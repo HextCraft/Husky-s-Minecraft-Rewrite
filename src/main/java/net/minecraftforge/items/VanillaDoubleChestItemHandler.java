@@ -55,7 +55,7 @@ public class VanillaDoubleChestItemHandler extends WeakReference<TileEntityChest
     {
         World world = chest.getWorld();
         BlockPos pos = chest.getPos();
-        if (world == null || pos == null || !world.isBlockLoaded(pos))
+        if (!world.isBlockLoaded(pos))
             return null; // Still loading
 
         Block blockType = chest.getBlockType();
@@ -84,7 +84,7 @@ public class VanillaDoubleChestItemHandler extends WeakReference<TileEntityChest
     }
 
     @Nullable
-    public TileEntityChest getChest(boolean accessingUpper)
+    private TileEntityChest getChest(boolean accessingUpper)
     {
         if (accessingUpper == mainChestIsUpper)
             return mainChest;
@@ -184,7 +184,7 @@ public class VanillaDoubleChestItemHandler extends WeakReference<TileEntityChest
     public int getSlotLimit(int slot)
     {
         boolean accessingUpperChest = slot < 27;
-        return getChest(accessingUpperChest).getInventoryStackLimit();
+        return java.util.Objects.requireNonNull(getChest(accessingUpperChest)).getInventoryStackLimit();
     }
 
     @Override

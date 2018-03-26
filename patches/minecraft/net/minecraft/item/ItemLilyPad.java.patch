@@ -1,18 +1,87 @@
 --- ../src-base/minecraft/net/minecraft/item/ItemLilyPad.java
 +++ ../src-work/minecraft/net/minecraft/item/ItemLilyPad.java
-@@ -50,6 +50,15 @@
+@@ -18,6 +18,8 @@
+ import net.minecraft.util.math.RayTraceResult;
+ import net.minecraft.world.World;
  
-                 if (iblockstate.func_185904_a() == Material.field_151586_h && ((Integer)iblockstate.func_177229_b(BlockLiquid.field_176367_b)).intValue() == 0 && p_77659_1_.func_175623_d(blockpos1))
-                 {
-+                    // special case for handling block placement with water lilies
-+                    net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(p_77659_1_, blockpos1);
-+                    p_77659_1_.func_175656_a(blockpos1, Blocks.field_150392_bi.func_176223_P());
-+                    if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(p_77659_2_, blocksnapshot, net.minecraft.util.EnumFacing.UP, p_77659_3_).isCanceled())
-+                    {
-+                        blocksnapshot.restore(true, false);
-+                        return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-+                    }
++import java.util.Objects;
 +
-                     p_77659_1_.func_180501_a(blockpos1, Blocks.field_150392_bi.func_176223_P(), 11);
+ public class ItemLilyPad extends ItemColored
+ {
+     public ItemLilyPad(Block p_i45357_1_)
+@@ -30,45 +32,47 @@
+         ItemStack itemstack = p_77659_2_.func_184586_b(p_77659_3_);
+         RayTraceResult raytraceresult = this.func_77621_a(p_77659_1_, p_77659_2_, true);
  
-                     if (p_77659_2_ instanceof EntityPlayerMP)
+-        if (raytraceresult == null)
++        if (raytraceresult.field_72313_a == RayTraceResult.Type.BLOCK)
+         {
+-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+-        }
+-        else
+-        {
+-            if (raytraceresult.field_72313_a == RayTraceResult.Type.BLOCK)
++            BlockPos blockpos = raytraceresult.func_178782_a();
++
++            if (!p_77659_1_.func_175660_a(p_77659_2_, blockpos) || !p_77659_2_.func_175151_a(blockpos.func_177972_a(raytraceresult.field_178784_b), raytraceresult.field_178784_b, itemstack))
+             {
+-                BlockPos blockpos = raytraceresult.func_178782_a();
++                return new ActionResult<>(EnumActionResult.FAIL, itemstack);
++            }
+ 
+-                if (!p_77659_1_.func_175660_a(p_77659_2_, blockpos) || !p_77659_2_.func_175151_a(blockpos.func_177972_a(raytraceresult.field_178784_b), raytraceresult.field_178784_b, itemstack))
++            BlockPos blockpos1 = blockpos.func_177984_a();
++            IBlockState iblockstate = p_77659_1_.func_180495_p(blockpos);
++
++            if (iblockstate.func_185904_a() == Material.field_151586_h && iblockstate.func_177229_b(BlockLiquid.field_176367_b) == 0 && p_77659_1_.func_175623_d(blockpos1))
++            {
++                // special case for handling block placement with water lilies
++                net.minecraftforge.common.util.BlockSnapshot blocksnapshot = net.minecraftforge.common.util.BlockSnapshot.getBlockSnapshot(p_77659_1_, blockpos1);
++                p_77659_1_.func_175656_a(blockpos1, Blocks.field_150392_bi.func_176223_P());
++                if (net.minecraftforge.event.ForgeEventFactory.onPlayerBlockPlace(p_77659_2_, blocksnapshot, net.minecraft.util.EnumFacing.UP, p_77659_3_).isCanceled())
+                 {
+-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
++                    blocksnapshot.restore(true, false);
++                    return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+                 }
+ 
+-                BlockPos blockpos1 = blockpos.func_177984_a();
+-                IBlockState iblockstate = p_77659_1_.func_180495_p(blockpos);
++                p_77659_1_.func_180501_a(blockpos1, Blocks.field_150392_bi.func_176223_P(), 11);
+ 
+-                if (iblockstate.func_185904_a() == Material.field_151586_h && ((Integer)iblockstate.func_177229_b(BlockLiquid.field_176367_b)).intValue() == 0 && p_77659_1_.func_175623_d(blockpos1))
++                if (p_77659_2_ instanceof EntityPlayerMP)
+                 {
+-                    p_77659_1_.func_180501_a(blockpos1, Blocks.field_150392_bi.func_176223_P(), 11);
++                    CriteriaTriggers.field_193137_x.func_193173_a((EntityPlayerMP)p_77659_2_, blockpos1, itemstack);
++                }
+ 
+-                    if (p_77659_2_ instanceof EntityPlayerMP)
+-                    {
+-                        CriteriaTriggers.field_193137_x.func_193173_a((EntityPlayerMP)p_77659_2_, blockpos1, itemstack);
+-                    }
+-
+-                    if (!p_77659_2_.field_71075_bZ.field_75098_d)
+-                    {
+-                        itemstack.func_190918_g(1);
+-                    }
+-
+-                    p_77659_2_.func_71029_a(StatList.func_188057_b(this));
+-                    p_77659_1_.func_184133_a(p_77659_2_, blockpos, SoundEvents.field_187916_gp, SoundCategory.BLOCKS, 1.0F, 1.0F);
+-                    return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
++                if (!p_77659_2_.field_71075_bZ.field_75098_d)
++                {
++                    itemstack.func_190918_g(1);
+                 }
+-            }
+ 
+-            return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
++                p_77659_2_.func_71029_a(Objects.requireNonNull(StatList.func_188057_b(this)));
++                p_77659_1_.func_184133_a(p_77659_2_, blockpos, SoundEvents.field_187916_gp, SoundCategory.BLOCKS, 1.0F, 1.0F);
++                return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
++            }
+         }
++
++        return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+     }
+ }

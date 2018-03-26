@@ -22,7 +22,6 @@ package net.minecraftforge.fml.common;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import net.minecraftforge.fml.common.discovery.ModCandidate;
 import net.minecraftforge.fml.common.discovery.asm.ASMModParser;
@@ -71,7 +70,7 @@ public class ModContainerFactory
                 FMLLog.log.debug("Identified a mod of type {} ({}) - loading", ann.getASMType(), className);
                 try {
                     ModContainer ret = modTypes.get(ann.getASMType()).newInstance(className, container, ann.getValues());
-                    if (!ret.shouldLoadInEnvironment())
+                    if (ret.shouldLoadInEnvironment())
                     {
                         FMLLog.log.debug("Skipping mod {}, container opted to not load.", className);
                         return null;

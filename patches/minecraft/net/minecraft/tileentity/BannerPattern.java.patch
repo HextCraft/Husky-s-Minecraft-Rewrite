@@ -1,0 +1,14 @@
+--- ../src-base/minecraft/net/minecraft/tileentity/BannerPattern.java
++++ ../src-work/minecraft/net/minecraft/tileentity/BannerPattern.java
+@@ -48,7 +48,10 @@
+     BRICKS("bricks", "bri", new ItemStack(Blocks.field_150336_V)),
+     SKULL("skull", "sku", new ItemStack(Items.field_151144_bL, 1, 1)),
+     FLOWER("flower", "flo", new ItemStack(Blocks.field_150328_O, 1, BlockFlower.EnumFlowerType.OXEYE_DAISY.func_176968_b())),
+-    MOJANG("mojang", "moj", new ItemStack(Items.field_151153_ao, 1, 1));
++    MOJANG("mojang", "moj", new ItemStack(Items.field_151153_ao, 1, 1)),
++    SWORD("sword", "swo", new ItemStack(Items.field_151040_l)),
++    ENDER_EYE("ender_eye", "ene", new ItemStack(Items.field_151061_bv)),
++    STAR("star", "sta", new ItemStack(Items.field_151156_bN));
+ 
+     private final String field_191014_N;
+     private final String field_191015_O;

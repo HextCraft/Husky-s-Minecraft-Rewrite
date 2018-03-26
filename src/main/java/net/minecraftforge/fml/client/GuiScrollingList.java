@@ -52,12 +52,12 @@ public abstract class GuiScrollingList
     protected int mouseY;
     private float initialMouseClickY = -2.0F;
     private float scrollFactor;
-    private float scrollDistance;
+    public static float scrollDistance;
     protected int selectedIndex = -1;
     private long lastClickTime = 0L;
     private boolean highlightSelected = true;
     private boolean hasHeader;
-    private int headerHeight;
+    public static int headerHeight;
     protected boolean captureMouse = true;
 
     @Deprecated // We need to know screen size.

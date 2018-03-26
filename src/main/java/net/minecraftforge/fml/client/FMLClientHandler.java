@@ -776,7 +776,7 @@ public class FMLClientHandler implements IFMLSidedHandler
 
     public void showInGameModOptions(GuiIngameMenu guiIngameMenu)
     {
-        showGuiScreen(new GuiModList(guiIngameMenu));
+        showGuiScreen(new GuiModList());
     }
 
     public IModGuiFactory getGuiFactoryFor(ModContainer selectedMod)
@@ -806,7 +806,7 @@ public class FMLClientHandler implements IFMLSidedHandler
             JsonObject jsonData = extraServerListData.get(originalResponse);
             String type = jsonData.get("type").getAsString();
             JsonArray modDataArray = jsonData.get("modList").getAsJsonArray();
-            boolean moddedClientAllowed = jsonData.has("clientModsAllowed") ? jsonData.get("clientModsAllowed").getAsBoolean() : true;
+            boolean moddedClientAllowed = !jsonData.has("clientModsAllowed") || jsonData.get("clientModsAllowed").getAsBoolean();
             Builder<String, String> modListBldr = ImmutableMap.builder();
             for (JsonElement obj : modDataArray)
             {

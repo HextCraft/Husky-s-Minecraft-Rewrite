@@ -93,7 +93,71 @@
                  this.func_181565_a(bufferbuilder, p_180453_3_ + 2, p_180453_4_ + 13, 13, 2, 0, 0, 0, 255);
                  this.func_181565_a(bufferbuilder, p_180453_3_ + 2, p_180453_4_ + 13, i, 1, j >> 16 & 255, j >> 8 & 255, j & 255, 255);
                  GlStateManager.func_179147_l();
-@@ -1099,6 +1086,7 @@
+@@ -647,11 +634,18 @@
+         this.func_175029_a(Blocks.field_150325_L, EnumDyeColor.WHITE.func_176765_a(), "white_wool");
+         this.func_175029_a(Blocks.field_150325_L, EnumDyeColor.YELLOW.func_176765_a(), "yellow_wool");
+         this.func_175031_a(Blocks.field_150458_ak, "farmland");
+-        this.func_175031_a(Blocks.field_150400_ck, "acacia_stairs");
+         this.func_175031_a(Blocks.field_150408_cc, "activator_rail");
+         this.func_175031_a(Blocks.field_150461_bJ, "beacon");
+         this.func_175031_a(Blocks.field_150357_h, "bedrock");
+-        this.func_175031_a(Blocks.field_150487_bG, "birch_stairs");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.OAK.func_176839_a(), "oak_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.SPRUCE.func_176839_a(), "spruce_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.BIRCH.func_176839_a(), "birch_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.JUNGLE.func_176839_a(), "jungle_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.ACACIA.func_176839_a(), "acacia_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.DARK_OAK.func_176839_a(), "dark_oak_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.PALM.func_176839_a(), "palm_stair");
++        this.func_175029_a(Blocks.STAIRS, BlockPlanks.EnumType.RED_WOOD.func_176839_a(), "red_wood_stair");
++
+         this.func_175031_a(Blocks.field_150342_X, "bookshelf");
+         this.func_175031_a(Blocks.field_150336_V, "brick_block");
+         this.func_175031_a(Blocks.field_150336_V, "brick_block");
+@@ -663,7 +657,6 @@
+         this.func_175031_a(Blocks.field_150365_q, "coal_ore");
+         this.func_175031_a(Blocks.field_150347_e, "cobblestone");
+         this.func_175031_a(Blocks.field_150462_ai, "crafting_table");
+-        this.func_175031_a(Blocks.field_150401_cl, "dark_oak_stairs");
+         this.func_175031_a(Blocks.field_150453_bW, "daylight_detector");
+         this.func_175031_a(Blocks.field_150330_I, "dead_bush");
+         this.func_175031_a(Blocks.field_150319_E, "detector_rail");
+@@ -708,7 +701,6 @@
+         this.func_175031_a(Blocks.field_150366_p, "iron_ore");
+         this.func_175031_a(Blocks.field_180400_cw, "iron_trapdoor");
+         this.func_175031_a(Blocks.field_150421_aI, "jukebox");
+-        this.func_175031_a(Blocks.field_150481_bH, "jungle_stairs");
+         this.func_175031_a(Blocks.field_150468_ap, "ladder");
+         this.func_175031_a(Blocks.field_150368_y, "lapis_block");
+         this.func_175031_a(Blocks.field_150369_x, "lapis_ore");
+@@ -723,7 +715,6 @@
+         this.func_175031_a(Blocks.field_150386_bk, "nether_brick_fence");
+         this.func_175031_a(Blocks.field_150387_bl, "nether_brick_stairs");
+         this.func_175031_a(Blocks.field_150323_B, "noteblock");
+-        this.func_175031_a(Blocks.field_150476_ad, "oak_stairs");
+         this.func_175031_a(Blocks.field_150343_Z, "obsidian");
+         this.func_175031_a(Blocks.field_150403_cj, "packed_ice");
+         this.func_175031_a(Blocks.field_150331_J, "piston");
+@@ -743,7 +734,6 @@
+         this.func_175031_a(Blocks.field_150433_aE, "snow");
+         this.func_175031_a(Blocks.field_150431_aC, "snow_layer");
+         this.func_175031_a(Blocks.field_150425_aM, "soul_sand");
+-        this.func_175031_a(Blocks.field_150485_bF, "spruce_stairs");
+         this.func_175031_a(Blocks.field_150320_F, "sticky_piston");
+         this.func_175031_a(Blocks.field_150390_bg, "stone_brick_stairs");
+         this.func_175031_a(Blocks.field_150430_aB, "stone_button");
+@@ -925,8 +915,8 @@
+         this.func_175047_a(Items.field_151114_aO, "glowstone_dust");
+         this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.COD.func_150976_a(), "cod");
+         this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.SALMON.func_150976_a(), "salmon");
+-        this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.CLOWNFISH.func_150976_a(), "clownfish");
+-        this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.PUFFERFISH.func_150976_a(), "pufferfish");
++        this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.CLOWN_FISH.func_150976_a(), "clown_fish");
++        this.func_175048_a(Items.field_151115_aP, ItemFishFood.FishType.PUFFER_FISH.func_150976_a(), "puffer_fish");
+         this.func_175048_a(Items.field_179566_aV, ItemFishFood.FishType.COD.func_150976_a(), "cooked_cod");
+         this.func_175048_a(Items.field_179566_aV, ItemFishFood.FishType.SALMON.func_150976_a(), "cooked_salmon");
+         this.func_175048_a(Items.field_151100_aR, EnumDyeColor.BLACK.func_176767_b(), "dye_black");
+@@ -1099,6 +1089,7 @@
          this.func_175029_a(Blocks.field_185779_df, TileEntityStructure.Mode.LOAD.func_185110_a(), "structure_block");
          this.func_175029_a(Blocks.field_185779_df, TileEntityStructure.Mode.CORNER.func_185110_a(), "structure_block");
          this.func_175029_a(Blocks.field_185779_df, TileEntityStructure.Mode.DATA.func_185110_a(), "structure_block");

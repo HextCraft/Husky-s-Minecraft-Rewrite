@@ -362,7 +362,7 @@ public @interface Mod
     }
 
     /**
-     * A class which will be subscribed to {@link net.minecraftforge.common.MinecraftForge.EVENT_BUS} at mod construction time.
+     * A class which will be subscribed to EventBus at mod construction time.
      */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)

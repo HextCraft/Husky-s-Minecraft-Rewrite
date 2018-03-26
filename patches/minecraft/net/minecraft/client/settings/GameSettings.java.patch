@@ -57,7 +57,17 @@
              }
  
              for (SoundCategory soundcategory : SoundCategory.values())
-@@ -1440,4 +1449,35 @@
+@@ -1342,7 +1351,8 @@
+         SHOW_SUBTITLES("options.showSubtitles", false, true),
+         REALMS_NOTIFICATIONS("options.realmsNotifications", false, true),
+         AUTO_JUMP("options.autoJump", false, true),
+-        NARRATOR("options.narrator", false, false);
++        NARRATOR("options.narrator", false, false),
++        HUSKY_MODE("options.huskyMode", false, true);
+ 
+         private final boolean field_74385_A;
+         private final boolean field_74386_B;
+@@ -1440,4 +1450,35 @@
              return p_148264_1_;
          }
      }

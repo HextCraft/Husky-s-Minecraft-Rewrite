@@ -236,7 +236,7 @@ public class FMLServerHandler implements IFMLSidedHandler
     public void addModAsResource(ModContainer container)
     {
         String langFile = "assets/" + container.getModId().toLowerCase() + "/lang/en_us.lang";
-        String langFile2 = "assets/" + container.getModId().toLowerCase() + "/lang/en_US.lang";
+        String langFile2 = "assets/" + container.getModId().toLowerCase() + "/lang/en_us.lang";
         File source = container.getSource();
         InputStream stream = null;
         ZipFile zip = null;

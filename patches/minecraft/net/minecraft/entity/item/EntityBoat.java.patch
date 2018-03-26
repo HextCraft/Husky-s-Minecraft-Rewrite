@@ -9,6 +9,33 @@
                                      ++k1;
                                  }
  
+@@ -915,7 +915,7 @@
+         this.field_184463_aC = p_184442_4_;
+     }
+ 
+-    public static enum Status
++    public enum Status
+     {
+         IN_WATER,
+         UNDER_WATER,
+@@ -924,7 +924,7 @@
+         IN_AIR;
+     }
+ 
+-    public static enum Type
++    public enum Type
+     {
+         OAK(BlockPlanks.EnumType.OAK.func_176839_a(), "oak"),
+         SPRUCE(BlockPlanks.EnumType.SPRUCE.func_176839_a(), "spruce"),
+@@ -936,7 +936,7 @@
+         private final String field_184990_g;
+         private final int field_184991_h;
+ 
+-        private Type(int p_i47028_3_, String p_i47028_4_)
++        Type(int p_i47028_3_, String p_i47028_4_)
+         {
+             this.field_184990_g = p_i47028_4_;
+             this.field_184991_h = p_i47028_3_;
 @@ -980,4 +980,20 @@
              return values()[0];
          }

@@ -1,0 +1,59 @@
+--- ../src-base/minecraft/net/minecraft/item/ItemFishFood.java
++++ ../src-work/minecraft/net/minecraft/item/ItemFishFood.java
+@@ -35,7 +35,7 @@
+     {
+         ItemFishFood.FishType itemfishfood$fishtype = ItemFishFood.FishType.func_150978_a(p_77849_1_);
+ 
+-        if (itemfishfood$fishtype == ItemFishFood.FishType.PUFFERFISH)
++        if (itemfishfood$fishtype == FishType.PUFFER_FISH)
+         {
+             p_77849_3_.func_70690_d(new PotionEffect(MobEffects.field_76436_u, 1200, 3));
+             p_77849_3_.func_70690_d(new PotionEffect(MobEffects.field_76438_s, 300, 2));
+@@ -69,8 +69,9 @@
+     {
+         COD(0, "cod", 2, 0.1F, 5, 0.6F),
+         SALMON(1, "salmon", 2, 0.1F, 6, 0.8F),
+-        CLOWNFISH(2, "clownfish", 1, 0.1F),
+-        PUFFERFISH(3, "pufferfish", 1, 0.1F);
++        CLOWN_FISH(2, "clown_fish", 1, 0.1F),
++        PUFFER_FISH(3, "puffer_fish", 1, 0.1F),
++        SWORD_FISH(4, "sword_fish", 2, 0.1F, 6, 0.8F);
+ 
+         private static final Map<Integer, ItemFishFood.FishType> field_150983_e = Maps.<Integer, ItemFishFood.FishType>newHashMap();
+         private final int field_150980_f;
+@@ -81,7 +82,7 @@
+         private final float field_150990_m;
+         private final boolean field_150987_n;
+ 
+-        private FishType(int p_i45336_3_, String p_i45336_4_, int p_i45336_5_, float p_i45336_6_, int p_i45336_7_, float p_i45336_8_)
++        FishType(int p_i45336_3_, String p_i45336_4_, int p_i45336_5_, float p_i45336_6_, int p_i45336_7_, float p_i45336_8_)
+         {
+             this.field_150980_f = p_i45336_3_;
+             this.field_150981_g = p_i45336_4_;
+@@ -92,7 +93,7 @@
+             this.field_150987_n = true;
+         }
+ 
+-        private FishType(int p_i45337_3_, String p_i45337_4_, int p_i45337_5_, float p_i45337_6_)
++        FishType(int p_i45337_3_, String p_i45337_4_, int p_i45337_5_, float p_i45337_6_)
+         {
+             this.field_150980_f = p_i45337_3_;
+             this.field_150981_g = p_i45337_4_;
+@@ -140,7 +141,7 @@
+ 
+         public static ItemFishFood.FishType func_150974_a(int p_150974_0_)
+         {
+-            ItemFishFood.FishType itemfishfood$fishtype = field_150983_e.get(Integer.valueOf(p_150974_0_));
++            ItemFishFood.FishType itemfishfood$fishtype = field_150983_e.get(p_150974_0_);
+             return itemfishfood$fishtype == null ? COD : itemfishfood$fishtype;
+         }
+ 
+@@ -153,7 +154,7 @@
+         {
+             for (ItemFishFood.FishType itemfishfood$fishtype : values())
+             {
+-                field_150983_e.put(Integer.valueOf(itemfishfood$fishtype.func_150976_a()), itemfishfood$fishtype);
++                field_150983_e.put(itemfishfood$fishtype.func_150976_a(), itemfishfood$fishtype);
+             }
+         }
+     }

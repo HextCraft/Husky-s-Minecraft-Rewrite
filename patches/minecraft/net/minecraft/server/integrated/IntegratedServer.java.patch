@@ -1,6 +1,15 @@
 --- ../src-base/minecraft/net/minecraft/server/integrated/IntegratedServer.java
 +++ ../src-work/minecraft/net/minecraft/server/integrated/IntegratedServer.java
-@@ -68,8 +68,6 @@
+@@ -8,6 +8,8 @@
+ import java.io.File;
+ import java.io.IOException;
+ import java.net.InetAddress;
++import java.util.Objects;
++
+ import net.minecraft.client.ClientBrandRetriever;
+ import net.minecraft.client.Minecraft;
+ import net.minecraft.client.multiplayer.ThreadLanServerPing;
+@@ -68,8 +70,6 @@
      public void func_71247_a(String p_71247_1_, String p_71247_2_, long p_71247_3_, WorldType p_71247_5_, String p_71247_6_)
      {
          this.func_71237_c(p_71247_1_);
@@ -9,7 +18,7 @@
          ISaveHandler isavehandler = this.func_71254_M().func_75804_a(p_71247_1_, true);
          this.func_175584_a(this.func_71270_I(), isavehandler);
          WorldInfo worldinfo = isavehandler.func_75757_d();
-@@ -83,6 +81,7 @@
+@@ -83,6 +83,7 @@
              worldinfo.func_76062_a(p_71247_2_);
          }
  
@@ -17,18 +26,21 @@
          for (int i = 0; i < this.field_71305_c.length; ++i)
          {
              int j = 0;
-@@ -117,10 +116,25 @@
+@@ -117,20 +118,30 @@
  
              this.field_71305_c[i].func_72954_a(new ServerWorldEventHandler(this, this.field_71305_c[i]));
          }
 +        }// Forge: End Dead Code
  
 -        this.func_184103_al().func_72364_a(this.field_71305_c);
+-
+-        if (this.field_71305_c[0].func_72912_H().func_176130_y() == null)
 +        WorldServer overWorld = (func_71242_L() ? (WorldServer)(new WorldServerDemo(this, isavehandler, worldinfo, 0, this.field_71304_b)).func_175643_b() :
 +                                            (WorldServer)(new WorldServer(this, isavehandler, worldinfo, 0, this.field_71304_b)).func_175643_b());
 +        overWorld.func_72963_a(this.field_71350_m);
 +        for (int dim : net.minecraftforge.common.DimensionManager.getStaticDimensionIDs())
-+        {
+         {
+-            this.func_147139_a(this.field_71349_l.field_71474_y.field_74318_M);
 +            WorldServer world = (dim == 0 ? overWorld : (WorldServer)(new WorldServerMulti(this, isavehandler, dim, overWorld, this.field_71304_b)).func_175643_b());
 +            world.func_72954_a(new ServerWorldEventHandler(this, world));
 +            if (!this.func_71264_H())
@@ -36,16 +48,22 @@
 +                world.func_72912_H().func_76060_a(func_71265_f());
 +            }
 +            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.WorldEvent.Load(world));
-+        }
+         }
  
--        if (this.field_71305_c[0].func_72912_H().func_176130_y() == null)
 +        this.func_184103_al().func_72364_a(new WorldServer[]{ overWorld });
 +
-+        if (overWorld.func_72912_H().func_176130_y() == null)
-         {
-             this.func_147139_a(this.field_71349_l.field_71474_y.field_74318_M);
-         }
-@@ -138,9 +152,10 @@
+         this.func_71222_d();
+     }
+ 
+-    public boolean func_71197_b() throws IOException
++    public boolean func_71197_b()
+     {
+-        field_147148_h.info("Starting integrated minecraft server version 1.12.2");
++        field_147148_h.info("Starting integrated minecraft server version 18w11a");
+         this.func_71229_d(true);
+         this.func_71251_e(true);
+         this.func_71257_f(true);
+@@ -138,9 +149,10 @@
          this.func_71245_h(true);
          field_147148_h.info("Generating keypair");
          this.func_71253_a(CryptManager.func_75891_b());
@@ -57,7 +75,16 @@
      }
  
      public void func_71217_p()
-@@ -213,6 +228,7 @@
+@@ -161,7 +173,7 @@
+             {
+                 while (!this.field_175589_i.isEmpty())
+                 {
+-                    Util.func_181617_a(this.field_175589_i.poll(), field_147148_h);
++                    Util.func_181617_a(Objects.requireNonNull(this.field_175589_i.poll()), field_147148_h);
+                 }
+             }
+         }
+@@ -213,6 +225,7 @@
  
      public EnumDifficulty func_147135_j()
      {
@@ -65,7 +92,7 @@
          return this.field_71349_l.field_71441_e.func_72912_H().func_176130_y();
      }
  
-@@ -364,6 +380,7 @@
+@@ -364,6 +377,7 @@
  
      public void func_71263_m()
      {

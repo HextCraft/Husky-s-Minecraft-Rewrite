@@ -59,12 +59,12 @@ public class ItemModelMesherForge extends ItemModelMesher
         TIntObjectHashMap<IBakedModel>           mods = models.get(key);
         if (locs == null)
         {
-            locs = new TIntObjectHashMap<ModelResourceLocation>();
+            locs = new TIntObjectHashMap<>();
             locations.put(key, locs);
         }
         if (mods == null)
         {
-            mods = new TIntObjectHashMap<IBakedModel>();
+            mods = new TIntObjectHashMap<>();
             models.put(key, mods);
         }
         locs.put(meta, location);
@@ -84,7 +84,7 @@ public class ItemModelMesherForge extends ItemModelMesher
             }
             else
             {
-                mods = new TIntObjectHashMap<IBakedModel>();
+                mods = new TIntObjectHashMap<>();
                 models.put(e.getKey(), mods);
             }
             final TIntObjectHashMap<IBakedModel> map = mods;

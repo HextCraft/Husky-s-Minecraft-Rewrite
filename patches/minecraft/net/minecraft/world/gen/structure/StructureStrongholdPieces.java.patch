@@ -1,0 +1,31 @@
+--- ../src-base/minecraft/net/minecraft/world/gen/structure/StructureStrongholdPieces.java
++++ ../src-work/minecraft/net/minecraft/world/gen/structure/StructureStrongholdPieces.java
+@@ -4,15 +4,8 @@
+ import java.util.List;
+ import java.util.Random;
+ import javax.annotation.Nullable;
+-import net.minecraft.block.BlockButton;
+-import net.minecraft.block.BlockDoor;
+-import net.minecraft.block.BlockEndPortalFrame;
+-import net.minecraft.block.BlockLadder;
+-import net.minecraft.block.BlockSilverfish;
+-import net.minecraft.block.BlockStairs;
+-import net.minecraft.block.BlockStoneBrick;
+-import net.minecraft.block.BlockStoneSlab;
+-import net.minecraft.block.BlockTorch;
++
++import net.minecraft.block.*;
+ import net.minecraft.block.state.IBlockState;
+ import net.minecraft.entity.EntityList;
+ import net.minecraft.entity.monster.EntitySilverfish;
+@@ -1505,8 +1498,8 @@
+                         this.func_175811_a(p_74990_1_, Blocks.field_150417_aV.func_176223_P(), p_74990_5_ + 2, p_74990_6_ + 2, p_74990_7_, p_74990_3_);
+                         this.func_175811_a(p_74990_1_, Blocks.field_150417_aV.func_176223_P(), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_, p_74990_3_);
+                         this.func_175811_a(p_74990_1_, Blocks.field_150417_aV.func_176223_P(), p_74990_5_ + 2, p_74990_6_, p_74990_7_, p_74990_3_);
+-                        this.func_175811_a(p_74990_1_, Blocks.field_180413_ao.func_176223_P(), p_74990_5_ + 1, p_74990_6_, p_74990_7_, p_74990_3_);
+-                        this.func_175811_a(p_74990_1_, Blocks.field_180413_ao.func_176223_P().func_177226_a(BlockDoor.field_176523_O, BlockDoor.EnumDoorHalf.UPPER), p_74990_5_ + 1, p_74990_6_ + 1, p_74990_7_, p_74990_3_);
++                        this.func_175811_a(p_74990_1_, Block.func_149684_b("tile.oak_door.name").func_176223_P(), p_74990_5_ + 1, p_74990_6_, p_74990_7_, p_74990_3_);
++                        this.func_175811_a(p_74990_1_, Block.func_149684_b("tile.oak_door.name").func_176223_P().func_177226_a(BlockDoor.field_176523_O, BlockDoor.EnumDoorHalf.UPPER), p_74990_5_ + 1, p_74990_6_ + 1, p_74990_7_, p_74990_3_);
+                         break;
+                     case GRATES:
+                         this.func_175811_a(p_74990_1_, Blocks.field_150350_a.func_176223_P(), p_74990_5_ + 1, p_74990_6_, p_74990_7_, p_74990_3_);

@@ -1,5 +1,14 @@
 --- ../src-base/minecraft/net/minecraft/client/gui/GuiVideoSettings.java
 +++ ../src-work/minecraft/net/minecraft/client/gui/GuiVideoSettings.java
+@@ -14,7 +14,7 @@
+     protected String field_146500_a = "Video Settings";
+     private final GameSettings field_146499_g;
+     private GuiListExtended field_146501_h;
+-    private static final GameSettings.Options[] field_146502_i = new GameSettings.Options[] {GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION, GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.ANAGLYPH, GameSettings.Options.VIEW_BOBBING, GameSettings.Options.GUI_SCALE, GameSettings.Options.ATTACK_INDICATOR, GameSettings.Options.GAMMA, GameSettings.Options.RENDER_CLOUDS, GameSettings.Options.PARTICLES, GameSettings.Options.USE_FULLSCREEN, GameSettings.Options.ENABLE_VSYNC, GameSettings.Options.MIPMAP_LEVELS, GameSettings.Options.USE_VBO, GameSettings.Options.ENTITY_SHADOWS};
++    private static final GameSettings.Options[] field_146502_i = new GameSettings.Options[] {GameSettings.Options.GRAPHICS, GameSettings.Options.RENDER_DISTANCE, GameSettings.Options.AMBIENT_OCCLUSION, GameSettings.Options.FRAMERATE_LIMIT, GameSettings.Options.VIEW_BOBBING, GameSettings.Options.GUI_SCALE, GameSettings.Options.ATTACK_INDICATOR, GameSettings.Options.GAMMA, GameSettings.Options.RENDER_CLOUDS, GameSettings.Options.PARTICLES, GameSettings.Options.USE_FULLSCREEN, GameSettings.Options.ENABLE_VSYNC, GameSettings.Options.USE_VBO, GameSettings.Options.ENTITY_SHADOWS, GameSettings.Options.HUSKY_MODE};
+ 
+     public GuiVideoSettings(GuiScreen p_i1062_1_, GameSettings p_i1062_2_)
+     {
 @@ -117,4 +117,12 @@
          this.func_73732_a(this.field_146289_q, this.field_146500_a, this.field_146294_l / 2, 5, 16777215);
          super.func_73863_a(p_73863_1_, p_73863_2_, p_73863_3_);

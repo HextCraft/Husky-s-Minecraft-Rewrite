@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.net.URI;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -45,36 +46,26 @@ public class ZipperUtil {
     public static void zip(File directory, File zipfile) throws IOException
     {
         URI base = directory.toURI();
-        Deque<File> queue = new LinkedList<File>();
+        Deque<File> queue = new LinkedList<>();
         queue.push(directory);
         OutputStream out = new FileOutputStream(zipfile);
-        Closeable res = null;
-        try
-        {
-            ZipOutputStream zout = new ZipOutputStream(out);
-            res = zout;
-            while (!queue.isEmpty())
-            {
+        ZipOutputStream zout = new ZipOutputStream(out);
+        try (Closeable res = zout) {
+            while (!queue.isEmpty()) {
                 directory = queue.pop();
-                for (File kid : directory.listFiles())
-                {
+                for (File kid : Objects.requireNonNull(directory.listFiles())) {
                     String name = base.relativize(kid.toURI()).getPath();
-                    if (kid.isDirectory())
-                    {
+                    if (kid.isDirectory()) {
                         queue.push(kid);
                         name = name.endsWith("/") ? name : name + "/";
                         zout.putNextEntry(new ZipEntry(name));
-                    } else
-                    {
+                    } else {
                         zout.putNextEntry(new ZipEntry(name));
                         Files.copy(kid, zout);
                         zout.closeEntry();
                     }
                 }
             }
-        } finally
-        {
-            res.close();
         }
     }
 
@@ -91,7 +82,7 @@ public class ZipperUtil {
         backupWorld(dirName);
     }
 
-    public static void backupWorld(String dirName) throws IOException
+    private static void backupWorld(String dirName) throws IOException
     {
         File dstFolder = FMLCommonHandler.instance().getSavesDirectory();
         File zip = new File(dstFolder, String.format("%s-%2$tY%2$tm%2$td-%2$tH%2$tM%2$tS.zip", dirName, System.currentTimeMillis()));

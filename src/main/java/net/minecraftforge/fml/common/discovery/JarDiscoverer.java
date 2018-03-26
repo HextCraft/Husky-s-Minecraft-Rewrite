@@ -148,7 +148,7 @@ public class JarDiscoverer implements ITypeDiscoverer
                 try
                 {
                     ModContainer ret = ctr.newInstance(data.getClassName(), candidate, data.getAnnotationInfo());
-                    if (!ret.shouldLoadInEnvironment())
+                    if (ret.shouldLoadInEnvironment())
                         FMLLog.log.debug("Skipping mod {}, container opted to not load.", data.getClassName());
                     else
                     {

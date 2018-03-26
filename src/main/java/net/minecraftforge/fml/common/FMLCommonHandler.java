@@ -123,13 +123,12 @@ public class FMLCommonHandler
         registerCrashCallable(new ICrashCallable()
         {
             @Override
-            public String call() throws Exception
-            {
+            public String call() {
                 StringBuilder builder = new StringBuilder();
                 Joiner joiner = Joiner.on("\n  ");
                 for(String coreMod : CoreModManager.getTransformers().keySet())
                 {
-                    builder.append("\n" + coreMod + "\n  ").append(joiner.join(CoreModManager.getTransformers().get(coreMod)));
+                    builder.append("\n").append(coreMod).append("\n  ").append(joiner.join(CoreModManager.getTransformers().get(coreMod)));
                 }
                 return builder.toString();
             }
@@ -158,7 +157,7 @@ public class FMLCommonHandler
         sidedDelegate = handler;
         MinecraftForge.initialize();
 //        MinecraftForge.registerCrashCallable();
-        return ImmutableList.<String>of();
+        return ImmutableList.of();
     }
 
     /**
@@ -409,7 +408,7 @@ public class FMLCommonHandler
             return;
         }
         handlerSet.add(handler);
-        handlerToCheck = new WeakReference<SaveHandler>(handler); // for confirmBackupLevelDatUse
+        handlerToCheck = new WeakReference<>(handler); // for confirmBackupLevelDatUse
         Map<String,NBTBase> additionalProperties = Maps.newHashMap();
         worldInfo.setAdditionalProperties(additionalProperties);
         for (ModContainer mc : Loader.instance().getModList())

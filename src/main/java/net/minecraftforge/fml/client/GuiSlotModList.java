@@ -20,6 +20,8 @@
 package net.minecraftforge.fml.client;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -45,6 +47,7 @@ public class GuiSlotModList extends GuiScrollingList
     
     private GuiModList parent;
     private ArrayList<ModContainer> mods;
+    private Map<String, List<InfoIcon>> infoIcons;
 
     public GuiSlotModList(GuiModList parent, ArrayList<ModContainer> mods, int listWidth, int slotHeight)
     {
@@ -111,7 +114,6 @@ public class GuiSlotModList extends GuiScrollingList
 
             if (vercheck.status.shouldDraw())
             {
-                //TODO: Consider adding more icons for visualization
                 Minecraft.getMinecraft().getTextureManager().bindTexture(VERSION_CHECK_ICONS);
                 GlStateManager.color(1, 1, 1, 1);
                 GlStateManager.pushMatrix();

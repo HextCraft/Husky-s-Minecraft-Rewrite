@@ -42,7 +42,6 @@ import javax.annotation.Nullable;
 
 public class MetadataCollection
 {
-    private String modListVersion;
     private ModMetadata[] modList;
     private Map<String, ModMetadata> metadatas = Maps.newHashMap();
 

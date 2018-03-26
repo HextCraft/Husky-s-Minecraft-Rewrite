@@ -1,0 +1,65 @@
+--- ../src-base/minecraft/net/minecraft/world/gen/ChunkGeneratorSettings.java
++++ ../src-work/minecraft/net/minecraft/world/gen/ChunkGeneratorSettings.java
+@@ -72,6 +72,20 @@
+     public final int field_177802_Z;
+     public final int field_177846_aa;
+     public final int field_177847_ab;
++
++    public final int basaltSize;
++    public final int basaltCount;
++    public final int basaltMinHeight;
++    public final int basaltMaxHeight;
++    public final int limestoneSize;
++    public final int limestoneCount;
++    public final int limestoneMinHeight;
++    public final int limestoneMaxHeight;
++    public final int marbleSize;
++    public final int marbleCount;
++    public final int marbleMinHeight;
++    public final int marbleMaxHeight;
++
+     public final int field_177844_ac;
+     public final int field_177845_ad;
+     public final int field_177851_ae;
+@@ -154,6 +168,20 @@
+         this.field_177802_Z = p_i45639_1_.field_177936_aa;
+         this.field_177846_aa = p_i45639_1_.field_177937_ab;
+         this.field_177847_ab = p_i45639_1_.field_177934_ac;
++
++        this.basaltSize = p_i45639_1_.basaltSize;
++        this.basaltCount = p_i45639_1_.basaltCount;
++        this.basaltMinHeight = p_i45639_1_.basaltMinHeight;
++        this.basaltMaxHeight = p_i45639_1_.basaltMaxHeight;
++        this.limestoneSize = p_i45639_1_.limestoneSize;
++        this.limestoneCount = p_i45639_1_.limestoneCount;
++        this.limestoneMinHeight = p_i45639_1_.limestoneMinHeight;
++        this.limestoneMaxHeight = p_i45639_1_.limestoneMaxHeight;
++        this.marbleSize = p_i45639_1_.marbleSize;
++        this.marbleCount = p_i45639_1_.marbleCount;
++        this.marbleMinHeight = p_i45639_1_.marbleMinHeight;
++        this.marbleMaxHeight = p_i45639_1_.marbleMaxHeight;
++
+         this.field_177844_ac = p_i45639_1_.field_177935_ad;
+         this.field_177845_ad = p_i45639_1_.field_177941_ae;
+         this.field_177851_ae = p_i45639_1_.field_177943_af;
+@@ -239,6 +267,20 @@
+             public int field_177936_aa = 10;
+             public int field_177937_ab;
+             public int field_177934_ac = 80;
++
++            public int basaltSize = 33;
++            public int basaltCount = 10;
++            public int basaltMinHeight;
++            public int basaltMaxHeight = 80;
++            public int limestoneSize = 33;
++            public int limestoneCount = 10;
++            public int limestoneMinHeight;
++            public int limestoneMaxHeight = 80;
++            public int marbleSize = 33;
++            public int marbleCount = 10;
++            public int marbleMinHeight;
++            public int marbleMaxHeight = 80;
++
+             public int field_177935_ad = 17;
+             public int field_177941_ae = 20;
+             public int field_177943_af;

@@ -1,18 +1,73 @@
 --- ../src-base/minecraft/net/minecraft/block/SoundType.java
 +++ ../src-work/minecraft/net/minecraft/block/SoundType.java
-@@ -48,7 +48,6 @@
+@@ -2,11 +2,8 @@
+ 
+ import net.minecraft.init.SoundEvents;
+ import net.minecraft.util.SoundEvent;
+-import net.minecraftforge.fml.relauncher.Side;
+-import net.minecraftforge.fml.relauncher.SideOnly;
+ 
+-public class SoundType
+-{
++public class SoundType {
+     public static final SoundType field_185848_a = new SoundType(1.0F, 1.0F, SoundEvents.field_187881_gQ, SoundEvents.field_187897_gY, SoundEvents.field_187891_gV, SoundEvents.field_187889_gU, SoundEvents.field_187887_gT);
+     public static final SoundType field_185849_b = new SoundType(1.0F, 1.0F, SoundEvents.field_187581_bW, SoundEvents.field_187668_ca, SoundEvents.field_187587_bZ, SoundEvents.field_187585_bY, SoundEvents.field_187583_bX);
+     public static final SoundType field_185850_c = new SoundType(1.0F, 1.0F, SoundEvents.field_187571_bR, SoundEvents.field_187579_bV, SoundEvents.field_187577_bU, SoundEvents.field_187575_bT, SoundEvents.field_187573_bS);
+@@ -27,8 +24,7 @@
+     private final SoundEvent field_185865_r;
+     private final SoundEvent field_185866_s;
+ 
+-    public SoundType(float p_i46679_1_, float p_i46679_2_, SoundEvent p_i46679_3_, SoundEvent p_i46679_4_, SoundEvent p_i46679_5_, SoundEvent p_i46679_6_, SoundEvent p_i46679_7_)
+-    {
++    public SoundType(float p_i46679_1_, float p_i46679_2_, SoundEvent p_i46679_3_, SoundEvent p_i46679_4_, SoundEvent p_i46679_5_, SoundEvent p_i46679_6_, SoundEvent p_i46679_7_) {
+         this.field_185860_m = p_i46679_1_;
+         this.field_185861_n = p_i46679_2_;
+         this.field_185862_o = p_i46679_3_;
+@@ -38,40 +34,31 @@
+         this.field_185866_s = p_i46679_7_;
+     }
+ 
+-    public float func_185843_a()
+-    {
++    public float func_185843_a() {
+         return this.field_185860_m;
+     }
+ 
+-    public float func_185847_b()
+-    {
++    public float func_185847_b() {
          return this.field_185861_n;
      }
  
 -    @SideOnly(Side.CLIENT)
-     public SoundEvent func_185845_c()
-     {
+-    public SoundEvent func_185845_c()
+-    {
++    public SoundEvent func_185845_c() {
          return this.field_185862_o;
-@@ -64,7 +63,6 @@
+     }
+ 
+-    public SoundEvent func_185844_d()
+-    {
++    public SoundEvent func_185844_d() {
+         return this.field_185863_p;
+     }
+ 
+-    public SoundEvent func_185841_e()
+-    {
++    public SoundEvent func_185841_e() {
          return this.field_185864_q;
      }
  
 -    @SideOnly(Side.CLIENT)
-     public SoundEvent func_185846_f()
-     {
+-    public SoundEvent func_185846_f()
+-    {
++    public SoundEvent func_185846_f() {
          return this.field_185865_r;
+     }
+ 
+-    public SoundEvent func_185842_g()
+-    {
++    public SoundEvent func_185842_g() {
+         return this.field_185866_s;
+     }
+ }

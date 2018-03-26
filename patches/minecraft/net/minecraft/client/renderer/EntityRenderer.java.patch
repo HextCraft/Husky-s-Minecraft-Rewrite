@@ -114,7 +114,7 @@
              }
  
              if (this.field_78531_r.field_71462_r != null)
-@@ -1109,7 +1121,7 @@
+@@ -1109,33 +1121,15 @@
  
                  try
                  {
@@ -123,7 +123,36 @@
                  }
                  catch (Throwable throwable)
                  {
-@@ -1204,7 +1216,7 @@
+                     CrashReport crashreport = CrashReport.func_85055_a(throwable, "Rendering screen");
+                     CrashReportCategory crashreportcategory = crashreport.func_85058_a("Screen render details");
+-                    crashreportcategory.func_189529_a("Screen name", new ICrashReportDetail<String>()
+-                    {
+-                        public String call() throws Exception
+-                        {
+-                            return EntityRenderer.this.field_78531_r.field_71462_r.getClass().getCanonicalName();
+-                        }
+-                    });
+-                    crashreportcategory.func_189529_a("Mouse location", new ICrashReportDetail<String>()
+-                    {
+-                        public String call() throws Exception
+-                        {
+-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d)", k1, l1, Mouse.getX(), Mouse.getY());
+-                        }
+-                    });
+-                    crashreportcategory.func_189529_a("Screen size", new ICrashReportDetail<String>()
+-                    {
+-                        public String call() throws Exception
+-                        {
+-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", scaledresolution.func_78326_a(), scaledresolution.func_78328_b(), EntityRenderer.this.field_78531_r.field_71443_c, EntityRenderer.this.field_78531_r.field_71440_d, scaledresolution.func_78325_e());
+-                        }
+-                    });
++                    crashreportcategory.func_189529_a("Screen name", () -> EntityRenderer.this.field_78531_r.field_71462_r.getClass().getCanonicalName());
++                    crashreportcategory.func_189529_a("Mouse location", () -> String.format("Scaled: (%d, %d). Absolute: (%d, %d)", k1, l1, Mouse.getX(), Mouse.getY()));
++                    crashreportcategory.func_189529_a("Screen size", () -> String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", scaledresolution.func_78326_a(), scaledresolution.func_78328_b(), EntityRenderer.this.field_78531_r.field_71443_c, EntityRenderer.this.field_78531_r.field_71440_d, scaledresolution.func_78325_e()));
+                     throw new ReportedException(crashreport);
+                 }
+             }
+@@ -1204,7 +1198,7 @@
  
                      if (this.field_78531_r.field_71442_b.func_178889_l() == GameType.SPECTATOR)
                      {
@@ -132,7 +161,7 @@
                      }
                      else
                      {
-@@ -1329,7 +1341,9 @@
+@@ -1329,7 +1323,9 @@
              GlStateManager.func_179094_E();
              RenderHelper.func_74519_b();
              this.field_78531_r.field_71424_I.func_76318_c("entities");
@@ -142,7 +171,7 @@
              RenderHelper.func_74518_a();
              this.func_175072_h();
          }
-@@ -1342,6 +1356,7 @@
+@@ -1342,6 +1338,7 @@
              EntityPlayer entityplayer = (EntityPlayer)entity;
              GlStateManager.func_179118_c();
              this.field_78531_r.field_71424_I.func_76318_c("outline");
@@ -150,7 +179,7 @@
              renderglobal.func_72731_b(entityplayer, this.field_78531_r.field_71476_x, 0, p_175068_2_);
              GlStateManager.func_179141_d();
          }
-@@ -1388,6 +1403,17 @@
+@@ -1388,6 +1385,17 @@
          GlStateManager.func_179103_j(7425);
          this.field_78531_r.field_71424_I.func_76318_c("translucent");
          renderglobal.func_174977_a(BlockRenderLayer.TRANSLUCENT, (double)p_175068_2_, p_175068_1_, entity);
@@ -168,7 +197,7 @@
          GlStateManager.func_179103_j(7424);
          GlStateManager.func_179132_a(true);
          GlStateManager.func_179089_o();
-@@ -1400,6 +1426,9 @@
+@@ -1400,6 +1408,9 @@
              this.func_180437_a(renderglobal, p_175068_2_, p_175068_1_, d0, d1, d2);
          }
  
@@ -178,7 +207,7 @@
          this.field_78531_r.field_71424_I.func_76318_c("hand");
  
          if (this.field_175074_C)
-@@ -1515,6 +1544,13 @@
+@@ -1515,6 +1526,13 @@
  
      protected void func_78474_d(float p_78474_1_)
      {
@@ -192,7 +221,7 @@
          float f = this.field_78531_r.field_71441_e.func_72867_j(p_78474_1_);
  
          if (f > 0.0F)
-@@ -1749,30 +1785,17 @@
+@@ -1749,30 +1767,17 @@
              this.field_175082_R = (float)vec3d3.field_72448_b;
              this.field_175081_S = (float)vec3d3.field_72449_c;
          }
@@ -232,7 +261,7 @@
  
          float f13 = this.field_78535_ad + (this.field_78539_ae - this.field_78535_ad) * p_78466_1_;
          this.field_175080_Q *= f13;
-@@ -1830,6 +1853,9 @@
+@@ -1830,6 +1835,9 @@
                  f6 = 1.0F / this.field_175081_S;
              }
  
@@ -242,7 +271,7 @@
              this.field_175080_Q = this.field_175080_Q * (1.0F - f15) + this.field_175080_Q * f6 * f15;
              this.field_175082_R = this.field_175082_R * (1.0F - f15) + this.field_175082_R * f6 * f15;
              this.field_175081_S = this.field_175081_S * (1.0F - f15) + this.field_175081_S * f6 * f15;
-@@ -1845,6 +1871,13 @@
+@@ -1845,6 +1853,13 @@
              this.field_175081_S = f7;
          }
  
@@ -256,7 +285,7 @@
          GlStateManager.func_179082_a(this.field_175080_Q, this.field_175082_R, this.field_175081_S, 0.0F);
      }
  
-@@ -1855,7 +1888,9 @@
+@@ -1855,7 +1870,9 @@
          GlStateManager.func_187432_a(0.0F, -1.0F, 0.0F);
          GlStateManager.func_179131_c(1.0F, 1.0F, 1.0F, 1.0F);
          IBlockState iblockstate = ActiveRenderInfo.func_186703_a(this.field_78531_r.field_71441_e, entity, p_78468_2_);
@@ -267,7 +296,7 @@
          if (entity instanceof EntityLivingBase && ((EntityLivingBase)entity).func_70644_a(MobEffects.field_76440_q))
          {
              float f1 = 5.0F;
-@@ -1940,6 +1975,7 @@
+@@ -1940,6 +1957,7 @@
                  GlStateManager.func_179102_b(f * 0.05F);
                  GlStateManager.func_179153_c(Math.min(f, 192.0F) * 0.5F);
              }

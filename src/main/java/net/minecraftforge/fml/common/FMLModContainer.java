@@ -104,6 +104,8 @@ public class FMLModContainer implements ModContainer
     private URL updateJSONUrl;
     private int classVersion;
 
+    private static FMLModContainer instance;
+
     public FMLModContainer(String className, ModCandidate container, Map<String, Object> modDescriptor)
     {
         this.className = className;
@@ -125,6 +127,10 @@ public class FMLModContainer implements ModContainer
             FMLLog.log.trace("Using custom language adapter {} for {} (modid: {})", languageAdapterType, this.className, getModId());
         }
         sanityCheckModId();
+    }
+
+    public static FMLModContainer instance() {
+        return instance;
     }
 
     private void sanityCheckModId()

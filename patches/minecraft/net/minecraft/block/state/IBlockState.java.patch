@@ -1,0 +1,29 @@
+--- ../src-base/minecraft/net/minecraft/block/state/IBlockState.java
++++ ../src-work/minecraft/net/minecraft/block/state/IBlockState.java
+@@ -1,21 +1,21 @@
+ package net.minecraft.block.state;
+ 
+ import com.google.common.collect.ImmutableMap;
+-import java.util.Collection;
+ import net.minecraft.block.Block;
+ import net.minecraft.block.properties.IProperty;
+ 
+-public interface IBlockState extends IBlockBehaviors, IBlockProperties
+-{
+-    Collection < IProperty<? >> func_177227_a();
++import java.util.Collection;
+ 
++public interface IBlockState extends IBlockBehaviors, IBlockProperties {
++    Collection<IProperty<?>> func_177227_a();
++
+     <T extends Comparable<T>> T func_177229_b(IProperty<T> p_177229_1_);
+ 
+     <T extends Comparable<T>, V extends T> IBlockState func_177226_a(IProperty<T> p_177226_1_, V p_177226_2_);
+ 
+     <T extends Comparable<T>> IBlockState func_177231_a(IProperty<T> p_177231_1_);
+ 
+-    ImmutableMap < IProperty<?>, Comparable<? >> func_177228_b();
++    ImmutableMap<IProperty<?>, Comparable<?>> func_177228_b();
+ 
+     Block func_177230_c();
+ }

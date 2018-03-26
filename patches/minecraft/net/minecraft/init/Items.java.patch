@@ -1,0 +1,27 @@
+--- ../src-base/minecraft/net/minecraft/init/Items.java
++++ ../src-work/minecraft/net/minecraft/init/Items.java
+@@ -223,6 +223,7 @@
+     public static final Item field_190930_cZ;
+     public static final Item field_191525_da;
+     public static final Item field_192397_db;
++    public static final Item CHEESE;
+ 
+     private static Item func_179554_a(String p_179554_0_)
+     {
+@@ -317,7 +318,7 @@
+             field_151159_an = func_179554_a("painting");
+             field_151153_ao = func_179554_a("golden_apple");
+             field_151155_ap = func_179554_a("sign");
+-            field_179570_aq = func_179554_a("wooden_door");
++            field_179570_aq = func_179554_a("oak_door");
+             field_179569_ar = func_179554_a("spruce_door");
+             field_179568_as = func_179554_a("birch_door");
+             field_179567_at = func_179554_a("jungle_door");
+@@ -456,6 +457,7 @@
+             field_190930_cZ = func_179554_a("shulker_shell");
+             field_191525_da = func_179554_a("iron_nugget");
+             field_192397_db = func_179554_a("knowledge_book");
++            CHEESE = func_179554_a("cheese");
+         }
+     }
+ }

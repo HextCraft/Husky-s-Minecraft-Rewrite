@@ -221,5 +221,11 @@ fml.button.continue=Continue
 fml.button.open.mods.folder=Open Mods Folder
 fml.button.open.file=Open %s
 
+fml.button.disable.name=Disable Mod
+fml.button.enable.name=Enable Mod
+fml.button.website.name=Website
+fml.button.done.name=Back
+fml.button.download.name=Download
+
 forge.container.enchant.limitedEnchantability=Limited Enchantability
 attribute.name.generic.reachDistance=Reach Distance

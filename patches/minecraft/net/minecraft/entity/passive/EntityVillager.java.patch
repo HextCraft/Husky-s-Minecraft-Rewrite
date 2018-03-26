@@ -202,3 +202,12 @@
  
      public static class ListItemForEmeralds implements EntityVillager.ITradeList
          {
+@@ -1176,7 +1206,7 @@
+                     ItemStack itemstack = ItemMap.func_190906_a(world, (double)blockpos.func_177958_n(), (double)blockpos.func_177952_p(), (byte)2, true, true);
+                     ItemMap.func_190905_a(world, itemstack);
+                     MapData.func_191094_a(itemstack, blockpos, "+", this.field_190891_c);
+-                    itemstack.func_190924_f("filled_map." + this.field_190890_b.toLowerCase(Locale.ROOT));
++                    itemstack.setTranslatableName("filled_map." + this.field_190890_b.toLowerCase(Locale.ROOT));
+                     p_190888_2_.add(new MerchantRecipe(new ItemStack(Items.field_151166_bC, i), new ItemStack(Items.field_151111_aL), itemstack));
+                 }
+             }

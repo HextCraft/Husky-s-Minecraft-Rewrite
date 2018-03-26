@@ -1,0 +1,13 @@
+--- ../src-base/minecraft/net/minecraft/item/EnumDyeColor.java
++++ ../src-work/minecraft/net/minecraft/item/EnumDyeColor.java
+@@ -110,6 +110,10 @@
+         return this.field_176786_u;
+     }
+ 
++    public TextFormatting getChatColor() {
++        return field_176793_x;
++    }
++
+     static
+     {
+         for (EnumDyeColor enumdyecolor : values())

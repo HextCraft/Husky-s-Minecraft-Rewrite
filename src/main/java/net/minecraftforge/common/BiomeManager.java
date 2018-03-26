@@ -19,10 +19,7 @@
 
 package net.minecraftforge.common;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import com.google.common.collect.ImmutableList;
 
@@ -55,7 +52,7 @@ public class BiomeManager
     {
         @SuppressWarnings("unchecked")
         TrackedList<BiomeEntry>[] currentBiomes = new TrackedList[BiomeType.values().length];
-        List<BiomeEntry> list = new ArrayList<BiomeEntry>();
+        List<BiomeEntry> list = new ArrayList<>();
 
         list.add(new BiomeEntry(Biomes.FOREST, 10));
         list.add(new BiomeEntry(Biomes.ROOFED_FOREST, 10));
@@ -64,7 +61,7 @@ public class BiomeManager
         list.add(new BiomeEntry(Biomes.BIRCH_FOREST, 10));
         list.add(new BiomeEntry(Biomes.SWAMPLAND, 10));
 
-        currentBiomes[BiomeType.WARM.ordinal()] = new TrackedList<BiomeEntry>(list);
+        currentBiomes[BiomeType.WARM.ordinal()] = new TrackedList<>(list);
         list.clear();
 
         list.add(new BiomeEntry(Biomes.FOREST, 10));
@@ -72,16 +69,16 @@ public class BiomeManager
         list.add(new BiomeEntry(Biomes.TAIGA, 10));
         list.add(new BiomeEntry(Biomes.PLAINS, 10));
 
-        currentBiomes[BiomeType.COOL.ordinal()] = new TrackedList<BiomeEntry>(list);
+        currentBiomes[BiomeType.COOL.ordinal()] = new TrackedList<>(list);
         list.clear();
 
         list.add(new BiomeEntry(Biomes.ICE_PLAINS, 30));
         list.add(new BiomeEntry(Biomes.COLD_TAIGA, 10));
 
-        currentBiomes[BiomeType.ICY.ordinal()] = new TrackedList<BiomeEntry>(list);
+        currentBiomes[BiomeType.ICY.ordinal()] = new TrackedList<>(list);
         list.clear();
 
-        currentBiomes[BiomeType.DESERT.ordinal()] = new TrackedList<BiomeEntry>(list);
+        currentBiomes[BiomeType.DESERT.ordinal()] = new TrackedList<>(list);
 
         return currentBiomes;
     }
@@ -100,7 +97,7 @@ public class BiomeManager
     {
         if (MapGenVillage.VILLAGE_SPAWN_BIOMES.contains(biome))
         {
-            ArrayList<Biome> biomes = new ArrayList<Biome>(MapGenVillage.VILLAGE_SPAWN_BIOMES);
+            ArrayList<Biome> biomes = new ArrayList<>(MapGenVillage.VILLAGE_SPAWN_BIOMES);
             biomes.remove(biome);
             MapGenVillage.VILLAGE_SPAWN_BIOMES = biomes;
         }
@@ -188,9 +185,9 @@ public class BiomeManager
                 if (t.name().equals(name)) return t;
             }
 
-            BiomeType ret = EnumHelper.addEnum(BiomeType.class, name, new Class[0], new Object[0]);
+            BiomeType ret = EnumHelper.addEnum(BiomeType.class, name, new Class[0]);
 
-            if (ret.ordinal() >= biomes.length)
+            if (Objects.requireNonNull(ret).ordinal() >= biomes.length)
             {
                 biomes = Arrays.copyOf(biomes, ret.ordinal() + 1);
             }
@@ -216,7 +213,7 @@ public class BiomeManager
         private static final long serialVersionUID = 1L;
         private boolean isModded = false;
 
-        public TrackedList(Collection<? extends E> c)
+        TrackedList(Collection<? extends E> c)
         {
             super(c);
         }

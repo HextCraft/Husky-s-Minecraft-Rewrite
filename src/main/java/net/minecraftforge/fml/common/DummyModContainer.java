@@ -216,7 +216,7 @@ public class DummyModContainer implements ModContainer
     @Override
     public boolean shouldLoadInEnvironment()
     {
-        return true;
+        return false;
     }
 
     @Override

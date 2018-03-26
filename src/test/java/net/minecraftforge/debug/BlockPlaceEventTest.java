@@ -20,7 +20,7 @@ public class BlockPlaceEventTest
             return;
         }
 
-        if (event.getPlacedBlock().getBlock() == Blocks.CHEST
+        if (event.getPlacedBlock().getBlock() == Blocks.OAK_CHEST
                 && event.getPlacedAgainst().getBlock() != Blocks.DIAMOND_BLOCK)
         {
             event.setCanceled(true);

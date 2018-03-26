@@ -1,0 +1,17 @@
+--- ../src-base/minecraft/net/minecraft/world/gen/structure/ComponentScatteredFeaturePieces.java
++++ ../src-work/minecraft/net/minecraft/world/gen/structure/ComponentScatteredFeaturePieces.java
+@@ -743,10 +743,10 @@
+                     this.func_175811_a(p_74875_1_, Blocks.field_150383_bp.func_176223_P(), 4, 2, 6, p_74875_3_);
+                     this.func_175811_a(p_74875_1_, Blocks.field_180407_aO.func_176223_P(), 1, 2, 1, p_74875_3_);
+                     this.func_175811_a(p_74875_1_, Blocks.field_180407_aO.func_176223_P(), 5, 2, 1, p_74875_3_);
+-                    IBlockState iblockstate = Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH);
+-                    IBlockState iblockstate1 = Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.EAST);
+-                    IBlockState iblockstate2 = Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST);
+-                    IBlockState iblockstate3 = Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH);
++                    IBlockState iblockstate = Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.SPRUCE);
++                    IBlockState iblockstate1 = Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.EAST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.SPRUCE);
++                    IBlockState iblockstate2 = Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.SPRUCE);
++                    IBlockState iblockstate3 = Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.SPRUCE);
+                     this.func_175804_a(p_74875_1_, p_74875_3_, 0, 4, 1, 6, 4, 1, iblockstate, iblockstate, false);
+                     this.func_175804_a(p_74875_1_, p_74875_3_, 0, 4, 2, 0, 4, 7, iblockstate1, iblockstate1, false);
+                     this.func_175804_a(p_74875_1_, p_74875_3_, 6, 4, 2, 6, 4, 7, iblockstate2, iblockstate2, false);

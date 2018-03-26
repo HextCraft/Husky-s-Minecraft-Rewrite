@@ -49,8 +49,8 @@ import javax.annotation.Nullable;
 
 public interface ModContainer
 {
-    public static enum Disableable {
-        YES, RESTART, NEVER, DEPENDENCIES;
+    enum Disableable {
+        YES, RESTART, NEVER, DEPENDENCIES
     }
     /**
      * The globally unique modid for this mod
@@ -89,7 +89,7 @@ public interface ModContainer
     void setEnabledState(boolean enabled);
 
     /**
-     * A list of the modids that this mod requires loaded prior to loading
+     * A list of the modid's that this mod requires loaded prior to loading
      */
     Set<ArtifactVersion> getRequirements();
 
@@ -118,15 +118,15 @@ public interface ModContainer
      * mods that don't need real events should return false and avoid further
      * processing
      *
-     * @param bus
-     * @param controller
+     * @param bus the eventbus
+     * @param controller this is the load controller
      */
     boolean registerBus(EventBus bus, LoadController controller);
 
     /**
      * Does this mod match the supplied mod
      *
-     * @param mod
+     * @param mod the mod
      */
     boolean matches(Object mod);
 
@@ -146,10 +146,10 @@ public interface ModContainer
     @Nullable
     Certificate getSigningCertificate();
 
-    public static final Map<String,String> EMPTY_PROPERTIES = ImmutableMap.of();
+    Map<String,String> EMPTY_PROPERTIES = ImmutableMap.of();
     Map<String,String> getCustomModProperties();
 
-    public Class<?> getCustomResourcePackClass();
+    Class<?> getCustomResourcePackClass();
 
     Map<String, String> getSharedModDescriptor();
 

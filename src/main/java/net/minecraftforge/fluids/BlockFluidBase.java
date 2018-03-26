@@ -31,6 +31,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -46,10 +47,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.common.property.PropertyFloat;
+import net.minecraftforge.common.property.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,16 +59,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public abstract class BlockFluidBase extends Block implements IFluidBlock
 {
-    protected final static Map<Block, Boolean> defaultDisplacements = Maps.newHashMap();
+    private final static Map<Block, Boolean> defaultDisplacements = Maps.newHashMap();
 
     static
     {
-        defaultDisplacements.put(Blocks.OAK_DOOR,                       false);
-        defaultDisplacements.put(Blocks.SPRUCE_DOOR,                    false);
-        defaultDisplacements.put(Blocks.BIRCH_DOOR,                     false);
-        defaultDisplacements.put(Blocks.JUNGLE_DOOR,                    false);
-        defaultDisplacements.put(Blocks.ACACIA_DOOR,                    false);
-        defaultDisplacements.put(Blocks.DARK_OAK_DOOR,                  false);
+        defaultDisplacements.put(Blocks.OAK_DOOR,                       true);
         defaultDisplacements.put(Blocks.TRAPDOOR,                       false);
         defaultDisplacements.put(Blocks.IRON_TRAPDOOR,                  false);
         defaultDisplacements.put(Blocks.OAK_FENCE,                      false);
@@ -90,8 +83,8 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
         defaultDisplacements.put(Blocks.STONE_PRESSURE_PLATE,           false);
         defaultDisplacements.put(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE,  false);
         defaultDisplacements.put(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE,  false);
-        defaultDisplacements.put(Blocks.LADDER,                         false);
-        defaultDisplacements.put(Blocks.IRON_BARS,                      false);
+        defaultDisplacements.put(Blocks.LADDER,                         true);
+        defaultDisplacements.put(Blocks.IRON_BARS,                      true);
         defaultDisplacements.put(Blocks.GLASS_PANE,                     false);
         defaultDisplacements.put(Blocks.STAINED_GLASS_PANE,             false);
         defaultDisplacements.put(Blocks.PORTAL,                         false);
@@ -109,19 +102,31 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
     }
     protected Map<Block, Boolean> displacements = Maps.newHashMap();
 
+    private static final class UnlistedPropertyBool extends Properties.PropertyAdapter<Boolean>
+    {
+        public UnlistedPropertyBool(String name)
+        {
+            super(PropertyBool.create(name));
+        }
+    }
+
     public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 15);
     public static final PropertyFloat[] LEVEL_CORNERS = new PropertyFloat[4];
     public static final PropertyFloat FLOW_DIRECTION = new PropertyFloat("flow_direction");
-    public static final ImmutableList<IUnlistedProperty<Float>> FLUID_RENDER_PROPS;
+    public static final UnlistedPropertyBool[] SIDE_OVERLAYS = new UnlistedPropertyBool[4];
+    public static final ImmutableList<IUnlistedProperty<?>> FLUID_RENDER_PROPS;
 
     static
     {
-        ImmutableList.Builder<IUnlistedProperty<Float>> builder = ImmutableList.builder();
+        ImmutableList.Builder<IUnlistedProperty<?>> builder = ImmutableList.builder();
         builder.add(FLOW_DIRECTION);
         for(int i = 0; i < 4; i++)
         {
             LEVEL_CORNERS[i] = new PropertyFloat("level_corner_" + i);
             builder.add(LEVEL_CORNERS[i]);
+
+            SIDE_OVERLAYS[i] = new UnlistedPropertyBool("side_overlay_" + i);
+            builder.add(SIDE_OVERLAYS[i]);
         }
         FLUID_RENDER_PROPS = builder.build();
     }
@@ -168,7 +173,10 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
     @Nonnull
     protected BlockStateContainer createBlockState()
     {
-        return new ExtendedBlockState(this, new IProperty[] { LEVEL }, FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]));
+        return new BlockStateContainer.Builder(this)
+                .add(LEVEL)
+                .add(FLUID_RENDER_PROPS.toArray(new IUnlistedProperty<?>[0]))
+                .build();
     }
 
     @Override
@@ -424,7 +432,7 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
         int lightThisExt  = lightThis >> 16 & 255;
         int lightUpExt    = lightUp >> 16 & 255;
         return (lightThisBase > lightUpBase ? lightThisBase : lightUpBase) |
-               ((lightThisExt > lightUpExt ? lightThisExt : lightUpExt) << 16);
+                ((lightThisExt > lightUpExt ? lightThisExt : lightUpExt) << 16);
     }
 
     @Override
@@ -532,6 +540,19 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
             {
                 corner[1][1] = 1;
             }
+        }
+
+        boolean[] overlaySides = new boolean[4];
+        for (EnumFacing side : EnumFacing.Plane.HORIZONTAL)
+        {
+            if (shouldSideBeRendered(oldState, worldIn, pos, side) && isBlockSolid(worldIn, pos.offset(side), side.getOpposite()))
+            {
+                overlaySides[side.getHorizontalIndex()] = true;
+            }
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            state = state.withProperty(SIDE_OVERLAYS[i], overlaySides[i]);
         }
 
         state = state.withProperty(LEVEL_CORNERS[0], corner[0][0]);
@@ -691,14 +712,14 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
         if (world.getBlockState(pos.up()).getBlock() == this)
         {
             boolean flag =
-                isBlockSolid(world, pos.add( 0,  0, -1), EnumFacing.NORTH) ||
-                isBlockSolid(world, pos.add( 0,  0,  1), EnumFacing.SOUTH) ||
-                isBlockSolid(world, pos.add(-1,  0,  0), EnumFacing.WEST) ||
-                isBlockSolid(world, pos.add( 1,  0,  0), EnumFacing.EAST) ||
-                isBlockSolid(world, pos.add( 0,  1, -1), EnumFacing.NORTH) ||
-                isBlockSolid(world, pos.add( 0,  1,  1), EnumFacing.SOUTH) ||
-                isBlockSolid(world, pos.add(-1,  1,  0), EnumFacing.WEST) ||
-                isBlockSolid(world, pos.add( 1,  1,  0), EnumFacing.EAST);
+                    isBlockSolid(world, pos.add( 0,  0, -1), EnumFacing.NORTH) ||
+                            isBlockSolid(world, pos.add( 0,  0,  1), EnumFacing.SOUTH) ||
+                            isBlockSolid(world, pos.add(-1,  0,  0), EnumFacing.WEST) ||
+                            isBlockSolid(world, pos.add( 1,  0,  0), EnumFacing.EAST) ||
+                            isBlockSolid(world, pos.add( 0,  1, -1), EnumFacing.NORTH) ||
+                            isBlockSolid(world, pos.add( 0,  1,  1), EnumFacing.SOUTH) ||
+                            isBlockSolid(world, pos.add(-1,  1,  0), EnumFacing.WEST) ||
+                            isBlockSolid(world, pos.add( 1,  1,  0), EnumFacing.EAST);
 
             if (flag)
             {
@@ -735,7 +756,7 @@ public abstract class BlockFluidBase extends Block implements IFluidBlock
     {
         return NULL_AABB;
     }
-    
+
     @Override
     @SideOnly (Side.CLIENT)
     public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)

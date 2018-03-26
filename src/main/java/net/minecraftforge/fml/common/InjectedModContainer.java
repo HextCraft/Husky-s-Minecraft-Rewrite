@@ -217,7 +217,7 @@ public class InjectedModContainer implements ModContainer
     @Override
     public boolean shouldLoadInEnvironment()
     {
-        return true;
+        return false;
     }
 
     @Override

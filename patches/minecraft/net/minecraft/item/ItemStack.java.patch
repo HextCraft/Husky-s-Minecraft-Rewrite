@@ -1,6 +1,14 @@
 --- ../src-base/minecraft/net/minecraft/item/ItemStack.java
 +++ ../src-work/minecraft/net/minecraft/item/ItemStack.java
-@@ -50,7 +50,7 @@
+@@ -5,6 +5,7 @@
+ import com.google.common.collect.Multimap;
+ import java.text.DecimalFormat;
+ import java.util.List;
++import java.util.Objects;
+ import java.util.Random;
+ import java.util.Map.Entry;
+ import javax.annotation.Nullable;
+@@ -50,7 +51,7 @@
  import net.minecraftforge.fml.relauncher.Side;
  import net.minecraftforge.fml.relauncher.SideOnly;
  
@@ -9,7 +17,7 @@
  {
      public static final ItemStack field_190927_a = new ItemStack((Item)null);
      public static final DecimalFormat field_111284_a = new DecimalFormat("#.##");
-@@ -66,6 +66,10 @@
+@@ -66,6 +67,10 @@
      private Block field_179550_j;
      private boolean field_179551_k;
  
@@ -20,7 +28,7 @@
      public ItemStack(Block p_i1876_1_)
      {
          this(p_i1876_1_, 1);
-@@ -91,8 +95,10 @@
+@@ -91,8 +96,10 @@
          this(p_i1880_1_, p_i1880_2_, 0);
      }
  
@@ -32,7 +40,7 @@
          this.field_151002_e = p_i1881_1_;
          this.field_77991_e = p_i1881_3_;
          this.field_77994_a = p_i1881_2_;
-@@ -103,6 +109,7 @@
+@@ -103,6 +110,7 @@
          }
  
          this.func_190923_F();
@@ -40,7 +48,7 @@
      }
  
      private void func_190923_F()
-@@ -112,7 +119,8 @@
+@@ -112,7 +120,8 @@
  
      public ItemStack(NBTTagCompound p_i47263_1_)
      {
@@ -50,7 +58,7 @@
          this.field_77994_a = p_i47263_1_.func_74771_c("Count");
          this.field_77991_e = Math.max(0, p_i47263_1_.func_74765_d("Damage"));
  
-@@ -127,6 +135,7 @@
+@@ -127,6 +136,7 @@
          }
  
          this.func_190923_F();
@@ -58,16 +66,16 @@
      }
  
      public boolean func_190926_b()
-@@ -135,7 +144,7 @@
+@@ -135,7 +145,7 @@
          {
              return true;
          }
 -        else if (this.field_151002_e != null && this.field_151002_e != Item.func_150898_a(Blocks.field_150350_a))
-+        else if (this.getItemRaw() != null && this.getItemRaw() != Item.func_150898_a(Blocks.field_150350_a))
++        else if (this.getItemRaw() != null && this.getItemRaw() != Items.field_190931_a)
          {
              if (this.field_77994_a <= 0)
              {
-@@ -169,11 +178,12 @@
+@@ -169,21 +179,35 @@
  
      public Item func_77973_b()
      {
@@ -81,7 +89,11 @@
          EnumActionResult enumactionresult = this.func_77973_b().func_180614_a(p_179546_1_, p_179546_2_, p_179546_3_, p_179546_4_, p_179546_5_, p_179546_6_, p_179546_7_, p_179546_8_);
  
          if (enumactionresult == EnumActionResult.SUCCESS)
-@@ -184,6 +194,19 @@
+         {
+-            p_179546_1_.func_71029_a(StatList.func_188057_b(this.field_151002_e));
++            p_179546_1_.func_71029_a(Objects.requireNonNull(StatList.func_188057_b(this.field_151002_e)));
+         }
+ 
          return enumactionresult;
      }
  
@@ -92,7 +104,7 @@
 +
 +        if (enumactionresult == EnumActionResult.SUCCESS)
 +        {
-+            playerIn.func_71029_a(StatList.func_188057_b(this.field_151002_e));
++            playerIn.func_71029_a(Objects.requireNonNull(StatList.func_188057_b(this.field_151002_e)));
 +        }
 +
 +        return enumactionresult;
@@ -101,7 +113,7 @@
      public float func_150997_a(IBlockState p_150997_1_)
      {
          return this.func_77973_b().func_150893_a(this, p_150997_1_);
-@@ -211,12 +234,18 @@
+@@ -211,12 +235,18 @@
              p_77955_1_.func_74782_a("tag", this.field_77990_d);
          }
  
@@ -121,7 +133,7 @@
      }
  
      public boolean func_77985_e()
-@@ -230,7 +259,7 @@
+@@ -230,7 +260,7 @@
          {
              return false;
          }
@@ -130,7 +142,7 @@
          {
              return false;
          }
-@@ -247,32 +276,27 @@
+@@ -247,32 +277,27 @@
  
      public boolean func_77951_h()
      {
@@ -168,7 +180,7 @@
      }
  
      public boolean func_96631_a(int p_96631_1_, Random p_96631_2_, @Nullable EntityPlayerMP p_96631_3_)
-@@ -309,8 +333,8 @@
+@@ -309,8 +334,8 @@
                  CriteriaTriggers.field_193132_s.func_193158_a(p_96631_3_, this, this.field_77991_e + p_96631_1_);
              }
  
@@ -179,7 +191,32 @@
          }
      }
  
-@@ -359,7 +383,7 @@
+@@ -328,7 +353,7 @@
+                     if (p_77972_2_ instanceof EntityPlayer)
+                     {
+                         EntityPlayer entityplayer = (EntityPlayer)p_77972_2_;
+-                        entityplayer.func_71029_a(StatList.func_188059_c(this.field_151002_e));
++                        entityplayer.func_71029_a(Objects.requireNonNull(StatList.func_188059_c(this.field_151002_e)));
+                     }
+ 
+                     this.field_77991_e = 0;
+@@ -343,7 +368,7 @@
+ 
+         if (flag)
+         {
+-            p_77961_2_.func_71029_a(StatList.func_188057_b(this.field_151002_e));
++            p_77961_2_.func_71029_a(Objects.requireNonNull(StatList.func_188057_b(this.field_151002_e)));
+         }
+     }
+ 
+@@ -353,13 +378,13 @@
+ 
+         if (flag)
+         {
+-            p_179548_4_.func_71029_a(StatList.func_188057_b(this.field_151002_e));
++            p_179548_4_.func_71029_a(Objects.requireNonNull(StatList.func_188057_b(this.field_151002_e)));
+         }
+     }
  
      public boolean func_150998_b(IBlockState p_150998_1_)
      {
@@ -188,7 +225,7 @@
      }
  
      public boolean func_111282_a(EntityPlayer p_111282_1_, EntityLivingBase p_111282_2_, EnumHand p_111282_3_)
-@@ -369,7 +393,7 @@
+@@ -369,7 +394,7 @@
  
      public ItemStack func_77946_l()
      {
@@ -197,7 +234,7 @@
          itemstack.func_190915_d(this.func_190921_D());
  
          if (this.field_77990_d != null)
-@@ -394,7 +418,7 @@
+@@ -394,7 +419,7 @@
              }
              else
              {
@@ -206,7 +243,16 @@
              }
          }
          else
-@@ -435,7 +459,7 @@
+@@ -411,7 +436,7 @@
+         }
+         else
+         {
+-            return !p_77989_0_.func_190926_b() && !p_77989_1_.func_190926_b() ? p_77989_0_.func_77959_d(p_77989_1_) : false;
++            return (!p_77989_0_.func_190926_b() && !p_77989_1_.func_190926_b()) && p_77989_0_.func_77959_d(p_77989_1_);
+         }
+     }
+ 
+@@ -435,7 +460,7 @@
          }
          else
          {
@@ -215,6 +261,54 @@
          }
      }
  
+@@ -447,7 +472,7 @@
+         }
+         else
+         {
+-            return !p_179545_0_.func_190926_b() && !p_179545_1_.func_190926_b() ? p_179545_0_.func_77969_a(p_179545_1_) : false;
++            return (!p_179545_0_.func_190926_b() && !p_179545_1_.func_190926_b()) && p_179545_0_.func_77969_a(p_179545_1_);
+         }
+     }
+ 
+@@ -459,7 +484,7 @@
+         }
+         else
+         {
+-            return !p_185132_0_.func_190926_b() && !p_185132_1_.func_190926_b() ? p_185132_0_.func_185136_b(p_185132_1_) : false;
++            return (!p_185132_0_.func_190926_b() && !p_185132_1_.func_190926_b()) && p_185132_0_.func_185136_b(p_185132_1_);
+         }
+     }
+ 
+@@ -505,7 +530,7 @@
+ 
+     public void func_77980_a(World p_77980_1_, EntityPlayer p_77980_2_, int p_77980_3_)
+     {
+-        p_77980_2_.func_71064_a(StatList.func_188060_a(this.field_151002_e), p_77980_3_);
++        p_77980_2_.func_71064_a(Objects.requireNonNull(StatList.func_188060_a(this.field_151002_e)), p_77980_3_);
+         this.func_77973_b().func_77622_d(this, p_77980_1_, p_77980_2_);
+     }
+ 
+@@ -593,10 +618,9 @@
+         return this.func_77973_b().func_77653_i(this);
+     }
+ 
+-    public ItemStack func_190924_f(String p_190924_1_)
++    public void setTranslatableName(String p_190924_1_)
+     {
+         this.func_190925_c("display").func_74778_a("LocName", p_190924_1_);
+-        return this;
+     }
+ 
+     public ItemStack func_151001_c(String p_151001_1_)
+@@ -854,7 +878,7 @@
+                 list.add(I18n.func_74837_a("item.durability", this.func_77958_k() - this.func_77952_i(), this.func_77958_k()));
+             }
+ 
+-            list.add(TextFormatting.DARK_GRAY + ((ResourceLocation)Item.field_150901_e.func_177774_c(this.field_151002_e)).toString());
++            list.add(TextFormatting.DARK_GRAY + (Objects.requireNonNull(Item.field_150901_e.func_177774_c(this.field_151002_e))).toString());
+ 
+             if (this.func_77942_o())
+             {
 @@ -862,6 +886,7 @@
              }
          }
@@ -240,7 +334,7 @@
 +    @Override
 +    public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, @Nullable net.minecraft.util.EnumFacing facing)
 +    {
-+        return this.field_190928_g  || this.capabilities == null ? false : this.capabilities.hasCapability(capability, facing);
++        return !this.field_190928_g && this.capabilities != null && this.capabilities.hasCapability(capability, facing);
 +    }
 +
 +    @Override
@@ -344,7 +438,7 @@
 +        if (shareTagA == null)
 +            return shareTagB == null;
 +        else
-+            return shareTagB != null && shareTagA.equals(shareTagB);
++            return shareTagA.equals(shareTagB);
 +    }
 +
 +    /**

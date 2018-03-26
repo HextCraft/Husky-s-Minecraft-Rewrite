@@ -1,0 +1,377 @@
+--- ../src-base/minecraft/net/minecraft/init/Blocks.java
++++ ../src-work/minecraft/net/minecraft/init/Blocks.java
+@@ -3,39 +3,10 @@
+ import com.google.common.collect.Sets;
+ import java.util.Set;
+ import javax.annotation.Nullable;
+-import net.minecraft.block.Block;
+-import net.minecraft.block.BlockBeacon;
+-import net.minecraft.block.BlockBush;
+-import net.minecraft.block.BlockCactus;
+-import net.minecraft.block.BlockCauldron;
+-import net.minecraft.block.BlockChest;
+-import net.minecraft.block.BlockDaylightDetector;
+-import net.minecraft.block.BlockDeadBush;
+-import net.minecraft.block.BlockDoor;
+-import net.minecraft.block.BlockDoublePlant;
+-import net.minecraft.block.BlockDynamicLiquid;
+-import net.minecraft.block.BlockFire;
+-import net.minecraft.block.BlockFlower;
+-import net.minecraft.block.BlockGrass;
+-import net.minecraft.block.BlockHopper;
+-import net.minecraft.block.BlockLeaves;
+-import net.minecraft.block.BlockMycelium;
+-import net.minecraft.block.BlockPistonBase;
+-import net.minecraft.block.BlockPistonExtension;
+-import net.minecraft.block.BlockPistonMoving;
+-import net.minecraft.block.BlockPortal;
+-import net.minecraft.block.BlockRedstoneComparator;
+-import net.minecraft.block.BlockRedstoneRepeater;
+-import net.minecraft.block.BlockRedstoneWire;
+-import net.minecraft.block.BlockReed;
+-import net.minecraft.block.BlockSand;
+-import net.minecraft.block.BlockSkull;
+-import net.minecraft.block.BlockSlab;
+-import net.minecraft.block.BlockStainedGlass;
+-import net.minecraft.block.BlockStainedGlassPane;
+-import net.minecraft.block.BlockStaticLiquid;
+-import net.minecraft.block.BlockTallGrass;
+-import net.minecraft.block.BlockTripWireHook;
++
++import net.minecraft.block.*;
++import net.minecraft.item.EnumCoralColor;
++import net.minecraft.item.EnumDyeColor;
+ import net.minecraft.util.ResourceLocation;
+ 
+ public class Blocks
+@@ -43,6 +14,7 @@
+     private static final Set<Block> field_185780_dg;
+     public static final Block field_150350_a;
+     public static final Block field_150348_b;
++    public static final Block STONE2;
+     public static final BlockGrass field_150349_c;
+     public static final Block field_150346_d;
+     public static final Block field_150347_e;
+@@ -90,14 +62,13 @@
+     public static final BlockSlab field_150333_U;
+     public static final Block field_150336_V;
+     public static final Block field_150335_W;
+-    public static final Block field_150342_X;
++    public static Block field_150342_X;
+     public static final Block field_150341_Y;
+     public static final Block field_150343_Z;
+     public static final Block field_150478_aa;
+     public static final BlockFire field_150480_ab;
+     public static final Block field_150474_ac;
+-    public static final Block field_150476_ad;
+-    public static final BlockChest field_150486_ae;
++    public static BlockChest field_150486_ae;
+     public static final BlockRedstoneWire field_150488_af;
+     public static final Block field_150482_ag;
+     public static final Block field_150484_ah;
+@@ -107,15 +78,11 @@
+     public static final Block field_150460_al;
+     public static final Block field_150470_am;
+     public static final Block field_150472_an;
+-    public static final BlockDoor field_180413_ao;
+-    public static final BlockDoor field_180414_ap;
+-    public static final BlockDoor field_180412_aq;
+-    public static final BlockDoor field_180411_ar;
+-    public static final BlockDoor field_180410_as;
+-    public static final BlockDoor field_180409_at;
++    public static BlockDoor DOORS;
+     public static final Block field_150468_ap;
+     public static final Block field_150448_aq;
+     public static final Block field_150446_ar;
++    public static Block STAIRS;
+     public static final Block field_150444_as;
+     public static final Block field_150442_at;
+     public static final Block field_150456_au;
+@@ -191,9 +158,6 @@
+     public static final BlockTripWireHook field_150479_bC;
+     public static final Block field_150473_bD;
+     public static final Block field_150475_bE;
+-    public static final Block field_150485_bF;
+-    public static final Block field_150487_bG;
+-    public static final Block field_150481_bH;
+     public static final Block field_150483_bI;
+     public static final BlockBeacon field_150461_bJ;
+     public static final Block field_150463_bK;
+@@ -203,7 +167,7 @@
+     public static final Block field_150471_bO;
+     public static final BlockSkull field_150465_bP;
+     public static final Block field_150467_bQ;
+-    public static final Block field_150447_bR;
++    public static Block field_150447_bR;
+     public static final Block field_150445_bS;
+     public static final Block field_150443_bT;
+     public static final BlockRedstoneComparator field_150441_bU;
+@@ -225,8 +189,6 @@
+     public static final Block field_150405_ch;
+     public static final Block field_150402_ci;
+     public static final Block field_150403_cj;
+-    public static final Block field_150400_ck;
+-    public static final Block field_150401_cl;
+     public static final Block field_180399_cE;
+     public static final BlockDoublePlant field_150398_cm;
+     public static final BlockStainedGlass field_150399_cn;
+@@ -296,6 +258,81 @@
+     public static final Block field_192444_dS;
+     public static final Block field_185779_df;
+ 
++    public static final Block YELLOW_CORAL;
++    public static final Block PINK_CORAL;
++    public static final Block PURPLE_CORAL;
++    public static final Block BLUE_CORAL;
++    public static final Block RED_CORAL;
++
++    public static final Block YELLOW_DEAD_CORAL;
++    public static final Block PINK_DEAD_CORAL;
++    public static final Block PURPLE_DEAD_CORAL;
++    public static final Block BLUE_DEAD_CORAL;
++    public static final Block RED_DEAD_CORAL;
++
++    public static final Block YELLOW_CORAL_PLANT;
++    public static final Block PINK_CORAL_PLANT;
++    public static final Block PURPLE_CORAL_PLANT;
++    public static final Block BLUE_CORAL_PLANT;
++    public static final Block RED_CORAL_PLANT;
++
++    public static final Block YELLOW_DEAD_CORAL_PLANT;
++    public static final Block PINK_DEAD_CORAL_PLANT;
++    public static final Block PURPLE_DEAD_CORAL_PLANT;
++    public static final Block BLUE_DEAD_CORAL_PLANT;
++    public static final Block RED_DEAD_CORAL_PLANT;
++
++    public static final Block YELLOW_CORAL_FAN;
++    public static final Block PINK_CORAL_FAN;
++    public static final Block PURPLE_CORAL_FAN;
++    public static final Block BLUE_CORAL_FAN;
++    public static final Block RED_CORAL_FAN;
++
++    public static final Block YELLOW_DEAD_CORAL_FAN;
++    public static final Block PINK_DEAD_CORAL_FAN;
++    public static final Block PURPLE_DEAD_CORAL_FAN;
++    public static final Block BLUE_DEAD_CORAL_FAN;
++    public static final Block RED_DEAD_CORAL_FAN;
++
++    public static final Block YELLOW_BRAIN_CORAL;
++    public static final Block PINK_BRAIN_CORAL;
++    public static final Block PURPLE_BRAIN_CORAL;
++    public static final Block BLUE_BRAIN_CORAL;
++    public static final Block RED_BRAIN_CORAL;
++
++    public static final Block YELLOW_DEAD_BRAIN_CORAL;
++    public static final Block PINK_DEAD_BRAIN_CORAL;
++    public static final Block PURPLE_DEAD_BRAIN_CORAL;
++    public static final Block BLUE_DEAD_BRAIN_CORAL;
++    public static final Block RED_DEAD_BRAIN_CORAL;
++
++    public static final Block YELLOW_PIPE_CORAL;
++    public static final Block PINK_PIPE_CORAL;
++    public static final Block PURPLE_PIPE_CORAL;
++    public static final Block BLUE_PIPE_CORAL;
++    public static final Block RED_PIPE_CORAL;
++
++    public static final Block YELLOW_DEAD_PIPE_CORAL;
++    public static final Block PINK_DEAD_PIPE_CORAL;
++    public static final Block PURPLE_DEAD_PIPE_CORAL;
++    public static final Block BLUE_DEAD_PIPE_CORAL;
++    public static final Block RED_DEAD_PIPE_CORAL;
++
++    public static final Block YELLOW_SEA_FAN_CORAL;
++    public static final Block PINK_SEA_FAN_CORAL;
++    public static final Block PURPLE_SEA_FAN_CORAL;
++    public static final Block BLUE_SEA_FAN_CORAL;
++    public static final Block RED_SEA_FAN_CORAL;
++
++    public static final Block YELLOW_DEAD_SEA_FAN_CORAL;
++    public static final Block PINK_DEAD_SEA_FAN_CORAL;
++    public static final Block PURPLE_DEAD_SEA_FAN_CORAL;
++    public static final Block BLUE_DEAD_SEA_FAN_CORAL;
++    public static final Block RED_DEAD_SEA_FAN_CORAL;
++
++    public static final Block KELP_PLANT;
++    public static final Block DRIED_KELP_BLOCK;
++
+     @Nullable
+     private static Block func_180383_a(String p_180383_0_)
+     {
+@@ -319,10 +356,11 @@
+         }
+         else
+         {
+-            field_185780_dg = Sets.<Block>newHashSet();
++            field_185780_dg = Sets.newHashSet();
+             field_150350_a = func_180383_a("air");
+             field_150348_b = func_180383_a("stone");
+-            field_150349_c = (BlockGrass)func_180383_a("grass");
++            STONE2 = func_180383_a("stone2");
++            field_150349_c = (BlockGrass)func_180383_a("grass_block");
+             field_150346_d = func_180383_a("dirt");
+             field_150347_e = func_180383_a("cobblestone");
+             field_150344_f = func_180383_a("planks");
+@@ -369,14 +407,20 @@
+             field_150333_U = (BlockSlab)func_180383_a("stone_slab");
+             field_150336_V = func_180383_a("brick_block");
+             field_150335_W = func_180383_a("tnt");
+-            field_150342_X = func_180383_a("bookshelf");
+             field_150341_Y = func_180383_a("mossy_cobblestone");
+             field_150343_Z = func_180383_a("obsidian");
+             field_150478_aa = func_180383_a("torch");
+             field_150480_ab = (BlockFire)func_180383_a("fire");
+             field_150474_ac = func_180383_a("mob_spawner");
+-            field_150476_ad = func_180383_a("oak_stairs");
+-            field_150486_ae = (BlockChest)func_180383_a("chest");
++
++            for(BlockPlanks.EnumType type : BlockPlanks.EnumType.values()) {
++                field_150342_X = func_180383_a(type.func_176610_l() + "_bookshelf");
++                field_150486_ae = (BlockChest)func_180383_a(type.func_176610_l() + "_chest");
++                STAIRS = func_180383_a(type.func_176610_l() + "_stairs");
++                field_150447_bR = func_180383_a(type.func_176610_l() + "_trapped_chest");
++                DOORS = (BlockDoor)func_180383_a(type.func_176610_l() + "_door");
++            }
++
+             field_150488_af = (BlockRedstoneWire)func_180383_a("redstone_wire");
+             field_150482_ag = func_180383_a("diamond_ore");
+             field_150484_ah = func_180383_a("diamond_block");
+@@ -386,12 +430,6 @@
+             field_150460_al = func_180383_a("furnace");
+             field_150470_am = func_180383_a("lit_furnace");
+             field_150472_an = func_180383_a("standing_sign");
+-            field_180413_ao = (BlockDoor)func_180383_a("wooden_door");
+-            field_180414_ap = (BlockDoor)func_180383_a("spruce_door");
+-            field_180412_aq = (BlockDoor)func_180383_a("birch_door");
+-            field_180411_ar = (BlockDoor)func_180383_a("jungle_door");
+-            field_180410_as = (BlockDoor)func_180383_a("acacia_door");
+-            field_180409_at = (BlockDoor)func_180383_a("dark_oak_door");
+             field_150468_ap = func_180383_a("ladder");
+             field_150448_aq = func_180383_a("rail");
+             field_150446_ar = func_180383_a("stone_stairs");
+@@ -412,7 +450,7 @@
+             field_150435_aG = func_180383_a("clay");
+             field_150436_aH = (BlockReed)func_180383_a("reeds");
+             field_150421_aI = func_180383_a("jukebox");
+-            field_180407_aO = func_180383_a("fence");
++            field_180407_aO = func_180383_a("oak_fence");
+             field_180408_aP = func_180383_a("spruce_fence");
+             field_180404_aQ = func_180383_a("birch_fence");
+             field_180403_aR = func_180383_a("jungle_fence");
+@@ -438,7 +476,7 @@
+             field_150393_bb = func_180383_a("pumpkin_stem");
+             field_150394_bc = func_180383_a("melon_stem");
+             field_150395_bd = func_180383_a("vine");
+-            field_180390_bo = func_180383_a("fence_gate");
++            field_180390_bo = func_180383_a("oak_fence_gate");
+             field_180391_bp = func_180383_a("spruce_fence_gate");
+             field_180392_bq = func_180383_a("birch_fence_gate");
+             field_180386_br = func_180383_a("jungle_fence_gate");
+@@ -470,9 +508,6 @@
+             field_150479_bC = (BlockTripWireHook)func_180383_a("tripwire_hook");
+             field_150473_bD = func_180383_a("tripwire");
+             field_150475_bE = func_180383_a("emerald_block");
+-            field_150485_bF = func_180383_a("spruce_stairs");
+-            field_150487_bG = func_180383_a("birch_stairs");
+-            field_150481_bH = func_180383_a("jungle_stairs");
+             field_150483_bI = func_180383_a("command_block");
+             field_150461_bJ = (BlockBeacon)func_180383_a("beacon");
+             field_150463_bK = func_180383_a("cobblestone_wall");
+@@ -482,7 +517,6 @@
+             field_150471_bO = func_180383_a("wooden_button");
+             field_150465_bP = (BlockSkull)func_180383_a("skull");
+             field_150467_bQ = func_180383_a("anvil");
+-            field_150447_bR = func_180383_a("trapped_chest");
+             field_150445_bS = func_180383_a("light_weighted_pressure_plate");
+             field_150443_bT = func_180383_a("heavy_weighted_pressure_plate");
+             field_150441_bU = (BlockRedstoneComparator)func_180383_a("unpowered_comparator");
+@@ -504,8 +538,6 @@
+             field_150405_ch = func_180383_a("hardened_clay");
+             field_150402_ci = func_180383_a("coal_block");
+             field_150403_cj = func_180383_a("packed_ice");
+-            field_150400_ck = func_180383_a("acacia_stairs");
+-            field_150401_cl = func_180383_a("dark_oak_stairs");
+             field_180399_cE = func_180383_a("slime");
+             field_150398_cm = (BlockDoublePlant)func_180383_a("double_plant");
+             field_150399_cn = (BlockStainedGlass)func_180383_a("stained_glass");
+@@ -574,6 +606,81 @@
+             field_192443_dR = func_180383_a("concrete");
+             field_192444_dS = func_180383_a("concrete_powder");
+             field_185779_df = func_180383_a("structure_block");
++
++            YELLOW_CORAL = func_180383_a("yellow_coral");
++            PINK_CORAL = func_180383_a("pink_coral");
++            PURPLE_CORAL = func_180383_a("purple_coral");
++            BLUE_CORAL = func_180383_a("blue_coral");
++            RED_CORAL = func_180383_a("red_coral");
++
++            YELLOW_DEAD_CORAL = func_180383_a("yellow_dead_coral");
++            PINK_DEAD_CORAL = func_180383_a("pink_dead_coral");
++            PURPLE_DEAD_CORAL = func_180383_a("purple_dead_coral");
++            BLUE_DEAD_CORAL = func_180383_a("blue_dead_coral");
++            RED_DEAD_CORAL = func_180383_a("red_dead_coral");
++
++            YELLOW_CORAL_PLANT = func_180383_a("yellow_coral_plant");
++            PINK_CORAL_PLANT = func_180383_a("pink_coral_plant");
++            PURPLE_CORAL_PLANT = func_180383_a("purple_coral_plant");
++            BLUE_CORAL_PLANT = func_180383_a("blue_coral_plant");
++            RED_CORAL_PLANT = func_180383_a("red_coral_plant");
++
++            YELLOW_DEAD_CORAL_PLANT = func_180383_a("yellow_dead_coral_plant");
++            PINK_DEAD_CORAL_PLANT = func_180383_a("pink_dead_coral_plant");
++            PURPLE_DEAD_CORAL_PLANT = func_180383_a("purple_dead_coral_plant");
++            BLUE_DEAD_CORAL_PLANT = func_180383_a("blue_dead_coral_plant");
++            RED_DEAD_CORAL_PLANT = func_180383_a("red_dead_coral_plant");
++
++            YELLOW_CORAL_FAN = func_180383_a("yellow_coral_fan");
++            PINK_CORAL_FAN = func_180383_a("pink_coral_fan");
++            PURPLE_CORAL_FAN = func_180383_a("purple_coral_fan");
++            BLUE_CORAL_FAN = func_180383_a("blue_coral_fan");
++            RED_CORAL_FAN = func_180383_a("red_coral_fan");
++
++            YELLOW_DEAD_CORAL_FAN = func_180383_a("yellow_dead_coral_fan");
++            PINK_DEAD_CORAL_FAN = func_180383_a("pink_dead_coral_fan");
++            PURPLE_DEAD_CORAL_FAN = func_180383_a("purple_dead_coral_fan");
++            BLUE_DEAD_CORAL_FAN = func_180383_a("blue_dead_coral_fan");
++            RED_DEAD_CORAL_FAN = func_180383_a("red_dead_coral_fan");
++
++            YELLOW_BRAIN_CORAL = func_180383_a("yellow_brain_coral");
++            PINK_BRAIN_CORAL = func_180383_a("pink_brain_coral");
++            PURPLE_BRAIN_CORAL = func_180383_a("purple_brain_coral");
++            BLUE_BRAIN_CORAL = func_180383_a("blue_brain_coral");
++            RED_BRAIN_CORAL = func_180383_a("red_brain_coral");
++
++            YELLOW_DEAD_BRAIN_CORAL = func_180383_a("yellow_dead_brain_coral");
++            PINK_DEAD_BRAIN_CORAL = func_180383_a("pink_dead_brain_coral");
++            PURPLE_DEAD_BRAIN_CORAL = func_180383_a("purple_dead_brain_coral");
++            BLUE_DEAD_BRAIN_CORAL = func_180383_a("blue_dead_brain_coral");
++            RED_DEAD_BRAIN_CORAL = func_180383_a("red_dead_brain_coral");
++
++            YELLOW_PIPE_CORAL = func_180383_a("yellow_pipe_coral");
++            PINK_PIPE_CORAL = func_180383_a("pink_pipe_coral");
++            PURPLE_PIPE_CORAL = func_180383_a("purple_pipe_coral");
++            BLUE_PIPE_CORAL = func_180383_a("blue_pipe_coral");
++            RED_PIPE_CORAL = func_180383_a("red_pipe_coral");
++
++            YELLOW_DEAD_PIPE_CORAL = func_180383_a("yellow_dead_pipe_coral");
++            PINK_DEAD_PIPE_CORAL = func_180383_a("pink_dead_pipe_coral");
++            PURPLE_DEAD_PIPE_CORAL = func_180383_a("purple_dead_pipe_coral");
++            BLUE_DEAD_PIPE_CORAL = func_180383_a("blue_dead_pipe_coral");
++            RED_DEAD_PIPE_CORAL = func_180383_a("red_dead_pipe_coral");
++
++            YELLOW_SEA_FAN_CORAL = func_180383_a("yellow_sea_fan_coral");
++            PINK_SEA_FAN_CORAL = func_180383_a("pink_sea_fan_coral");
++            PURPLE_SEA_FAN_CORAL = func_180383_a("purple_sea_fan_coral");
++            BLUE_SEA_FAN_CORAL = func_180383_a("blue_sea_fan_coral");
++            RED_SEA_FAN_CORAL = func_180383_a("red_sea_fan_coral");
++
++            YELLOW_DEAD_SEA_FAN_CORAL = func_180383_a("yellow_dead_sea_fan_coral");
++            PINK_DEAD_SEA_FAN_CORAL = func_180383_a("pink_dead_sea_fan_coral");
++            PURPLE_DEAD_SEA_FAN_CORAL = func_180383_a("purple_dead_sea_fan_coral");
++            BLUE_DEAD_SEA_FAN_CORAL = func_180383_a("blue_dead_sea_fan_coral");
++            RED_DEAD_SEA_FAN_CORAL = func_180383_a("red_dead_sea_fan_coral");
++
++            KELP_PLANT = func_180383_a("kelp_plant");
++            DRIED_KELP_BLOCK = func_180383_a("dried_kelp_block");
+             field_185780_dg.clear();
+         }
+     }

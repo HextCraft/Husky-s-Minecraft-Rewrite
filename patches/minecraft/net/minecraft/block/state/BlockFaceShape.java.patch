@@ -1,0 +1,18 @@
+--- ../src-base/minecraft/net/minecraft/block/state/BlockFaceShape.java
++++ ../src-work/minecraft/net/minecraft/block/state/BlockFaceShape.java
+@@ -1,7 +1,6 @@
+ package net.minecraft.block.state;
+ 
+-public enum BlockFaceShape
+-{
++public enum BlockFaceShape {
+     SOLID,
+     BOWL,
+     CENTER_SMALL,
+@@ -10,5 +9,5 @@
+     MIDDLE_POLE,
+     CENTER_BIG,
+     MIDDLE_POLE_THICK,
+-    UNDEFINED;
++    UNDEFINED
+ }

@@ -1,0 +1,17 @@
+--- ../src-base/minecraft/net/minecraft/block/BlockDirectional.java
++++ ../src-work/minecraft/net/minecraft/block/BlockDirectional.java
+@@ -3,12 +3,10 @@
+ import net.minecraft.block.material.Material;
+ import net.minecraft.block.properties.PropertyDirection;
+ 
+-public abstract class BlockDirectional extends Block
+-{
++public abstract class BlockDirectional extends Block {
+     public static final PropertyDirection field_176387_N = PropertyDirection.func_177714_a("facing");
+ 
+-    protected BlockDirectional(Material p_i45401_1_)
+-    {
++    protected BlockDirectional(Material p_i45401_1_) {
+         super(p_i45401_1_);
+     }
+ }

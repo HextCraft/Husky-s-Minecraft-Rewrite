@@ -88,12 +88,7 @@ public class OreDictionary
             registerOre("logWood",     new ItemStack(Blocks.LOG2, 1, WILDCARD_VALUE));
             registerOre("plankWood",   new ItemStack(Blocks.PLANKS, 1, WILDCARD_VALUE));
             registerOre("slabWood",    new ItemStack(Blocks.WOODEN_SLAB, 1, WILDCARD_VALUE));
-            registerOre("stairWood",   Blocks.OAK_STAIRS);
-            registerOre("stairWood",   Blocks.SPRUCE_STAIRS);
-            registerOre("stairWood",   Blocks.BIRCH_STAIRS);
-            registerOre("stairWood",   Blocks.JUNGLE_STAIRS);
-            registerOre("stairWood",   Blocks.ACACIA_STAIRS);
-            registerOre("stairWood",   Blocks.DARK_OAK_STAIRS);
+            registerOre("stairOak",   Blocks.OAK_STAIRS);
             registerOre("stickWood",   Items.STICK);
             registerOre("treeSapling", new ItemStack(Blocks.SAPLING, 1, WILDCARD_VALUE));
             registerOre("treeLeaves",  new ItemStack(Blocks.LEAVES, 1, WILDCARD_VALUE));
@@ -210,16 +205,49 @@ public class OreDictionary
             //paneGlass{Color} is added below with dyes
 
             // chests
-            registerOre("chest",        Blocks.CHEST);
+            registerOre("chest",        Blocks.OAK_CHEST);
+            registerOre("chest",        Blocks.SPRUCE_CHEST);
+            registerOre("chest",        Blocks.BIRCH_CHEST);
+            registerOre("chest",        Blocks.JUNGLE_CHEST);
+            registerOre("chest",        Blocks.DARK_OAK_CHEST);
+            registerOre("chest",        Blocks.ACACIA_CHEST);
+            registerOre("chest",        Blocks.REDWOOD_CHEST);
+            registerOre("chest",        Blocks.PALM_CHEST);
+
             registerOre("chest",        Blocks.ENDER_CHEST);
-            registerOre("chest",        Blocks.TRAPPED_CHEST);
-            registerOre("chestWood",    Blocks.CHEST);
+
+            registerOre("chest",        Blocks.OAK_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.SPRUCE_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.BIRCH_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.JUNGLE_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.DARK_OAK_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.ACACIA_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.REDWOOD_TRAPPED_CHEST);
+            registerOre("chest",        Blocks.PALM_TRAPPED_CHEST);
+
+            registerOre("chestOak",    Blocks.OAK_CHEST);
+            registerOre("chestSpruce",    Blocks.SPRUCE_CHEST);
+            registerOre("chestBirch",    Blocks.BIRCH_CHEST);
+            registerOre("chestJungle",    Blocks.JUNGLE_CHEST);
+            registerOre("chestDarkOak",    Blocks.DARK_OAK_CHEST);
+            registerOre("chestAcacia",    Blocks.ACACIA_CHEST);
+            registerOre("chestRedwood",    Blocks.REDWOOD_CHEST);
+            registerOre("chestPalm",    Blocks.PALM_CHEST);
+
             registerOre("chestEnder",   Blocks.ENDER_CHEST);
-            registerOre("chestTrapped", Blocks.TRAPPED_CHEST);
+
+            registerOre("chestOakTrapped",    Blocks.OAK_TRAPPED_CHEST);
+            registerOre("chestSpruceTrapped",    Blocks.SPRUCE_TRAPPED_CHEST);
+            registerOre("chestBirchTrapped",    Blocks.BIRCH_TRAPPED_CHEST);
+            registerOre("chestJungleTrapped",    Blocks.JUNGLE_TRAPPED_CHEST);
+            registerOre("chestDarkOakTrapped",    Blocks.DARK_OAK_TRAPPED_CHEST);
+            registerOre("chestAcaciaTrapped",    Blocks.ACACIA_TRAPPED_CHEST);
+            registerOre("chestRedwoodTrapped",    Blocks.REDWOOD_TRAPPED_CHEST);
+            registerOre("chestPalmTrapped",    Blocks.PALM_TRAPPED_CHEST);
         }
 
         // Build our list of items to replace with ore tags
-        Map<ItemStack, String> replacements = new HashMap<ItemStack, String>();
+        Map<ItemStack, String> replacements = new HashMap<>();
 
         // wood-related things
         replacements.put(new ItemStack(Items.STICK), "stickWood");
@@ -271,15 +299,21 @@ public class OreDictionary
         replacements.put(new ItemStack(Blocks.PRISMARINE), "prismarine");
         replacements.put(new ItemStack(Blocks.STONE, 1, 1), "stoneGranite");
         replacements.put(new ItemStack(Blocks.STONE, 1, 2), "stoneGranitePolished");
-        replacements.put(new ItemStack(Blocks.STONE, 1, 3), "stoneDiorite");
-        replacements.put(new ItemStack(Blocks.STONE, 1, 4), "stoneDioritePolished");
-        replacements.put(new ItemStack(Blocks.STONE, 1, 5), "stoneAndesite");
-        replacements.put(new ItemStack(Blocks.STONE, 1, 6), "stoneAndesitePolished");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 3), "stoneGraniteBricks");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 4), "stoneGraniteCobble");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 5), "stoneDiorite");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 6), "stoneDioritePolished");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 7), "stoneDioriteBricks");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 8), "stoneDioriteCobble");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 9), "stoneAndesite");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 10), "stoneAndesitePolished");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 10), "stoneAndesiteBlocks");
+        replacements.put(new ItemStack(Blocks.STONE, 1, 10), "stoneAndesiteCobble");
 
         // chests
-        replacements.put(new ItemStack(Blocks.CHEST), "chestWood");
+        replacements.put(new ItemStack(Blocks.OAK_CHEST), "chestOak");
         replacements.put(new ItemStack(Blocks.ENDER_CHEST), "chestEnder");
-        replacements.put(new ItemStack(Blocks.TRAPPED_CHEST), "chestTrapped");
+        replacements.put(new ItemStack(Blocks.OAK_TRAPPED_CHEST), "chestOakTrapped");
 
         // Register dyes
         String[] dyes =
@@ -335,19 +369,14 @@ public class OreDictionary
             new ItemStack(Blocks.OAK_STAIRS),
             new ItemStack(Blocks.SPRUCE_FENCE),
             new ItemStack(Blocks.SPRUCE_FENCE_GATE),
-            new ItemStack(Blocks.SPRUCE_STAIRS),
             new ItemStack(Blocks.BIRCH_FENCE_GATE),
             new ItemStack(Blocks.BIRCH_FENCE),
-            new ItemStack(Blocks.BIRCH_STAIRS),
             new ItemStack(Blocks.JUNGLE_FENCE),
             new ItemStack(Blocks.JUNGLE_FENCE_GATE),
-            new ItemStack(Blocks.JUNGLE_STAIRS),
             new ItemStack(Blocks.ACACIA_FENCE),
             new ItemStack(Blocks.ACACIA_FENCE_GATE),
-            new ItemStack(Blocks.ACACIA_STAIRS),
             new ItemStack(Blocks.DARK_OAK_FENCE),
             new ItemStack(Blocks.DARK_OAK_FENCE_GATE),
-            new ItemStack(Blocks.DARK_OAK_STAIRS),
             new ItemStack(Blocks.WOODEN_SLAB, 1, WILDCARD_VALUE),
             new ItemStack(Blocks.GLASS_PANE),
             new ItemStack(Blocks.BONE_BLOCK), // Bone Block, to prevent conversion of dyes into bone meal.

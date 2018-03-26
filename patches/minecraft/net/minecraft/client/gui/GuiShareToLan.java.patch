@@ -1,0 +1,33 @@
+--- ../src-base/minecraft/net/minecraft/client/gui/GuiShareToLan.java
++++ ../src-work/minecraft/net/minecraft/client/gui/GuiShareToLan.java
+@@ -1,6 +1,8 @@
+ package net.minecraft.client.gui;
+ 
+ import java.io.IOException;
++import java.util.Objects;
++
+ import net.minecraft.client.resources.I18n;
+ import net.minecraft.util.text.ITextComponent;
+ import net.minecraft.util.text.TextComponentString;
+@@ -82,18 +84,11 @@
+         }
+         else if (p_146284_1_.field_146127_k == 101)
+         {
+-            this.field_146297_k.func_147108_a((GuiScreen)null);
+-            String s = this.field_146297_k.func_71401_C().func_71206_a(GameType.func_77142_a(this.field_146599_h), this.field_146600_i);
++            this.field_146297_k.func_147108_a(null);
++            String s = Objects.requireNonNull(this.field_146297_k.func_71401_C()).func_71206_a(GameType.func_77142_a(this.field_146599_h), this.field_146600_i);
+             ITextComponent itextcomponent;
+ 
+-            if (s != null)
+-            {
+-                itextcomponent = new TextComponentTranslation("commands.publish.started", new Object[] {s});
+-            }
+-            else
+-            {
+-                itextcomponent = new TextComponentString("commands.publish.failed");
+-            }
++            itextcomponent = new TextComponentTranslation("commands.publish.started", s);
+ 
+             this.field_146297_k.field_71456_v.func_146158_b().func_146227_a(itextcomponent);
+         }

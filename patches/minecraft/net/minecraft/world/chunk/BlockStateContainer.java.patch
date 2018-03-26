@@ -1,6 +1,15 @@
 --- ../src-base/minecraft/net/minecraft/world/chunk/BlockStateContainer.java
 +++ ../src-work/minecraft/net/minecraft/world/chunk/BlockStateContainer.java
-@@ -30,6 +30,10 @@
+@@ -10,6 +10,8 @@
+ import net.minecraftforge.fml.relauncher.Side;
+ import net.minecraftforge.fml.relauncher.SideOnly;
+ 
++import java.util.Objects;
++
+ public class BlockStateContainer implements IBlockStatePaletteResizer
+ {
+     private static final IBlockStatePalette field_186023_d = new BlockStatePaletteRegistry();
+@@ -30,6 +32,10 @@
  
      private void func_186012_b(int p_186012_1_)
      {
@@ -11,7 +20,7 @@
          if (p_186012_1_ != this.field_186024_e)
          {
              this.field_186024_e = p_186012_1_;
-@@ -47,6 +51,8 @@
+@@ -47,6 +53,8 @@
              {
                  this.field_186022_c = field_186023_d;
                  this.field_186024_e = MathHelper.func_151241_e(Block.field_176229_d.func_186804_a());
@@ -20,7 +29,7 @@
              }
  
              this.field_186022_c.func_186041_a(field_186020_a);
-@@ -102,11 +108,15 @@
+@@ -102,11 +110,15 @@
  
          if (this.field_186024_e != i)
          {
@@ -37,3 +46,12 @@
      }
  
      public void func_186009_b(PacketBuffer p_186009_1_)
+@@ -154,7 +166,7 @@
+             int l = i >> 4 & 15;
+             int i1 = p_186019_3_ == null ? 0 : p_186019_3_.func_76582_a(j, k, l);
+             int j1 = i1 << 12 | (p_186019_1_[i] & 255) << 4 | p_186019_2_.func_76582_a(j, k, l);
+-            this.func_186014_b(i, Block.field_176229_d.func_148745_a(j1));
++            this.func_186014_b(i, Objects.requireNonNull(Block.field_176229_d.func_148745_a(j1)));
+         }
+     }
+ 

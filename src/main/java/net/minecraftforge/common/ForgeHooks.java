@@ -1373,9 +1373,9 @@ public class ForgeHooks
         {
             IForgeRegistry<IRecipe> vanilla = RegistryManager.VANILLA.getRegistry(IRecipe.class);
             if (recipes.size() > 0)
-                recipes = recipes.stream().filter(e -> vanilla.containsValue(e)).collect(Collectors.toList());
+                recipes = recipes.stream().filter(vanilla::containsValue).collect(Collectors.toList());
             if (display.size() > 0)
-                display = display.stream().filter(e -> vanilla.containsValue(e)).collect(Collectors.toList());
+                display = display.stream().filter(vanilla::containsValue).collect(Collectors.toList());
         }
 
         if (recipes.size() > 0 || display.size() > 0)

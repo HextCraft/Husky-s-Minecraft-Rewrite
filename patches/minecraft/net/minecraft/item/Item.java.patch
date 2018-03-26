@@ -1,10 +1,56 @@
 --- ../src-base/minecraft/net/minecraft/item/Item.java
 +++ ../src-work/minecraft/net/minecraft/item/Item.java
-@@ -58,10 +58,10 @@
+@@ -3,24 +3,11 @@
+ import com.google.common.collect.HashMultimap;
+ import com.google.common.collect.Maps;
+ import com.google.common.collect.Multimap;
+-import java.util.List;
+-import java.util.Map;
+-import java.util.Random;
+-import java.util.UUID;
++
++import java.util.*;
+ import javax.annotation.Nullable;
+-import net.minecraft.block.Block;
+-import net.minecraft.block.BlockDirt;
+-import net.minecraft.block.BlockDoublePlant;
+-import net.minecraft.block.BlockFlower;
+-import net.minecraft.block.BlockPlanks;
+-import net.minecraft.block.BlockPrismarine;
+-import net.minecraft.block.BlockRedSandstone;
+-import net.minecraft.block.BlockSand;
+-import net.minecraft.block.BlockSandStone;
+-import net.minecraft.block.BlockSilverfish;
+-import net.minecraft.block.BlockStone;
+-import net.minecraft.block.BlockStoneBrick;
+-import net.minecraft.block.BlockWall;
++
++import net.minecraft.block.*;
+ import net.minecraft.block.state.IBlockState;
+ import net.minecraft.client.util.ITooltipFlag;
+ import net.minecraft.creativetab.CreativeTabs;
+@@ -31,7 +18,9 @@
+ import net.minecraft.entity.item.EntityItemFrame;
+ import net.minecraft.entity.item.EntityMinecart;
+ import net.minecraft.entity.item.EntityPainting;
++import net.minecraft.entity.passive.EntityHorse;
+ import net.minecraft.entity.player.EntityPlayer;
++import net.minecraft.entity.player.EntityPlayerMP;
+ import net.minecraft.init.Blocks;
+ import net.minecraft.init.Items;
+ import net.minecraft.init.MobEffects;
+@@ -54,14 +43,17 @@
+ import net.minecraft.util.registry.RegistryNamespaced;
+ import net.minecraft.util.registry.RegistrySimple;
+ import net.minecraft.util.text.translation.I18n;
++import net.minecraft.world.GameType;
+ import net.minecraft.world.World;
  import net.minecraftforge.fml.relauncher.Side;
  import net.minecraftforge.fml.relauncher.SideOnly;
  
 -public class Item
++import static net.minecraft.item.ItemMultiTexture.*;
++
 +public class Item extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<Item>
  {
 -    public static final RegistryNamespaced<ResourceLocation, Item> field_150901_e = new RegistryNamespaced<ResourceLocation, Item>();
@@ -14,7 +60,7 @@
      private static final IItemPropertyGetter field_185046_b = new IItemPropertyGetter()
      {
          @SideOnly(Side.CLIENT)
-@@ -197,6 +197,7 @@
+@@ -197,6 +189,7 @@
          return p_77654_1_;
      }
  
@@ -22,7 +68,7 @@
      public int func_77639_j()
      {
          return this.field_77777_bU;
-@@ -218,6 +219,7 @@
+@@ -218,6 +211,7 @@
          return this;
      }
  
@@ -30,7 +76,7 @@
      public int func_77612_l()
      {
          return this.field_77699_b;
-@@ -317,6 +319,7 @@
+@@ -317,6 +311,7 @@
          return this.field_77700_c;
      }
  
@@ -38,7 +84,7 @@
      public boolean func_77634_r()
      {
          return this.field_77700_c != null;
-@@ -372,7 +375,7 @@
+@@ -372,7 +367,7 @@
  
      public boolean func_77616_k(ItemStack p_77616_1_)
      {
@@ -47,7 +93,7 @@
      }
  
      protected RayTraceResult func_77621_a(World p_77621_1_, EntityPlayer p_77621_2_, boolean p_77621_3_)
-@@ -389,8 +392,8 @@
+@@ -389,8 +384,8 @@
          float f5 = MathHelper.func_76126_a(-f * 0.017453292F);
          float f6 = f3 * f4;
          float f7 = f2 * f4;
@@ -58,7 +104,7 @@
          return p_77621_1_.func_147447_a(vec3d, vec3d1, p_77621_3_, !p_77621_3_, false);
      }
  
-@@ -409,6 +412,9 @@
+@@ -409,6 +404,9 @@
  
      protected boolean func_194125_a(CreativeTabs p_194125_1_)
      {
@@ -68,7 +114,7 @@
          CreativeTabs creativetabs = this.func_77640_w();
          return creativetabs != null && (p_194125_1_ == CreativeTabs.field_78027_g || p_194125_1_ == creativetabs);
      }
-@@ -435,11 +441,728 @@
+@@ -435,90 +433,736 @@
          return false;
      }
  
@@ -78,12 +124,15 @@
          return HashMultimap.<String, AttributeModifier>create();
      }
  
+-    public static void func_150900_l()
 +    /* ======================================== FORGE START =====================================*/
 +    /**
 +     * ItemStack sensitive version of getItemAttributeModifiers
 +     */
 +    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack)
-+    {
+     {
+-        func_179214_a(Blocks.field_150350_a, new ItemAir(Blocks.field_150350_a));
+-        func_179214_a(Blocks.field_150348_b, (new ItemMultiTexture(Blocks.field_150348_b, Blocks.field_150348_b, new ItemMultiTexture.Mapper()
 +        return this.func_111205_h(slot);
 +    }
 +
@@ -116,7 +165,6 @@
 +
 +    /**
 +     * This is called when the item is used, before the block is activated.
-+     * @param stack The Item Stack
 +     * @param player The Player that used the item
 +     * @param world The Current World
 +     * @param pos Target position
@@ -219,7 +267,14 @@
 +    public ItemStack getContainerItem(ItemStack itemStack)
 +    {
 +        if (!hasContainerItem(itemStack))
-+        {
+         {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockStone.EnumType.func_176643_a(p_apply_1_.func_77960_j()).func_176644_c();
+-            }
+-        })).func_77655_b("stone"));
+-        func_179214_a(Blocks.field_150349_c, new ItemColored(Blocks.field_150349_c, false));
+-        func_179214_a(Blocks.field_150346_d, (new ItemMultiTexture(Blocks.field_150346_d, Blocks.field_150346_d, new ItemMultiTexture.Mapper()
 +            return ItemStack.field_190927_a;
 +        }
 +        return new ItemStack(func_77668_q());
@@ -536,7 +591,12 @@
 +        stack.field_77991_e = damage;
 +
 +        if (stack.field_77991_e < 0)
-+        {
+         {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockDirt.DirtType.func_176924_a(p_apply_1_.func_77960_j()).func_176927_c();
+-            }
+-        })).func_77655_b("dirt"));
 +            stack.field_77991_e = 0;
 +        }
 +    }
@@ -544,7 +604,7 @@
 +    /**
 +     * Checked from {@link net.minecraft.client.multiplayer.PlayerControllerMP#onPlayerDestroyBlock(BlockPos pos) PlayerControllerMP.onPlayerDestroyBlock()}
 +     * when a creative player left-clicks a block with this item.
-+     * Also checked from {@link net.minecraftforge.common.ForgeHooks#onBlockBreakEvent(World, GameType, EntityPlayerMP, BlockPos)  ForgeHooks.onBlockBreakEvent()}
++     * Also checked from {@link net.minecraftforge.common.ForgeHooks#onBlockBreakEvent(World, GameType, EntityPlayerMP, BlockPos)} (World, GameType, EntityPlayerMP, BlockPos)  ForgeHooks.onBlockBreakEvent()}
 +     * to prevent sending an event.
 +     * @return true if the given player can destroy specified block in creative mode with this item
 +     */
@@ -717,23 +777,6 @@
 +        return null;
 +    }
 +
-+    public com.google.common.collect.ImmutableMap<String, net.minecraftforge.common.animation.ITimeValue> getAnimationParameters(final ItemStack stack, final World world, final EntityLivingBase entity)
-+    {
-+        com.google.common.collect.ImmutableMap.Builder<String, net.minecraftforge.common.animation.ITimeValue> builder = com.google.common.collect.ImmutableMap.builder();
-+        for(ResourceLocation location : field_185051_m.func_148742_b())
-+        {
-+            final IItemPropertyGetter parameter = field_185051_m.func_82594_a(location);
-+            builder.put(location.toString(), new net.minecraftforge.common.animation.ITimeValue()
-+            {
-+                public float apply(float input)
-+                {
-+                    return parameter.func_185085_a(stack, world, entity);
-+                }
-+            });
-+        }
-+        return builder.build();
-+    }
-+
 +    /**
 +     * Can this Item disable a shield
 +     * @param stack The ItemStack
@@ -785,7 +828,7 @@
 +    }
 +    
 +    /**
-+     * Called every tick from {@link EntityHorse#onUpdate()} on the item in the armor slot.
++     * Called every tick from {@link EntityHorse#onUpdate()} ()} on the item in the armor slot.
 +     * @param world the world the horse is in
 +     * @param horse the horse wearing this armor
 +     * @param armor the armor itemstack
@@ -794,10 +837,328 @@
 +
 +    /* ======================================== FORGE END   =====================================*/
 +
-     public static void func_150900_l()
++    public static void func_150900_l()
++    {
++        func_179214_a(Blocks.field_150350_a, new ItemAir(Blocks.field_150350_a));
++        func_179214_a(Blocks.field_150348_b, (new ItemMultiTexture(Blocks.field_150348_b, Blocks.field_150348_b, p_apply_1_ -> BlockStone.EnumType.func_176643_a(p_apply_1_.func_77960_j()).func_176644_c())).func_77655_b("stone"));
++        func_179214_a(Blocks.STONE2, (new ItemMultiTexture(Blocks.STONE2, Blocks.STONE2, p_apply_1_ -> BlockStone2.EnumType.byMetadata(p_apply_1_.func_77960_j()).getUnlocalizedName())).func_77655_b("stone2"));
++        func_179214_a(Blocks.field_150349_c, new ItemColored(Blocks.field_150349_c, false).func_77655_b("grass"));
++        func_179214_a(Blocks.field_150346_d, (new ItemMultiTexture(Blocks.field_150346_d, Blocks.field_150346_d, p_apply_1_ -> BlockDirt.DirtType.func_176924_a(p_apply_1_.func_77960_j()).func_176927_c())).func_77655_b("dirt"));
+         func_179216_c(Blocks.field_150347_e);
+-        func_179214_a(Blocks.field_150344_f, (new ItemMultiTexture(Blocks.field_150344_f, Blocks.field_150344_f, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c();
+-            }
+-        })).func_77655_b("wood"));
+-        func_179214_a(Blocks.field_150345_g, (new ItemMultiTexture(Blocks.field_150345_g, Blocks.field_150345_g, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c();
+-            }
+-        })).func_77655_b("sapling"));
++        func_179214_a(Blocks.field_150344_f, (new ItemMultiTexture(Blocks.field_150344_f, Blocks.field_150344_f, p_apply_1_ -> BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c())).func_77655_b("wood"));
++        func_179214_a(Blocks.field_150345_g, (new ItemMultiTexture(Blocks.field_150345_g, Blocks.field_150345_g, p_apply_1_ -> BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c())).func_77655_b("sapling"));
+         func_179216_c(Blocks.field_150357_h);
+-        func_179214_a(Blocks.field_150354_m, (new ItemMultiTexture(Blocks.field_150354_m, Blocks.field_150354_m, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockSand.EnumType.func_176686_a(p_apply_1_.func_77960_j()).func_176685_d();
+-            }
+-        })).func_77655_b("sand"));
++        func_179214_a(Blocks.field_150354_m, (new ItemMultiTexture(Blocks.field_150354_m, Blocks.field_150354_m, p_apply_1_ -> BlockSand.EnumType.func_176686_a(p_apply_1_.func_77960_j()).func_176685_d())).func_77655_b("sand"));
+         func_179216_c(Blocks.field_150351_n);
+         func_179216_c(Blocks.field_150352_o);
+         func_179216_c(Blocks.field_150366_p);
+         func_179216_c(Blocks.field_150365_q);
+-        func_179214_a(Blocks.field_150364_r, (new ItemMultiTexture(Blocks.field_150364_r, Blocks.field_150364_r, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c();
+-            }
+-        })).func_77655_b("log"));
+-        func_179214_a(Blocks.field_150363_s, (new ItemMultiTexture(Blocks.field_150363_s, Blocks.field_150363_s, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j() + 4).func_176840_c();
+-            }
+-        })).func_77655_b("log"));
++        func_179214_a(Blocks.field_150364_r, (new ItemMultiTexture(Blocks.field_150364_r, Blocks.field_150364_r, p_apply_1_ -> BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j()).func_176840_c())).func_77655_b("log"));
++        func_179214_a(Blocks.field_150363_s, (new ItemMultiTexture(Blocks.field_150363_s, Blocks.field_150363_s, p_apply_1_ -> BlockPlanks.EnumType.func_176837_a(p_apply_1_.func_77960_j() + 4).func_176840_c())).func_77655_b("log"));
+         func_179214_a(Blocks.field_150362_t, (new ItemLeaves(Blocks.field_150362_t)).func_77655_b("leaves"));
+         func_179214_a(Blocks.field_150361_u, (new ItemLeaves(Blocks.field_150361_u)).func_77655_b("leaves"));
+-        func_179214_a(Blocks.field_150360_v, (new ItemMultiTexture(Blocks.field_150360_v, Blocks.field_150360_v, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return (p_apply_1_.func_77960_j() & 1) == 1 ? "wet" : "dry";
+-            }
+-        })).func_77655_b("sponge"));
++        func_179214_a(Blocks.field_150360_v, (new ItemMultiTexture(Blocks.field_150360_v, Blocks.field_150360_v, p_apply_1_ -> (p_apply_1_.func_77960_j() & 1) == 1 ? "wet" : "dry")).func_77655_b("sponge"));
+         func_179216_c(Blocks.field_150359_w);
+         func_179216_c(Blocks.field_150369_x);
+         func_179216_c(Blocks.field_150368_y);
+         func_179216_c(Blocks.field_150367_z);
+-        func_179214_a(Blocks.field_150322_A, (new ItemMultiTexture(Blocks.field_150322_A, Blocks.field_150322_A, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockSandStone.EnumType.func_176673_a(p_apply_1_.func_77960_j()).func_176676_c();
+-            }
+-        })).func_77655_b("sandStone"));
++        func_179214_a(Blocks.field_150322_A, (new ItemMultiTexture(Blocks.field_150322_A, Blocks.field_150322_A, p_apply_1_ -> BlockSandStone.EnumType.func_176673_a(p_apply_1_.func_77960_j()).func_176676_c())).func_77655_b("sandStone"));
+         func_179216_c(Blocks.field_150323_B);
+         func_179216_c(Blocks.field_150318_D);
+         func_179216_c(Blocks.field_150319_E);
+@@ -528,20 +1172,8 @@
+         func_179216_c(Blocks.field_150330_I);
+         func_179214_a(Blocks.field_150331_J, new ItemPiston(Blocks.field_150331_J));
+         func_179214_a(Blocks.field_150325_L, (new ItemCloth(Blocks.field_150325_L)).func_77655_b("cloth"));
+-        func_179214_a(Blocks.field_150327_N, (new ItemMultiTexture(Blocks.field_150327_N, Blocks.field_150327_N, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockFlower.EnumFlowerType.func_176967_a(BlockFlower.EnumFlowerColor.YELLOW, p_apply_1_.func_77960_j()).func_176963_d();
+-            }
+-        })).func_77655_b("flower"));
+-        func_179214_a(Blocks.field_150328_O, (new ItemMultiTexture(Blocks.field_150328_O, Blocks.field_150328_O, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockFlower.EnumFlowerType.func_176967_a(BlockFlower.EnumFlowerColor.RED, p_apply_1_.func_77960_j()).func_176963_d();
+-            }
+-        })).func_77655_b("rose"));
++        func_179214_a(Blocks.field_150327_N, (new ItemMultiTexture(Blocks.field_150327_N, Blocks.field_150327_N, p_apply_1_ -> BlockFlower.EnumFlowerType.func_176967_a(BlockFlower.EnumFlowerColor.YELLOW, p_apply_1_.func_77960_j()).func_176963_d())).func_77655_b("flower"));
++        func_179214_a(Blocks.field_150328_O, (new ItemMultiTexture(Blocks.field_150328_O, Blocks.field_150328_O, p_apply_1_ -> BlockFlower.EnumFlowerType.func_176967_a(BlockFlower.EnumFlowerColor.RED, p_apply_1_.func_77960_j()).func_176963_d())).func_77655_b("rose"));
+         func_179216_c(Blocks.field_150338_P);
+         func_179216_c(Blocks.field_150337_Q);
+         func_179216_c(Blocks.field_150340_R);
+@@ -561,8 +1193,6 @@
+         func_179216_c(Blocks.field_185769_cV);
+         func_179214_a(Blocks.field_185771_cX, (new ItemSlab(Blocks.field_185771_cX, Blocks.field_185771_cX, Blocks.field_185770_cW)).func_77655_b("purpurSlab"));
+         func_179216_c(Blocks.field_150474_ac);
+-        func_179216_c(Blocks.field_150476_ad);
+-        func_179216_c(Blocks.field_150486_ae);
+         func_179216_c(Blocks.field_150482_ag);
+         func_179216_c(Blocks.field_150484_ah);
+         func_179216_c(Blocks.field_150462_ai);
+@@ -595,20 +1225,8 @@
+         func_179216_c(Blocks.field_150426_aN);
+         func_179216_c(Blocks.field_150428_aP);
+         func_179216_c(Blocks.field_150415_aT);
+-        func_179214_a(Blocks.field_150418_aU, (new ItemMultiTexture(Blocks.field_150418_aU, Blocks.field_150418_aU, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockSilverfish.EnumType.func_176879_a(p_apply_1_.func_77960_j()).func_176882_c();
+-            }
+-        })).func_77655_b("monsterStoneEgg"));
+-        func_179214_a(Blocks.field_150417_aV, (new ItemMultiTexture(Blocks.field_150417_aV, Blocks.field_150417_aV, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockStoneBrick.EnumType.func_176613_a(p_apply_1_.func_77960_j()).func_176614_c();
+-            }
+-        })).func_77655_b("stonebricksmooth"));
++        func_179214_a(Blocks.field_150418_aU, (new ItemMultiTexture(Blocks.field_150418_aU, Blocks.field_150418_aU, p_apply_1_ -> BlockSilverfish.EnumType.func_176879_a(p_apply_1_.func_77960_j()).func_176882_c())).func_77655_b("monsterStoneEgg"));
++        func_179214_a(Blocks.field_150417_aV, (new ItemMultiTexture(Blocks.field_150417_aV, Blocks.field_150417_aV, p_apply_1_ -> BlockStoneBrick.EnumType.func_176613_a(p_apply_1_.func_77960_j()).func_176614_c())).func_77655_b("stonebricksmooth"));
+         func_179216_c(Blocks.field_150420_aW);
+         func_179216_c(Blocks.field_150419_aX);
+         func_179216_c(Blocks.field_150411_aY);
+@@ -640,27 +1258,19 @@
+         func_179216_c(Blocks.field_150477_bB);
+         func_179216_c(Blocks.field_150479_bC);
+         func_179216_c(Blocks.field_150475_bE);
+-        func_179216_c(Blocks.field_150485_bF);
+-        func_179216_c(Blocks.field_150487_bG);
+-        func_179216_c(Blocks.field_150481_bH);
+         func_179216_c(Blocks.field_150483_bI);
+         func_179216_c(Blocks.field_150461_bJ);
+-        func_179214_a(Blocks.field_150463_bK, (new ItemMultiTexture(Blocks.field_150463_bK, Blocks.field_150463_bK, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockWall.EnumType.func_176660_a(p_apply_1_.func_77960_j()).func_176659_c();
+-            }
+-        })).func_77655_b("cobbleWall"));
++        func_179214_a(Blocks.field_150463_bK, (new ItemMultiTexture(Blocks.field_150463_bK, Blocks.field_150463_bK, p_apply_1_ -> BlockWall.EnumType.func_176660_a(p_apply_1_.func_77960_j()).func_176659_c())).func_77655_b("cobbleWall"));
+         func_179216_c(Blocks.field_150471_bO);
+         func_179214_a(Blocks.field_150467_bQ, (new ItemAnvilBlock(Blocks.field_150467_bQ)).func_77655_b("anvil"));
+-        func_179216_c(Blocks.field_150447_bR);
+         func_179216_c(Blocks.field_150445_bS);
+         func_179216_c(Blocks.field_150443_bT);
+         func_179216_c(Blocks.field_150453_bW);
+         func_179216_c(Blocks.field_150451_bX);
+         func_179216_c(Blocks.field_150449_bY);
+         func_179216_c(Blocks.field_150438_bZ);
++        func_179216_c(Blocks.KELP_PLANT);
++        func_179216_c(Blocks.DRIED_KELP_BLOCK);
+         func_179214_a(Blocks.field_150371_ca, (new ItemMultiTexture(Blocks.field_150371_ca, Blocks.field_150371_ca, new String[] {"default", "chiseled", "lines"})).func_77655_b("quartzBlock"));
+         func_179216_c(Blocks.field_150370_cb);
+         func_179216_c(Blocks.field_150408_cc);
+@@ -673,34 +1283,14 @@
+         func_179216_c(Blocks.field_150405_ch);
+         func_179216_c(Blocks.field_150402_ci);
+         func_179216_c(Blocks.field_150403_cj);
+-        func_179216_c(Blocks.field_150400_ck);
+-        func_179216_c(Blocks.field_150401_cl);
+         func_179216_c(Blocks.field_180399_cE);
+         func_179216_c(Blocks.field_185774_da);
+-        func_179214_a(Blocks.field_150398_cm, (new ItemMultiTexture(Blocks.field_150398_cm, Blocks.field_150398_cm, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockDoublePlant.EnumPlantType.func_176938_a(p_apply_1_.func_77960_j()).func_176939_c();
+-            }
+-        })).func_77655_b("doublePlant"));
++        func_179214_a(Blocks.field_150398_cm, (new ItemMultiTexture(Blocks.field_150398_cm, Blocks.field_150398_cm, p_apply_1_ -> BlockDoublePlant.EnumPlantType.func_176938_a(p_apply_1_.func_77960_j()).func_176939_c())).func_77655_b("doublePlant"));
+         func_179214_a(Blocks.field_150399_cn, (new ItemCloth(Blocks.field_150399_cn)).func_77655_b("stainedGlass"));
+         func_179214_a(Blocks.field_150397_co, (new ItemCloth(Blocks.field_150397_co)).func_77655_b("stainedGlassPane"));
+-        func_179214_a(Blocks.field_180397_cI, (new ItemMultiTexture(Blocks.field_180397_cI, Blocks.field_180397_cI, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockPrismarine.EnumType.func_176810_a(p_apply_1_.func_77960_j()).func_176809_c();
+-            }
+-        })).func_77655_b("prismarine"));
++        func_179214_a(Blocks.field_180397_cI, (new ItemMultiTexture(Blocks.field_180397_cI, Blocks.field_180397_cI, p_apply_1_ -> BlockPrismarine.EnumType.func_176810_a(p_apply_1_.func_77960_j()).func_176809_c())).func_77655_b("prismarine"));
+         func_179216_c(Blocks.field_180398_cJ);
+-        func_179214_a(Blocks.field_180395_cM, (new ItemMultiTexture(Blocks.field_180395_cM, Blocks.field_180395_cM, new ItemMultiTexture.Mapper()
+-        {
+-            public String apply(ItemStack p_apply_1_)
+-            {
+-                return BlockRedSandstone.EnumType.func_176825_a(p_apply_1_.func_77960_j()).func_176828_c();
+-            }
+-        })).func_77655_b("redSandStone"));
++        func_179214_a(Blocks.field_180395_cM, (new ItemMultiTexture(Blocks.field_180395_cM, Blocks.field_180395_cM, p_apply_1_ -> BlockRedSandstone.EnumType.func_176825_a(p_apply_1_.func_77960_j()).func_176828_c())).func_77655_b("redSandStone"));
+         func_179216_c(Blocks.field_180396_cN);
+         func_179214_a(Blocks.field_180389_cP, (new ItemSlab(Blocks.field_180389_cP, Blocks.field_180389_cP, Blocks.field_180388_cO)).func_77655_b("stoneSlab2"));
+         func_179216_c(Blocks.field_185776_dc);
+@@ -746,6 +1336,67 @@
+         func_179214_a(Blocks.field_192443_dR, (new ItemCloth(Blocks.field_192443_dR)).func_77655_b("concrete"));
+         func_179214_a(Blocks.field_192444_dS, (new ItemCloth(Blocks.field_192444_dS)).func_77655_b("concrete_powder"));
+         func_179216_c(Blocks.field_185779_df);
++
++        func_179216_c(Blocks.YELLOW_CORAL);
++        func_179216_c(Blocks.PINK_CORAL);
++        func_179216_c(Blocks.PURPLE_CORAL);
++        func_179216_c(Blocks.BLUE_CORAL);
++        func_179216_c(Blocks.RED_CORAL);
++
++        func_179216_c(Blocks.YELLOW_CORAL_PLANT);
++        func_179216_c(Blocks.PINK_CORAL_PLANT);
++        func_179216_c(Blocks.PURPLE_CORAL_PLANT);
++        func_179216_c(Blocks.BLUE_CORAL_PLANT);
++        func_179216_c(Blocks.RED_CORAL_PLANT);
++
++        func_179216_c(Blocks.YELLOW_BRAIN_CORAL);
++        func_179216_c(Blocks.PINK_BRAIN_CORAL);
++        func_179216_c(Blocks.PURPLE_BRAIN_CORAL);
++        func_179216_c(Blocks.BLUE_BRAIN_CORAL);
++        func_179216_c(Blocks.RED_BRAIN_CORAL);
++
++        func_179216_c(Blocks.YELLOW_PIPE_CORAL);
++        func_179216_c(Blocks.PINK_PIPE_CORAL);
++        func_179216_c(Blocks.PURPLE_PIPE_CORAL);
++        func_179216_c(Blocks.BLUE_PIPE_CORAL);
++        func_179216_c(Blocks.RED_PIPE_CORAL);
++
++        func_179216_c(Blocks.YELLOW_SEA_FAN_CORAL);
++        func_179216_c(Blocks.PINK_SEA_FAN_CORAL);
++        func_179216_c(Blocks.PURPLE_SEA_FAN_CORAL);
++        func_179216_c(Blocks.BLUE_SEA_FAN_CORAL);
++        func_179216_c(Blocks.RED_SEA_FAN_CORAL);
++
++        func_179216_c(Blocks.YELLOW_DEAD_CORAL);
++        func_179216_c(Blocks.PINK_DEAD_CORAL);
++        func_179216_c(Blocks.PURPLE_DEAD_CORAL);
++        func_179216_c(Blocks.BLUE_DEAD_CORAL);
++        func_179216_c(Blocks.RED_DEAD_CORAL);
++
++        func_179216_c(Blocks.YELLOW_DEAD_CORAL_PLANT);
++        func_179216_c(Blocks.PINK_DEAD_CORAL_PLANT);
++        func_179216_c(Blocks.PURPLE_DEAD_CORAL_PLANT);
++        func_179216_c(Blocks.BLUE_DEAD_CORAL_PLANT);
++        func_179216_c(Blocks.RED_DEAD_CORAL_PLANT);
++
++        func_179216_c(Blocks.YELLOW_DEAD_BRAIN_CORAL);
++        func_179216_c(Blocks.PINK_DEAD_BRAIN_CORAL);
++        func_179216_c(Blocks.PURPLE_DEAD_BRAIN_CORAL);
++        func_179216_c(Blocks.BLUE_DEAD_BRAIN_CORAL);
++        func_179216_c(Blocks.RED_DEAD_BRAIN_CORAL);
++
++        func_179216_c(Blocks.YELLOW_DEAD_PIPE_CORAL);
++        func_179216_c(Blocks.PINK_DEAD_PIPE_CORAL);
++        func_179216_c(Blocks.PURPLE_DEAD_PIPE_CORAL);
++        func_179216_c(Blocks.BLUE_DEAD_PIPE_CORAL);
++        func_179216_c(Blocks.RED_DEAD_PIPE_CORAL);
++
++        func_179216_c(Blocks.YELLOW_DEAD_SEA_FAN_CORAL);
++        func_179216_c(Blocks.PINK_DEAD_SEA_FAN_CORAL);
++        func_179216_c(Blocks.PURPLE_DEAD_SEA_FAN_CORAL);
++        func_179216_c(Blocks.BLUE_DEAD_SEA_FAN_CORAL);
++        func_179216_c(Blocks.RED_DEAD_SEA_FAN_CORAL);
++
+         func_179217_a(256, "iron_shovel", (new ItemSpade(Item.ToolMaterial.IRON)).func_77655_b("shovelIron"));
+         func_179217_a(257, "iron_pickaxe", (new ItemPickaxe(Item.ToolMaterial.IRON)).func_77655_b("pickaxeIron"));
+         func_179217_a(258, "iron_axe", (new ItemAxe(Item.ToolMaterial.IRON)).func_77655_b("hatchetIron"));
+@@ -814,7 +1465,17 @@
+         func_179217_a(321, "painting", (new ItemHangingEntity(EntityPainting.class)).func_77655_b("painting"));
+         func_179217_a(322, "golden_apple", (new ItemAppleGold(4, 1.2F, false)).func_77848_i().func_77655_b("appleGold"));
+         func_179217_a(323, "sign", (new ItemSign()).func_77655_b("sign"));
+-        func_179217_a(324, "wooden_door", (new ItemDoor(Blocks.field_180413_ao)).func_77655_b("doorOak"));
++
++        for(BlockPlanks.EnumType type : BlockPlanks.EnumType.values()) {
++            func_179217_a(324, type.func_176610_l() + "_door", (new ItemDoor(Objects.requireNonNull(Block.func_149684_b("minecraft:" + type.func_176610_l() + "_door")))).func_77655_b(type.func_176610_l() + "_door"));
++            func_179217_a(325, type.func_176610_l() + "_trapped_chest", (new ItemBlock(Objects.requireNonNull(Block.func_149684_b("minecraft:" + type.func_176610_l() + "_trapped_chest")))).func_77655_b(type.func_176610_l() + "_door"));
++            func_179217_a(326, type.func_176610_l() + "_chest", (new ItemBlock(Objects.requireNonNull(Block.func_149684_b("minecraft:" + type.func_176610_l() + "_chest")))).func_77655_b(type.func_176610_l() + "_door"));
++//            registerItem(327, type.getName() + "_fence", (new ItemBlock(Objects.requireNonNull(Block.getBlockFromName("minecraft:" + type.getName() + "_fence")))).setUnlocalizedName(type.getName() + "_fence"));
++//            registerItem(328, type.getName() + "_fence_gate", (new ItemBlock(Objects.requireNonNull(Block.getBlockFromName("minecraft:" + type.getName() + "_fence_gate")))).setUnlocalizedName(type.getName() + "_fence_gate"));
++//            registerItem(329, type.getName() + "_bookshelf", (new ItemBlock(Objects.requireNonNull(Block.getBlockFromName("minecraft:" + type.getName() + "_bookshelf")))).setUnlocalizedName(type.getName() + "_bookshelf"));
++            func_179217_a(330, type.func_176610_l() + "_stairs", (new ItemBlock(Objects.requireNonNull(Block.func_149684_b("minecraft:" + type.func_176610_l() + "_stairs")))).func_77655_b(type.func_176610_l() + "_stairs"));
++        }
++
+         Item item = (new ItemBucket(Blocks.field_150350_a)).func_77655_b("bucket").func_77625_d(16);
+         func_179217_a(325, "bucket", item);
+         func_179217_a(326, "water_bucket", (new ItemBucket(Blocks.field_150358_i)).func_77655_b("bucketWater").func_77642_a(item));
+@@ -919,11 +1580,6 @@
+         func_179217_a(424, "cooked_mutton", (new ItemFood(6, 0.8F, true)).func_77655_b("muttonCooked"));
+         func_179217_a(425, "banner", (new ItemBanner()).func_77655_b("banner"));
+         func_179217_a(426, "end_crystal", new ItemEndCrystal());
+-        func_179217_a(427, "spruce_door", (new ItemDoor(Blocks.field_180414_ap)).func_77655_b("doorSpruce"));
+-        func_179217_a(428, "birch_door", (new ItemDoor(Blocks.field_180412_aq)).func_77655_b("doorBirch"));
+-        func_179217_a(429, "jungle_door", (new ItemDoor(Blocks.field_180411_ar)).func_77655_b("doorJungle"));
+-        func_179217_a(430, "acacia_door", (new ItemDoor(Blocks.field_180410_as)).func_77655_b("doorAcacia"));
+-        func_179217_a(431, "dark_oak_door", (new ItemDoor(Blocks.field_180409_at)).func_77655_b("doorDarkOak"));
+         func_179217_a(432, "chorus_fruit", (new ItemChorusFruit(4, 0.3F)).func_77848_i().func_77655_b("chorusFruit").func_77637_a(CreativeTabs.field_78035_l));
+         func_179217_a(433, "chorus_fruit_popped", (new Item()).func_77655_b("chorusFruitPopped").func_77637_a(CreativeTabs.field_78035_l));
+         func_179217_a(434, "beetroot", (new ItemFood(1, 0.6F, false)).func_77655_b("beetroot"));
+@@ -945,6 +1601,10 @@
+         func_179217_a(450, "shulker_shell", (new Item()).func_77655_b("shulkerShell").func_77637_a(CreativeTabs.field_78035_l));
+         func_179217_a(452, "iron_nugget", (new Item()).func_77655_b("ironNugget").func_77637_a(CreativeTabs.field_78035_l));
+         func_179217_a(453, "knowledge_book", (new ItemKnowledgeBook()).func_77655_b("knowledgeBook"));
++        func_179217_a(454, "cheese", (new ItemFood(2, 0.6f, false)).func_77655_b("cheese"));
++
++        func_179217_a(455, "steak", (new ItemFood(5, 0.6F, false)).func_77655_b("steak"));
++
+         func_179217_a(2256, "record_13", (new ItemRecord("13", SoundEvents.field_187828_ep)).func_77655_b("record"));
+         func_179217_a(2257, "record_cat", (new ItemRecord("cat", SoundEvents.field_187832_er)).func_77655_b("record"));
+         func_179217_a(2258, "record_blocks", (new ItemRecord("blocks", SoundEvents.field_187830_eq)).func_77655_b("record"));
+@@ -986,7 +1646,7 @@
+         return new ItemStack(this);
+     }
+ 
+-    public static enum ToolMaterial
++    public enum ToolMaterial
      {
-         func_179214_a(Blocks.field_150350_a, new ItemAir(Blocks.field_150350_a));
-@@ -999,6 +1722,8 @@
+         WOOD(0, 59, 2.0F, 0.0F, 15),
+         STONE(1, 131, 4.0F, 1.0F, 5),
+@@ -999,6 +1659,8 @@
          private final float field_78010_h;
          private final float field_78011_i;
          private final int field_78008_j;
@@ -806,7 +1167,7 @@
  
          private ToolMaterial(int p_i1874_3_, int p_i1874_4_, float p_i1874_5_, float p_i1874_6_, int p_i1874_7_)
          {
-@@ -1034,6 +1759,7 @@
+@@ -1034,6 +1696,7 @@
              return this.field_78008_j;
          }
  
@@ -814,7 +1175,7 @@
          public Item func_150995_f()
          {
              if (this == WOOD)
-@@ -1057,5 +1783,21 @@
+@@ -1057,5 +1720,21 @@
                  return this == DIAMOND ? Items.field_151045_i : null;
              }
          }

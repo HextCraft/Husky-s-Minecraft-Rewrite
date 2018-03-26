@@ -19,95 +19,47 @@
 
 package net.minecraftforge.fml.client;
 
-import java.awt.Dimension;
+import com.google.common.base.Strings;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.versioning.ComparableVersion;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.GuiUtilRenderComponents;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StringUtils;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.common.ForgeVersion.CheckResult;
-import net.minecraftforge.common.ForgeVersion.Status;
-import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.common.ModContainer.Disableable;
-import net.minecraftforge.fml.common.versioning.ComparableVersion;
-import static net.minecraft.util.text.TextFormatting.*;
-
-import org.lwjgl.input.Mouse;
-
-import com.google.common.base.Strings;
-import org.lwjgl.opengl.GL11;
+import static net.minecraft.util.text.TextFormatting.RED;
+import static net.minecraft.util.text.TextFormatting.WHITE;
 
 /**
- * @author cpw
- *
+ * @original_author cpw and
+ * @current_author HuskyTheArtist
  */
-public class GuiModList extends GuiScreen
-{
-    private enum SortType implements Comparator<ModContainer>
-    {
-        NORMAL(24),
-        A_TO_Z(25){ @Override protected int compare(String name1, String name2){ return name1.compareTo(name2); }},
-        Z_TO_A(26){ @Override protected int compare(String name1, String name2){ return name2.compareTo(name1); }};
-
-        private int buttonID;
-
-        private SortType(int buttonID)
-        {
-            this.buttonID = buttonID;
-        }
-
-        @Nullable
-        public static SortType getTypeForButton(GuiButton button)
-        {
-            for (SortType t : values())
-            {
-                if (t.buttonID == button.id)
-                {
-                    return t;
-                }
-            }
-            return null;
-        }
-
-        protected int compare(String name1, String name2){ return 0; }
-
-        @Override
-        public int compare(ModContainer o1, ModContainer o2)
-        {
-            String name1 = StringUtils.stripControlCodes(o1.getName()).toLowerCase();
-            String name2 = StringUtils.stripControlCodes(o2.getName()).toLowerCase();
-            return compare(name1, name2);
-        }
-    }
+public class GuiModList extends GuiScreenBase {
 
     private GuiScreen mainMenu;
     private GuiSlotModList modList;
@@ -119,7 +71,6 @@ public class GuiModList extends GuiScreen
     private GuiButton configModButton;
     private GuiButton disableModButton;
 
-    private int buttonMargin = 1;
     private int numButtons = SortType.values().length;
 
     private String lastFilterText = "";
@@ -128,13 +79,8 @@ public class GuiModList extends GuiScreen
     private boolean sorted = false;
     private SortType sortType = SortType.NORMAL;
 
-    /**
-     * @param mainMenu
-     */
-    public GuiModList(GuiScreen mainMenu)
-    {
-        this.mainMenu = mainMenu;
-        this.mods = new ArrayList<ModContainer>();
+    public GuiModList() {
+        this.mods = new ArrayList<>();
         FMLClientHandler.instance().addSpecialModEntries(mods);
         // Add child mods to their parent's list
         for (ModContainer mod : Loader.instance().getModList())
@@ -159,8 +105,8 @@ public class GuiModList extends GuiScreen
     }
 
     @Override
-    public void initGui()
-    {
+    public void initGui() {
+
         int slotHeight = 35;
         for (ModContainer mod : mods)
         {
@@ -182,6 +128,7 @@ public class GuiModList extends GuiScreen
 
         int width = (modList.listWidth / numButtons);
         int x = 10, y = 10;
+        int buttonMargin = 1;
         GuiButton normalSort = new GuiButton(SortType.NORMAL.buttonID, x, y, width - buttonMargin, 20, I18n.format("fml.menu.mods.normal"));
         normalSort.enabled = false;
         buttonList.add(normalSort);
@@ -194,11 +141,10 @@ public class GuiModList extends GuiScreen
     }
 
     @Override
-    protected void mouseClicked(int x, int y, int button) throws IOException
-    {
-        super.mouseClicked(x, y, button);
-        search.mouseClicked(x, y, button);
-        if (button == 1 && x >= search.x && x < search.x + search.width && y >= search.y && y < search.y + search.height) {
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        search.mouseClicked(mouseX, mouseY, mouseButton);
+        if (mouseButton == 1 && mouseX >= search.x && mouseX < search.x + search.width && mouseY >= search.y && mouseY < search.y + search.height) {
             search.setText("");
         }
     }
@@ -225,7 +171,7 @@ public class GuiModList extends GuiScreen
         if (!sorted)
         {
             reloadMods();
-            Collections.sort(mods, sortType);
+            mods.sort(sortType);
             selected = modList.selectedIndex = mods.indexOf(selectedMod);
             sorted = true;
         }
@@ -342,7 +288,7 @@ public class GuiModList extends GuiScreen
         return fontRenderer;
     }
 
-    public void selectModIndex(int index)
+    void selectModIndex(int index)
     {
         if (index == this.selected)
             return;
@@ -368,8 +314,8 @@ public class GuiModList extends GuiScreen
 
         ResourceLocation logoPath = null;
         Dimension logoDims = new Dimension(0, 0);
-        List<String> lines = new ArrayList<String>();
-        CheckResult vercheck = ForgeVersion.getResult(selectedMod);
+        List<String> lines = new ArrayList<>();
+        ForgeVersion.CheckResult vercheck = ForgeVersion.getResult(selectedMod);
 
         String logoFile = selectedMod.getMetadata().logoFile;
         if (!logoFile.isEmpty())
@@ -403,12 +349,12 @@ public class GuiModList extends GuiScreen
             disableModButton.visible = true;
             disableModButton.enabled = true;
             disableModButton.packedFGColour = 0;
-            Disableable disableable = selectedMod.canBeDisabled();
-            if (disableable == Disableable.RESTART)
+            ModContainer.Disableable disableable = selectedMod.canBeDisabled();
+            if (disableable == ModContainer.Disableable.RESTART)
             {
                 disableModButton.packedFGColour = 0xFF3377;
             }
-            else if (disableable != Disableable.YES)
+            else if (disableable != ModContainer.Disableable.YES)
             {
                 disableModButton.enabled = false;
             }
@@ -437,7 +383,7 @@ public class GuiModList extends GuiScreen
             else
                 lines.add("Child mods: " + selectedMod.getMetadata().getChildModList());
 
-            if (vercheck.status == Status.OUTDATED || vercheck.status == Status.BETA_OUTDATED)
+            if (vercheck.status == ForgeVersion.Status.OUTDATED || vercheck.status == ForgeVersion.Status.BETA_OUTDATED)
                 lines.add("Update Available: " + (vercheck.url == null ? "" : vercheck.url));
 
             lines.add(null);
@@ -448,7 +394,7 @@ public class GuiModList extends GuiScreen
             lines.add(WHITE + selectedMod.getName());
             lines.add(WHITE + "Version: " + selectedMod.getVersion());
             lines.add(WHITE + "Mod State: " + Loader.instance().getModState(selectedMod));
-            if (vercheck.status == Status.OUTDATED || vercheck.status == Status.BETA_OUTDATED)
+            if (vercheck.status == ForgeVersion.Status.OUTDATED || vercheck.status == ForgeVersion.Status.BETA_OUTDATED)
                 lines.add("Update Available: " + (vercheck.url == null ? "" : vercheck.url));
 
             lines.add(null);
@@ -456,11 +402,11 @@ public class GuiModList extends GuiScreen
             lines.add(RED + "Ask your mod author to provide a mod mcmod.info file");
         }
 
-        if ((vercheck.status == Status.OUTDATED || vercheck.status == Status.BETA_OUTDATED) && vercheck.changes.size() > 0)
+        if ((vercheck.status == ForgeVersion.Status.OUTDATED || vercheck.status == ForgeVersion.Status.BETA_OUTDATED) && vercheck.changes.size() > 0)
         {
             lines.add(null);
             lines.add("Changes:");
-            for (Entry<ComparableVersion, String> entry : vercheck.changes.entrySet())
+            for (Map.Entry<ComparableVersion, String> entry : vercheck.changes.entrySet())
             {
                 lines.add("  " + entry.getKey() + ":");
                 lines.add(entry.getValue());
@@ -471,105 +417,108 @@ public class GuiModList extends GuiScreen
         modInfo = new Info(this.width - this.listWidth - 30, lines, logoPath, logoDims);
     }
 
-    private class Info extends GuiScrollingList
-    {
+    private class Info extends GuiScrollingList {
         @Nullable
         private ResourceLocation logoPath;
         private Dimension logoDims;
-        private List<ITextComponent> lines = null;
+        private List<ITextComponent> lines;
 
-        public Info(int width, List<String> lines, @Nullable ResourceLocation logoPath, Dimension logoDims)
-        {
+        public Info(int width, List<String> lines, @Nullable ResourceLocation logoPath, Dimension logoDims) {
             super(GuiModList.this.getMinecraftInstance(),
-                  width,
-                  GuiModList.this.height,
-                  32, GuiModList.this.height - 88 + 4,
-                  GuiModList.this.listWidth + 20, 60,
-                  GuiModList.this.width,
-                  GuiModList.this.height);
-            this.lines    = resizeContent(lines);
+                    width,
+                    GuiModList.this.height,
+                    32, GuiModList.this.height - 88 + 4,
+                    GuiModList.this.listWidth + 20, 60,
+                    GuiModList.this.width,
+                    GuiModList.this.height);
+            this.lines = resizeContent(lines);
             this.logoPath = logoPath;
             this.logoDims = logoDims;
 
             this.setHeaderInfo(true, getHeaderHeight());
         }
 
-        @Override protected int getSize() { return 0; }
-        @Override protected void elementClicked(int index, boolean doubleClick) { }
-        @Override protected boolean isSelected(int index) { return false; }
-        @Override protected void drawBackground() {}
-        @Override protected void drawSlot(int slotIdx, int entryRight, int slotTop, int slotBuffer, Tessellator tess) { }
+        @Override
+        protected int getSize() {
+            return 0;
+        }
 
-        private List<ITextComponent> resizeContent(List<String> lines)
-        {
-            List<ITextComponent> ret = new ArrayList<ITextComponent>();
-            for (String line : lines)
-            {
-                if (line == null)
-                {
+        @Override
+        protected void elementClicked(int index, boolean doubleClick) {
+        }
+
+        @Override
+        protected boolean isSelected(int index) {
+            return false;
+        }
+
+        @Override
+        protected void drawBackground() {
+        }
+
+        @Override
+        protected void drawSlot(int slotIdx, int entryRight, int slotTop, int slotBuffer, Tessellator tess) {
+        }
+
+        private List<ITextComponent> resizeContent(List<String> lines) {
+            List<ITextComponent> ret = new ArrayList<>();
+            for (String line : lines) {
+                if (line == null) {
                     ret.add(null);
                     continue;
                 }
 
                 ITextComponent chat = ForgeHooks.newChatWithLinks(line, false);
                 int maxTextLength = this.listWidth - 8;
-                if (maxTextLength >= 0)
-                {
+                if (maxTextLength >= 0) {
                     ret.addAll(GuiUtilRenderComponents.splitText(chat, maxTextLength, GuiModList.this.fontRenderer, false, true));
                 }
             }
             return ret;
         }
 
-        private int getHeaderHeight()
-        {
-          int height = 0;
-          if (logoPath != null)
-          {
-              double scaleX = logoDims.width / 200.0;
-              double scaleY = logoDims.height / 65.0;
-              double scale = 1.0;
-              if (scaleX > 1 || scaleY > 1)
-              {
-                  scale = 1.0 / Math.max(scaleX, scaleY);
-              }
-              logoDims.width *= scale;
-              logoDims.height *= scale;
+        private int getHeaderHeight() {
+            int height = 0;
+            if (logoPath != null) {
+                double scaleX = logoDims.width / 200.0;
+                double scaleY = logoDims.height / 65.0;
+                double scale = 1.0;
+                if (scaleX > 1 || scaleY > 1) {
+                    scale = 1.0 / Math.max(scaleX, scaleY);
+                }
+                logoDims.width *= scale;
+                logoDims.height *= scale;
 
-              height += logoDims.height;
-              height += 10;
-          }
-          height += (lines.size() * 10);
-          if (height < this.bottom - this.top - 8) height = this.bottom - this.top - 8;
-          return height;
+                height += logoDims.height;
+                height += 10;
+            }
+            height += (lines.size() * 10);
+            if (height < this.bottom - this.top - 8) height = this.bottom - this.top - 8;
+            return height;
         }
 
 
         @Override
-        protected void drawHeader(int entryRight, int relativeY, Tessellator tess)
-        {
+        protected void drawHeader(int entryRight, int relativeY, Tessellator tess) {
             int top = relativeY;
 
-            if (logoPath != null)
-            {
+            if (logoPath != null) {
                 GlStateManager.enableBlend();
                 GuiModList.this.mc.renderEngine.bindTexture(logoPath);
                 BufferBuilder wr = tess.getBuffer();
-                int offset = (this.left + this.listWidth/2) - (logoDims.width / 2);
+                int offset = (this.left + this.listWidth / 2) - (logoDims.width / 2);
                 wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-                wr.pos(offset,                  top + logoDims.height, zLevel).tex(0, 1).endVertex();
+                wr.pos(offset, top + logoDims.height, zLevel).tex(0, 1).endVertex();
                 wr.pos(offset + logoDims.width, top + logoDims.height, zLevel).tex(1, 1).endVertex();
-                wr.pos(offset + logoDims.width, top,                   zLevel).tex(1, 0).endVertex();
-                wr.pos(offset,                  top,                   zLevel).tex(0, 0).endVertex();
+                wr.pos(offset + logoDims.width, top, zLevel).tex(1, 0).endVertex();
+                wr.pos(offset, top, zLevel).tex(0, 0).endVertex();
                 tess.draw();
                 GlStateManager.disableBlend();
                 top += logoDims.height + 10;
             }
 
-            for (ITextComponent line : lines)
-            {
-                if (line != null)
-                {
+            for (ITextComponent line : lines) {
+                if (line != null) {
                     GlStateManager.enableBlend();
                     GuiModList.this.fontRenderer.drawStringWithShadow(line.getFormattedText(), this.left + 4, top, 0xFFFFFF);
                     GlStateManager.disableAlpha();
@@ -580,11 +529,10 @@ public class GuiModList extends GuiScreen
         }
 
         @Override
-        protected void clickHeader(int x, int y)
-        {
+        protected void clickHeader(int x, int y) {
             int offset = y;
             if (logoPath != null) {
-              offset -= logoDims.height + 10;
+                offset -= logoDims.height + 10;
             }
             if (offset <= 0)
                 return;
@@ -594,15 +542,13 @@ public class GuiModList extends GuiScreen
                 return;
 
             ITextComponent line = lines.get(lineIdx);
-            if (line != null)
-            {
+            if (line != null) {
                 int k = -4;
                 for (ITextComponent part : line) {
                     if (!(part instanceof TextComponentString))
                         continue;
-                    k += GuiModList.this.fontRenderer.getStringWidth(((TextComponentString)part).getText());
-                    if (k >= x)
-                    {
+                    k += GuiModList.this.fontRenderer.getStringWidth(((TextComponentString) part).getText());
+                    if (k >= x) {
                         GuiModList.this.handleComponentClick(part);
                         break;
                     }
@@ -610,4 +556,5 @@ public class GuiModList extends GuiScreen
             }
         }
     }
+
 }

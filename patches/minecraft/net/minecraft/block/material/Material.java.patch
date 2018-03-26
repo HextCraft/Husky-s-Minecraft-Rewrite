@@ -1,0 +1,151 @@
+--- ../src-base/minecraft/net/minecraft/block/material/Material.java
++++ ../src-work/minecraft/net/minecraft/block/material/Material.java
+@@ -1,7 +1,6 @@
+ package net.minecraft.block.material;
+ 
+-public class Material
+-{
++public class Material {
+     public static final Material field_151579_a = new MaterialTransparent(MapColor.field_151660_b);
+     public static final Material field_151577_b = new Material(MapColor.field_151661_c);
+     public static final Material field_151578_c = new Material(MapColor.field_151664_l);
+@@ -34,118 +33,98 @@
+     public static final Material field_151566_D = (new Material(MapColor.field_151669_i)).func_76219_n();
+     public static final Material field_151567_E = (new MaterialPortal(MapColor.field_151660_b)).func_76225_o();
+     public static final Material field_151568_F = (new Material(MapColor.field_151660_b)).func_76219_n();
+-    public static final Material field_151569_G = (new Material(MapColor.field_151659_e)
+-    {
+-        public boolean func_76230_c()
+-        {
++    public static final Material field_151569_G = (new Material(MapColor.field_151659_e) {
++        public boolean func_76230_c() {
+             return false;
+         }
+     }).func_76221_f().func_76219_n();
+     public static final Material field_76233_E = (new Material(MapColor.field_151665_m)).func_76225_o();
+     public static final Material field_175972_I = (new Material(MapColor.field_151660_b)).func_76221_f().func_76225_o();
+     public static final Material field_189963_J = new MaterialTransparent(MapColor.field_151660_b);
++    private final MapColor field_76234_F;
+     private boolean field_76235_G;
+     private boolean field_76239_H;
+     private boolean field_76240_I;
+-    private final MapColor field_76234_F;
+     private boolean field_76241_J = true;
+     private EnumPushReaction field_76242_K = EnumPushReaction.NORMAL;
+     private boolean field_85159_M;
+ 
+-    public Material(MapColor p_i2116_1_)
+-    {
++    public Material(MapColor p_i2116_1_) {
+         this.field_76234_F = p_i2116_1_;
+     }
+ 
+-    public boolean func_76224_d()
+-    {
++    public boolean func_76224_d() {
+         return false;
+     }
+ 
+-    public boolean func_76220_a()
+-    {
++    public boolean func_76220_a() {
+         return true;
+     }
+ 
+-    public boolean func_76228_b()
+-    {
++    public boolean func_76228_b() {
+         return true;
+     }
+ 
+-    public boolean func_76230_c()
+-    {
++    public boolean func_76230_c() {
+         return true;
+     }
+ 
+-    private Material func_76223_p()
+-    {
++    private Material func_76223_p() {
+         this.field_76240_I = true;
+         return this;
+     }
+ 
+-    protected Material func_76221_f()
+-    {
++    protected Material func_76221_f() {
+         this.field_76241_J = false;
+         return this;
+     }
+ 
+-    protected Material func_76226_g()
+-    {
++    protected Material func_76226_g() {
+         this.field_76235_G = true;
+         return this;
+     }
+ 
+-    public boolean func_76217_h()
+-    {
++    public boolean func_76217_h() {
+         return this.field_76235_G;
+     }
+ 
+-    public Material func_76231_i()
+-    {
++    public Material func_76231_i() {
+         this.field_76239_H = true;
+         return this;
+     }
+ 
+-    public boolean func_76222_j()
+-    {
++    public boolean func_76222_j() {
+         return this.field_76239_H;
+     }
+ 
+-    public boolean func_76218_k()
+-    {
++    public boolean func_76218_k() {
+         return this.field_76240_I ? false : this.func_76230_c();
+     }
+ 
+-    public boolean func_76229_l()
+-    {
++    public boolean func_76229_l() {
+         return this.field_76241_J;
+     }
+ 
+-    public EnumPushReaction func_186274_m()
+-    {
++    public EnumPushReaction func_186274_m() {
+         return this.field_76242_K;
+     }
+ 
+-    protected Material func_76219_n()
+-    {
++    protected Material func_76219_n() {
+         this.field_76242_K = EnumPushReaction.DESTROY;
+         return this;
+     }
+ 
+-    protected Material func_76225_o()
+-    {
++    protected Material func_76225_o() {
+         this.field_76242_K = EnumPushReaction.BLOCK;
+         return this;
+     }
+ 
+-    protected Material func_85158_p()
+-    {
++    protected Material func_85158_p() {
+         this.field_85159_M = true;
+         return this;
+     }
+ 
+-    public MapColor func_151565_r()
+-    {
++    public MapColor func_151565_r() {
+         return this.field_76234_F;
+     }
+ }
