@@ -16,13 +16,14 @@
  
 -public class BlockStone extends Block
 -{
+-    public static final PropertyEnum<BlockStone.EnumType> field_176247_a = PropertyEnum.<BlockStone.EnumType>func_177709_a("variant", BlockStone.EnumType.class);
 +import java.util.Random;
-+
-+public class BlockStone extends Block {
-     public static final PropertyEnum<BlockStone.EnumType> field_176247_a = PropertyEnum.<BlockStone.EnumType>func_177709_a("variant", BlockStone.EnumType.class);
  
 -    public BlockStone()
 -    {
++public class BlockStone extends Block {
++    public static final PropertyEnum<EnumType> field_176247_a = PropertyEnum.<BlockStone.EnumType>func_177709_a("variant", BlockStone.EnumType.class);
++
 +    public BlockStone() {
          super(Material.field_151576_e);
          this.func_180632_j(this.field_176227_L.func_177621_b().func_177226_a(field_176247_a, BlockStone.EnumType.STONE));

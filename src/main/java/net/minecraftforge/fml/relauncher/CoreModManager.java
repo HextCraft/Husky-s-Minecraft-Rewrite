@@ -143,7 +143,7 @@ public class CoreModManager {
             FMLLog.log.debug("Injection complete");
 
             FMLLog.log.debug("Running coremod plugin for {} \\{{}\\}", name, coreModInstance.getClass().getName());
-            Map<String, Object> data = new HashMap<String, Object>();
+            Map<String, Object> data = new HashMap<>();
             data.put("mcLocation", mcDir);
             data.put("coremodList", loadPlugins);
             data.put("runtimeDeobfuscationEnabled", !deobfuscatedEnvironment);

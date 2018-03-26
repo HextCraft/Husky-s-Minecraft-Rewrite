@@ -1,6 +1,32 @@
 --- ../src-base/minecraft/net/minecraft/world/gen/feature/WorldGenDungeons.java
 +++ ../src-work/minecraft/net/minecraft/world/gen/feature/WorldGenDungeons.java
-@@ -159,6 +159,6 @@
+@@ -76,7 +76,7 @@
+ 
+                         if (k3 != k && i4 != -1 && k4 != l1 && k3 != l && i4 != 4 && k4 != i2)
+                         {
+-                            if (p_180709_1_.func_180495_p(blockpos1).func_177230_c() != Blocks.field_150486_ae)
++                            if (p_180709_1_.func_180495_p(blockpos1).func_177230_c() != Blocks.OAK_CHEST)
+                             {
+                                 p_180709_1_.func_175698_g(blockpos1);
+                             }
+@@ -85,7 +85,7 @@
+                         {
+                             p_180709_1_.func_175698_g(blockpos1);
+                         }
+-                        else if (p_180709_1_.func_180495_p(blockpos1).func_185904_a().func_76220_a() && p_180709_1_.func_180495_p(blockpos1).func_177230_c() != Blocks.field_150486_ae)
++                        else if (p_180709_1_.func_180495_p(blockpos1).func_185904_a().func_76220_a() && p_180709_1_.func_180495_p(blockpos1).func_177230_c() != Blocks.OAK_CHEST)
+                         {
+                             if (i4 == -1 && p_180709_2_.nextInt(4) != 0)
+                             {
+@@ -123,7 +123,6 @@
+ 
+                         if (j3 == 1)
+                         {
+-                            p_180709_1_.func_180501_a(blockpos2, Blocks.field_150486_ae.func_176458_f(p_180709_1_, blockpos2, Blocks.field_150486_ae.func_176223_P()), 2);
+                             TileEntity tileentity1 = p_180709_1_.func_175625_s(blockpos2);
+ 
+                             if (tileentity1 instanceof TileEntityChest)
+@@ -159,6 +158,6 @@
  
      private ResourceLocation func_76543_b(Random p_76543_1_)
      {

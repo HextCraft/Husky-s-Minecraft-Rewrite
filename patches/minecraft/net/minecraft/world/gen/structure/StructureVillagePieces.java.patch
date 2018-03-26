@@ -52,58 +52,24 @@
              }
  
              public boolean func_74875_a(World p_74875_1_, Random p_74875_2_, StructureBoundingBox p_74875_3_)
-@@ -663,9 +674,9 @@
-                 }
- 
+@@ -797,7 +808,7 @@
                  IBlockState iblockstate = this.func_175847_a(Blocks.field_150347_e.func_176223_P());
--                IBlockState iblockstate1 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
--                IBlockState iblockstate2 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH));
--                IBlockState iblockstate3 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST));
-+                IBlockState iblockstate1 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate2 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate3 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-                 IBlockState iblockstate4 = this.func_175847_a(Blocks.field_150344_f.func_176223_P());
-                 IBlockState iblockstate5 = this.func_175847_a(Blocks.field_150364_r.func_176223_P());
-                 IBlockState iblockstate6 = this.func_175847_a(Blocks.field_180407_aO.func_176223_P());
-@@ -795,9 +806,9 @@
-                 }
- 
-                 IBlockState iblockstate = this.func_175847_a(Blocks.field_150347_e.func_176223_P());
--                IBlockState iblockstate1 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
--                IBlockState iblockstate2 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH));
+                 IBlockState iblockstate1 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
+                 IBlockState iblockstate2 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH));
 -                IBlockState iblockstate3 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.EAST));
-+                IBlockState iblockstate1 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate2 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate3 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
++                IBlockState iblockstate3 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST));
                  IBlockState iblockstate4 = this.func_175847_a(Blocks.field_150344_f.func_176223_P());
                  IBlockState iblockstate5 = this.func_175847_a(Blocks.field_150446_ar.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
                  IBlockState iblockstate6 = this.func_175847_a(Blocks.field_180407_aO.func_176223_P());
-@@ -941,8 +952,8 @@
-                 }
- 
-                 IBlockState iblockstate = Blocks.field_150347_e.func_176223_P();
--                IBlockState iblockstate1 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
--                IBlockState iblockstate2 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST));
-+                IBlockState iblockstate1 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate2 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-                 IBlockState iblockstate3 = this.func_175847_a(Blocks.field_150344_f.func_176223_P());
-                 IBlockState iblockstate4 = this.func_175847_a(Blocks.field_150446_ar.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
-                 IBlockState iblockstate5 = this.func_175847_a(Blocks.field_150364_r.func_176223_P());
-@@ -1055,10 +1066,10 @@
-                 }
- 
-                 IBlockState iblockstate = this.func_175847_a(Blocks.field_150347_e.func_176223_P());
--                IBlockState iblockstate1 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH));
--                IBlockState iblockstate2 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH));
--                IBlockState iblockstate3 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.EAST));
--                IBlockState iblockstate4 = this.func_175847_a(Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST));
-+                IBlockState iblockstate1 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.NORTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate2 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.SOUTH).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate3 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.EAST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-+                IBlockState iblockstate4 = this.func_175847_a(Blocks.STAIRS.func_176223_P().func_177226_a(BlockStairs.field_176309_a, EnumFacing.WEST).func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK));
-                 IBlockState iblockstate5 = this.func_175847_a(Blocks.field_150344_f.func_176223_P());
-                 IBlockState iblockstate6 = this.func_175847_a(Blocks.field_150364_r.func_176223_P());
-                 this.func_175804_a(p_74875_1_, p_74875_3_, 1, 1, 1, 7, 4, 4, Blocks.field_150350_a.func_176223_P(), Blocks.field_150350_a.func_176223_P(), false);
+@@ -848,7 +859,7 @@
+                 this.func_175811_a(p_74875_1_, Blocks.field_150410_aZ.func_176223_P(), 6, 2, 5, p_74875_3_);
+                 this.func_175804_a(p_74875_1_, p_74875_3_, 1, 4, 1, 7, 4, 1, iblockstate4, iblockstate4, false);
+                 this.func_175804_a(p_74875_1_, p_74875_3_, 1, 4, 4, 7, 4, 4, iblockstate4, iblockstate4, false);
+-                this.func_175804_a(p_74875_1_, p_74875_3_, 1, 3, 4, 7, 3, 4, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
++                this.func_175804_a(p_74875_1_, p_74875_3_, 1, 3, 4, 7, 3, 4, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
+                 this.func_175811_a(p_74875_1_, iblockstate4, 7, 1, 4, p_74875_3_);
+                 this.func_175811_a(p_74875_1_, iblockstate3, 7, 1, 3, p_74875_3_);
+                 this.func_175811_a(p_74875_1_, iblockstate1, 6, 1, 4, p_74875_3_);
 @@ -1539,6 +1550,7 @@
              public List<StructureVillagePieces.PieceWeight> field_74931_h;
              public List<StructureComponent> field_74932_i = Lists.<StructureComponent>newArrayList();
@@ -121,23 +87,92 @@
  
                  if (biome instanceof BiomeDesert)
                  {
-@@ -1623,6 +1637,7 @@
+@@ -1608,21 +1622,18 @@
+                 this.func_175811_a(p_74875_1_, iblockstate, 1, 0, 0, p_74875_3_);
+                 this.func_175811_a(p_74875_1_, iblockstate, 1, 1, 0, p_74875_3_);
+                 this.func_175811_a(p_74875_1_, iblockstate, 1, 2, 0, p_74875_3_);
+-                this.func_175811_a(p_74875_1_, Blocks.field_150325_L.func_176203_a(EnumDyeColor.WHITE.func_176767_b()), 1, 3, 0, p_74875_3_);
+-                this.func_189926_a(p_74875_1_, EnumFacing.EAST, 2, 3, 0, p_74875_3_);
+-                this.func_189926_a(p_74875_1_, EnumFacing.NORTH, 1, 3, 1, p_74875_3_);
+-                this.func_189926_a(p_74875_1_, EnumFacing.WEST, 0, 3, 0, p_74875_3_);
+-                this.func_189926_a(p_74875_1_, EnumFacing.SOUTH, 1, 3, -1, p_74875_3_);
++                this.func_175811_a(p_74875_1_, Blocks.field_180398_cJ.func_176223_P(), 1, 3, 0, p_74875_3_);
+                 return true;
+             }
+         }
+ 
+     public abstract static class Village extends StructureComponent
+         {
+-            protected int field_143015_k = -1;
++            int field_143015_k = -1;
              private int field_74896_a;
-             protected int field_189928_h;
-             protected boolean field_189929_i;
+-            protected int field_189928_h;
+-            protected boolean field_189929_i;
++            int field_189928_h;
++            boolean field_189929_i;
 +            protected StructureVillagePieces.Start startPiece;
  
              public Village()
              {
-@@ -1636,6 +1651,7 @@
-                 {
-                     this.field_189928_h = p_i2107_1_.field_189928_h;
-                     this.field_189929_i = p_i2107_1_.field_189929_i;
-+                    startPiece = p_i2107_1_;
+@@ -1632,11 +1643,9 @@
+             {
+                 super(p_i2107_2_);
+ 
+-                if (p_i2107_1_ != null)
+-                {
+-                    this.field_189928_h = p_i2107_1_.field_189928_h;
+-                    this.field_189929_i = p_i2107_1_.field_189929_i;
+-                }
++                this.field_189928_h = p_i2107_1_.field_189928_h;
++                this.field_189929_i = p_i2107_1_.field_189929_i;
++                startPiece = p_i2107_1_;
+             }
+ 
+             protected void func_143012_a(NBTTagCompound p_143012_1_)
+@@ -1662,7 +1671,7 @@
+             }
+ 
+             @Nullable
+-            protected StructureComponent func_74891_a(StructureVillagePieces.Start p_74891_1_, List<StructureComponent> p_74891_2_, Random p_74891_3_, int p_74891_4_, int p_74891_5_)
++            StructureComponent func_74891_a(StructureVillagePieces.Start p_74891_1_, List<StructureComponent> p_74891_2_, Random p_74891_3_, int p_74891_4_, int p_74891_5_)
+             {
+                 EnumFacing enumfacing = this.func_186165_e();
+ 
+@@ -1688,7 +1697,7 @@
+             }
+ 
+             @Nullable
+-            protected StructureComponent func_74894_b(StructureVillagePieces.Start p_74894_1_, List<StructureComponent> p_74894_2_, Random p_74894_3_, int p_74894_4_, int p_74894_5_)
++            StructureComponent func_74894_b(StructureVillagePieces.Start p_74894_1_, List<StructureComponent> p_74894_2_, Random p_74894_3_, int p_74894_4_, int p_74894_5_)
+             {
+                 EnumFacing enumfacing = this.func_186165_e();
+ 
+@@ -1713,7 +1722,7 @@
                  }
              }
  
-@@ -1770,7 +1786,6 @@
+-            protected int func_74889_b(World p_74889_1_, StructureBoundingBox p_74889_2_)
++            int func_74889_b(World p_74889_1_, StructureBoundingBox p_74889_2_)
+             {
+                 int i = 0;
+                 int j = 0;
+@@ -1743,12 +1752,12 @@
+                 }
+             }
+ 
+-            protected static boolean func_74895_a(StructureBoundingBox p_74895_0_)
++            static boolean func_74895_a(StructureBoundingBox p_74895_0_)
+             {
+-                return p_74895_0_ != null && p_74895_0_.field_78895_b > 10;
++                return p_74895_0_.field_78895_b > 10;
+             }
+ 
+-            protected void func_74893_a(World p_74893_1_, StructureBoundingBox p_74893_2_, int p_74893_3_, int p_74893_4_, int p_74893_5_, int p_74893_6_)
++            void func_74893_a(World p_74893_1_, StructureBoundingBox p_74893_2_, int p_74893_3_, int p_74893_4_, int p_74893_5_, int p_74893_6_)
+             {
+                 if (this.field_74896_a < p_74893_6_)
+                 {
+@@ -1770,7 +1779,6 @@
                              EntityZombieVillager entityzombievillager = new EntityZombieVillager(p_74893_1_);
                              entityzombievillager.func_70012_b((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                              entityzombievillager.func_180482_a(p_74893_1_.func_175649_E(new BlockPos(entityzombievillager)), (IEntityLivingData)null);
@@ -145,7 +180,7 @@
                              entityzombievillager.func_110163_bv();
                              p_74893_1_.func_72838_d(entityzombievillager);
                          }
-@@ -1778,7 +1793,7 @@
+@@ -1778,7 +1786,7 @@
                          {
                              EntityVillager entityvillager = new EntityVillager(p_74893_1_);
                              entityvillager.func_70012_b((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
@@ -154,7 +189,7 @@
                              entityvillager.func_190672_a(p_74893_1_.func_175649_E(new BlockPos(entityvillager)), (IEntityLivingData)null, false);
                              p_74893_1_.func_72838_d(entityvillager);
                          }
-@@ -1786,13 +1801,21 @@
+@@ -1786,13 +1794,21 @@
                  }
              }
  
@@ -176,43 +211,37 @@
                  if (this.field_189928_h == 1)
                  {
                      if (p_175847_1_.func_177230_c() == Blocks.field_150364_r || p_175847_1_.func_177230_c() == Blocks.field_150363_s)
-@@ -1810,7 +1833,8 @@
+@@ -1810,7 +1826,7 @@
                          return Blocks.field_150322_A.func_176203_a(BlockSandStone.EnumType.SMOOTH.func_176675_a());
                      }
  
 -                    if (p_175847_1_.func_177230_c() == Blocks.field_150476_ad)
-+//                    if (blockstateIn.getBlock() == Blocks.STAIRS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.OAK))
-+                    if(p_175847_1_.func_177230_c() == Objects.requireNonNull(func_149684_b("tile.oak_stair.name")).func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a)))
++                    if(p_175847_1_.func_177230_c() == Blocks.field_150476_ad.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a)))
                      {
                          return Blocks.field_150372_bz.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
                      }
-@@ -1837,9 +1861,10 @@
+@@ -1837,9 +1853,9 @@
                          return Blocks.field_150344_f.func_176223_P().func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.SPRUCE);
                      }
  
 -                    if (p_175847_1_.func_177230_c() == Blocks.field_150476_ad)
-+                    if (p_175847_1_.func_177230_c() == Blocks.STAIRS.func_176223_P().func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK))
++                    if (p_175847_1_.func_177230_c() == Blocks.field_150476_ad.func_176223_P())
                      {
 -                        return Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
-+//                        return Blocks.STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING)).withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);
-+                        return Objects.requireNonNull(func_149684_b("tile.spruce_stair.name")).func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
++                      return Blocks.field_150485_bF.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
                      }
  
                      if (p_175847_1_.func_177230_c() == Blocks.field_180407_aO)
-@@ -1859,9 +1884,10 @@
+@@ -1859,7 +1875,7 @@
                          return Blocks.field_150344_f.func_176223_P().func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.ACACIA);
                      }
  
 -                    if (p_175847_1_.func_177230_c() == Blocks.field_150476_ad)
-+                    if (p_175847_1_.func_177230_c() == Blocks.STAIRS.func_176223_P().func_177226_a(BlockPlanks.field_176383_a, BlockPlanks.EnumType.OAK))
++                    if (p_175847_1_.func_177230_c() == Blocks.field_150476_ad.func_176223_P())
                      {
--                        return Blocks.field_150400_ck.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
-+//                        return Blocks.STAIRS.getDefaultState().withProperty(BlockStairs.FACING, blockstateIn.getValue(BlockStairs.FACING)).withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA);
-+                        return Objects.requireNonNull(func_149684_b("tile.acacia_stair.name")).func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
+                         return Blocks.field_150400_ck.func_176223_P().func_177226_a(BlockStairs.field_176309_a, p_175847_1_.func_177229_b(BlockStairs.field_176309_a));
                      }
- 
-                     if (p_175847_1_.func_177230_c() == Blocks.field_150347_e)
-@@ -1878,16 +1904,16 @@
+@@ -1878,16 +1894,16 @@
                  return p_175847_1_;
              }
  
@@ -223,17 +252,17 @@
                  {
                      case 2:
 -                        return Blocks.field_180410_as;
-+                        return (BlockDoor) func_149684_b("minecraft:acacia_door");
++                        return (BlockDoor) Blocks.field_180410_as;
                      case 3:
 -                        return Blocks.field_180414_ap;
-+                        return (BlockDoor) func_149684_b("minecraft:spruce_door");
++                        return (BlockDoor) Blocks.field_180414_ap;
                      default:
 -                        return Blocks.field_180413_ao;
-+                        return (BlockDoor) func_149684_b("minecraft:oak_door");
++                        return (BlockDoor) Blocks.field_180413_ao;
                  }
              }
  
-@@ -2030,7 +2056,10 @@
+@@ -2030,7 +2046,10 @@
              public static StructureVillagePieces.WoodHut func_175853_a(StructureVillagePieces.Start p_175853_0_, List<StructureComponent> p_175853_1_, Random p_175853_2_, int p_175853_3_, int p_175853_4_, int p_175853_5_, EnumFacing p_175853_6_, int p_175853_7_)
              {
                  StructureBoundingBox structureboundingbox = StructureBoundingBox.func_175897_a(p_175853_3_, p_175853_4_, p_175853_5_, 0, 0, 0, 4, 6, 5, p_175853_6_);

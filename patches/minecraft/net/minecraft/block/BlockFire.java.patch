@@ -54,20 +54,24 @@
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150373_bw, 5, 20);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150376_bx, 5, 20);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_180390_bo, 5, 20);
-@@ -66,12 +58,7 @@
-         Blocks.field_150480_ab.func_180686_a(Blocks.field_180403_aR, 5, 20);
+@@ -67,16 +59,11 @@
          Blocks.field_150480_ab.func_180686_a(Blocks.field_180406_aS, 5, 20);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_180405_aT, 5, 20);
--        Blocks.field_150480_ab.func_180686_a(Blocks.field_150476_ad, 5, 20);
+         Blocks.field_150480_ab.func_180686_a(Blocks.field_150476_ad, 5, 20);
 -        Blocks.field_150480_ab.func_180686_a(Blocks.field_150487_bG, 5, 20);
 -        Blocks.field_150480_ab.func_180686_a(Blocks.field_150485_bF, 5, 20);
 -        Blocks.field_150480_ab.func_180686_a(Blocks.field_150481_bH, 5, 20);
 -        Blocks.field_150480_ab.func_180686_a(Blocks.field_150400_ck, 5, 20);
 -        Blocks.field_150480_ab.func_180686_a(Blocks.field_150401_cl, 5, 20);
-+        Blocks.field_150480_ab.func_180686_a(Blocks.STAIRS, 5, 20);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150364_r, 5, 5);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150363_s, 5, 5);
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150362_t, 30, 60);
+         Blocks.field_150480_ab.func_180686_a(Blocks.field_150361_u, 30, 60);
+-        Blocks.field_150480_ab.func_180686_a(Blocks.field_150342_X, 30, 20);
++        Blocks.field_150480_ab.func_180686_a(Blocks.OAK_BOOKSHELF, 30, 20);
+         Blocks.field_150480_ab.func_180686_a(Blocks.field_150335_W, 15, 100);
+         Blocks.field_150480_ab.func_180686_a(Blocks.field_150329_H, 60, 100);
+         Blocks.field_150480_ab.func_180686_a(Blocks.field_150398_cm, 60, 100);
 @@ -90,85 +77,76 @@
          Blocks.field_150480_ab.func_180686_a(Blocks.field_150404_cg, 60, 20);
      }

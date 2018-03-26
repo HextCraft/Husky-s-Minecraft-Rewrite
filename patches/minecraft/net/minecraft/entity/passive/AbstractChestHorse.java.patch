@@ -1,0 +1,29 @@
+--- ../src-base/minecraft/net/minecraft/entity/passive/AbstractChestHorse.java
++++ ../src-work/minecraft/net/minecraft/entity/passive/AbstractChestHorse.java
+@@ -78,7 +78,7 @@
+         {
+             if (!this.field_70170_p.field_72995_K)
+             {
+-                this.func_145779_a(Item.func_150898_a(Blocks.field_150486_ae), 1);
++                this.func_145779_a(Item.func_150898_a(Blocks.OAK_CHEST), 1);
+             }
+ 
+             this.func_110207_m(false);
+@@ -153,7 +153,7 @@
+                 return true;
+             }
+ 
+-            if (!this.func_190695_dh() && p_174820_2_.func_77973_b() == Item.func_150898_a(Blocks.field_150486_ae))
++            if (!this.func_190695_dh() && p_174820_2_.func_77973_b() == Item.func_150898_a(Blocks.OAK_CHEST))
+             {
+                 this.func_110207_m(true);
+                 this.func_110226_cD();
+@@ -203,7 +203,7 @@
+                     return true;
+                 }
+ 
+-                if (!flag && !this.func_190695_dh() && itemstack.func_77973_b() == Item.func_150898_a(Blocks.field_150486_ae))
++                if (!flag && !this.func_190695_dh() && itemstack.func_77973_b() == Item.func_150898_a(Blocks.OAK_CHEST))
+                 {
+                     this.func_110207_m(true);
+                     this.func_190697_dk();

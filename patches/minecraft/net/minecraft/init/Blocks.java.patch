@@ -1,9 +1,11 @@
 --- ../src-base/minecraft/net/minecraft/init/Blocks.java
 +++ ../src-work/minecraft/net/minecraft/init/Blocks.java
-@@ -3,39 +3,10 @@
+@@ -1,48 +1,18 @@
+ package net.minecraft.init;
+ 
  import com.google.common.collect.Sets;
- import java.util.Set;
- import javax.annotation.Nullable;
+-import java.util.Set;
+-import javax.annotation.Nullable;
 -import net.minecraft.block.Block;
 -import net.minecraft.block.BlockBeacon;
 -import net.minecraft.block.BlockBush;
@@ -37,14 +39,14 @@
 -import net.minecraft.block.BlockStaticLiquid;
 -import net.minecraft.block.BlockTallGrass;
 -import net.minecraft.block.BlockTripWireHook;
-+
 +import net.minecraft.block.*;
-+import net.minecraft.item.EnumCoralColor;
-+import net.minecraft.item.EnumDyeColor;
  import net.minecraft.util.ResourceLocation;
  
++import javax.annotation.Nullable;
++import java.util.Set;
++
  public class Blocks
-@@ -43,6 +14,7 @@
+ {
      private static final Set<Block> field_185780_dg;
      public static final Block field_150350_a;
      public static final Block field_150348_b;
@@ -52,12 +54,21 @@
      public static final BlockGrass field_150349_c;
      public static final Block field_150346_d;
      public static final Block field_150347_e;
-@@ -90,14 +62,13 @@
+@@ -90,14 +60,31 @@
      public static final BlockSlab field_150333_U;
      public static final Block field_150336_V;
      public static final Block field_150335_W;
 -    public static final Block field_150342_X;
-+    public static Block field_150342_X;
++    
++    public static final Block OAK_BOOKSHELF;
++    public static final Block SPRUCE_BOOKSHELF;
++    public static final Block BIRCH_BOOKSHELF;
++    public static final Block JUNGLE_BOOKSHELF;
++    public static final Block DARK_OAK_BOOKSHELF;
++    public static final Block ACACIA_BOOKSHELF;
++    public static final Block REDWOOD_BOOKSHELF;
++    public static final Block PALM_BOOKSHELF;
++    
      public static final Block field_150341_Y;
      public static final Block field_150343_Z;
      public static final Block field_150478_aa;
@@ -65,11 +76,20 @@
      public static final Block field_150474_ac;
 -    public static final Block field_150476_ad;
 -    public static final BlockChest field_150486_ae;
-+    public static BlockChest field_150486_ae;
++    
++    public static final Block OAK_CHEST;
++    public static final Block SPRUCE_CHEST;
++    public static final Block BIRCH_CHEST;
++    public static final Block JUNGLE_CHEST;
++    public static final Block DARK_OAK_CHEST;
++    public static final Block ACACIA_CHEST;
++    public static final Block REDWOOD_CHEST;
++    public static final Block PALM_CHEST;
++    
      public static final BlockRedstoneWire field_150488_af;
      public static final Block field_150482_ag;
      public static final Block field_150484_ah;
-@@ -107,15 +78,11 @@
+@@ -107,15 +94,29 @@
      public static final Block field_150460_al;
      public static final Block field_150470_am;
      public static final Block field_150472_an;
@@ -79,15 +99,33 @@
 -    public static final BlockDoor field_180411_ar;
 -    public static final BlockDoor field_180410_as;
 -    public static final BlockDoor field_180409_at;
-+    public static BlockDoor DOORS;
++    
++    public static final Block field_180413_ao;
++    public static final Block field_180414_ap;
++    public static final Block field_180412_aq;
++    public static final Block field_180411_ar;
++    public static final Block field_180409_at;
++    public static final Block field_180410_as;
++    public static final Block REDWOOD_DOOR;
++    public static final Block PALM_DOOR;
++    
      public static final Block field_150468_ap;
      public static final Block field_150448_aq;
      public static final Block field_150446_ar;
-+    public static Block STAIRS;
++    
++    public static final Block field_150476_ad;
++    public static final Block field_150485_bF;
++    public static final Block field_150487_bG;
++    public static final Block field_150481_bH;
++    public static final Block field_150401_cl;
++    public static final Block field_150400_ck;
++    public static final Block REDWOOD_STAIRS;
++    public static final Block PALM_STAIRS;
++    
      public static final Block field_150444_as;
      public static final Block field_150442_at;
      public static final Block field_150456_au;
-@@ -191,9 +158,6 @@
+@@ -191,9 +192,6 @@
      public static final BlockTripWireHook field_150479_bC;
      public static final Block field_150473_bD;
      public static final Block field_150475_bE;
@@ -97,16 +135,25 @@
      public static final Block field_150483_bI;
      public static final BlockBeacon field_150461_bJ;
      public static final Block field_150463_bK;
-@@ -203,7 +167,7 @@
+@@ -203,7 +201,16 @@
      public static final Block field_150471_bO;
      public static final BlockSkull field_150465_bP;
      public static final Block field_150467_bQ;
 -    public static final Block field_150447_bR;
-+    public static Block field_150447_bR;
++    
++    public static final Block OAK_TRAPPED_CHEST;
++    public static final Block SPRUCE_TRAPPED_CHEST;
++    public static final Block BIRCH_TRAPPED_CHEST;
++    public static final Block JUNGLE_TRAPPED_CHEST;
++    public static final Block DARK_OAK_TRAPPED_CHEST;
++    public static final Block ACACIA_TRAPPED_CHEST;
++    public static final Block REDWOOD_TRAPPED_CHEST;
++    public static final Block PALM_TRAPPED_CHEST;
++    
      public static final Block field_150445_bS;
      public static final Block field_150443_bT;
      public static final BlockRedstoneComparator field_150441_bU;
-@@ -225,8 +189,6 @@
+@@ -225,8 +232,6 @@
      public static final Block field_150405_ch;
      public static final Block field_150402_ci;
      public static final Block field_150403_cj;
@@ -115,7 +162,7 @@
      public static final Block field_180399_cE;
      public static final BlockDoublePlant field_150398_cm;
      public static final BlockStainedGlass field_150399_cn;
-@@ -296,6 +258,81 @@
+@@ -296,6 +301,81 @@
      public static final Block field_192444_dS;
      public static final Block field_185779_df;
  
@@ -197,7 +244,7 @@
      @Nullable
      private static Block func_180383_a(String p_180383_0_)
      {
-@@ -319,10 +356,11 @@
+@@ -319,9 +399,10 @@
          }
          else
          {
@@ -205,13 +252,11 @@
 +            field_185780_dg = Sets.newHashSet();
              field_150350_a = func_180383_a("air");
              field_150348_b = func_180383_a("stone");
--            field_150349_c = (BlockGrass)func_180383_a("grass");
 +            STONE2 = func_180383_a("stone2");
-+            field_150349_c = (BlockGrass)func_180383_a("grass_block");
+             field_150349_c = (BlockGrass)func_180383_a("grass");
              field_150346_d = func_180383_a("dirt");
              field_150347_e = func_180383_a("cobblestone");
-             field_150344_f = func_180383_a("planks");
-@@ -369,14 +407,20 @@
+@@ -369,14 +450,57 @@
              field_150333_U = (BlockSlab)func_180383_a("stone_slab");
              field_150336_V = func_180383_a("brick_block");
              field_150335_W = func_180383_a("tnt");
@@ -221,21 +266,57 @@
              field_150478_aa = func_180383_a("torch");
              field_150480_ab = (BlockFire)func_180383_a("fire");
              field_150474_ac = func_180383_a("mob_spawner");
--            field_150476_ad = func_180383_a("oak_stairs");
--            field_150486_ae = (BlockChest)func_180383_a("chest");
 +
-+            for(BlockPlanks.EnumType type : BlockPlanks.EnumType.values()) {
-+                field_150342_X = func_180383_a(type.func_176610_l() + "_bookshelf");
-+                field_150486_ae = (BlockChest)func_180383_a(type.func_176610_l() + "_chest");
-+                STAIRS = func_180383_a(type.func_176610_l() + "_stairs");
-+                field_150447_bR = func_180383_a(type.func_176610_l() + "_trapped_chest");
-+                DOORS = (BlockDoor)func_180383_a(type.func_176610_l() + "_door");
-+            }
++            OAK_BOOKSHELF = func_180383_a("oak_bookshelf");
++            SPRUCE_BOOKSHELF = func_180383_a("spruce_bookshelf");
++            BIRCH_BOOKSHELF = func_180383_a("birch_bookshelf");
++            JUNGLE_BOOKSHELF = func_180383_a("jungle_bookshelf");
++            DARK_OAK_BOOKSHELF = func_180383_a("dark_oak_bookshelf");
++            ACACIA_BOOKSHELF = func_180383_a("acacia_bookshelf");
++            REDWOOD_BOOKSHELF = func_180383_a("redwood_bookshelf");
++            PALM_BOOKSHELF = func_180383_a("palm_bookshelf");
++
++            OAK_CHEST = func_180383_a("oak_chest");
++            SPRUCE_CHEST = func_180383_a("spruce_chest");
++            BIRCH_CHEST = func_180383_a("birch_chest");
++            JUNGLE_CHEST = func_180383_a("jungle_chest");
++            DARK_OAK_CHEST = func_180383_a("dark_oak_chest");
++            ACACIA_CHEST = func_180383_a("acacia_chest");
++            REDWOOD_CHEST = func_180383_a("redwood_chest");
++            PALM_CHEST = func_180383_a("palm_chest");
++
+             field_150476_ad = func_180383_a("oak_stairs");
+-            field_150486_ae = (BlockChest)func_180383_a("chest");
++            field_150485_bF = func_180383_a("spruce_stairs");
++            field_150487_bG = func_180383_a("birch_stairs");
++            field_150481_bH = func_180383_a("jungle_stairs");
++            field_150401_cl = func_180383_a("dark_oak_stairs");
++            field_150400_ck = func_180383_a("acacia_stairs");
++            REDWOOD_STAIRS = func_180383_a("redwood_stairs");
++            PALM_STAIRS = func_180383_a("palm_stairs");
++
++            OAK_TRAPPED_CHEST = func_180383_a("oak_trapped_chest");
++            SPRUCE_TRAPPED_CHEST = func_180383_a("spruce_trapped_chest");
++            BIRCH_TRAPPED_CHEST = func_180383_a("birch_trapped_chest");
++            JUNGLE_TRAPPED_CHEST = func_180383_a("jungle_trapped_chest");
++            DARK_OAK_TRAPPED_CHEST = func_180383_a("dark_oak_trapped_chest");
++            ACACIA_TRAPPED_CHEST = func_180383_a("acacia_trapped_chest");
++            REDWOOD_TRAPPED_CHEST = func_180383_a("redwood_trapped_chest");
++            PALM_TRAPPED_CHEST = func_180383_a("palm_trapped_chest");
++
++            field_180413_ao = func_180383_a("oak_door");
++            field_180414_ap = func_180383_a("spruce_door");
++            field_180412_aq = func_180383_a("birch_door");
++            field_180411_ar = func_180383_a("jungle_door");
++            field_180409_at = func_180383_a("dark_oak_door");
++            field_180410_as = func_180383_a("acacia_door");
++            REDWOOD_DOOR = func_180383_a("redwood_door");
++            PALM_DOOR = func_180383_a("palm_door");
 +
              field_150488_af = (BlockRedstoneWire)func_180383_a("redstone_wire");
              field_150482_ag = func_180383_a("diamond_ore");
              field_150484_ah = func_180383_a("diamond_block");
-@@ -386,12 +430,6 @@
+@@ -386,12 +510,6 @@
              field_150460_al = func_180383_a("furnace");
              field_150470_am = func_180383_a("lit_furnace");
              field_150472_an = func_180383_a("standing_sign");
@@ -248,7 +329,7 @@
              field_150468_ap = func_180383_a("ladder");
              field_150448_aq = func_180383_a("rail");
              field_150446_ar = func_180383_a("stone_stairs");
-@@ -412,7 +450,7 @@
+@@ -412,7 +530,7 @@
              field_150435_aG = func_180383_a("clay");
              field_150436_aH = (BlockReed)func_180383_a("reeds");
              field_150421_aI = func_180383_a("jukebox");
@@ -257,7 +338,7 @@
              field_180408_aP = func_180383_a("spruce_fence");
              field_180404_aQ = func_180383_a("birch_fence");
              field_180403_aR = func_180383_a("jungle_fence");
-@@ -438,7 +476,7 @@
+@@ -438,7 +556,7 @@
              field_150393_bb = func_180383_a("pumpkin_stem");
              field_150394_bc = func_180383_a("melon_stem");
              field_150395_bd = func_180383_a("vine");
@@ -266,7 +347,7 @@
              field_180391_bp = func_180383_a("spruce_fence_gate");
              field_180392_bq = func_180383_a("birch_fence_gate");
              field_180386_br = func_180383_a("jungle_fence_gate");
-@@ -470,9 +508,6 @@
+@@ -470,9 +588,6 @@
              field_150479_bC = (BlockTripWireHook)func_180383_a("tripwire_hook");
              field_150473_bD = func_180383_a("tripwire");
              field_150475_bE = func_180383_a("emerald_block");
@@ -276,7 +357,7 @@
              field_150483_bI = func_180383_a("command_block");
              field_150461_bJ = (BlockBeacon)func_180383_a("beacon");
              field_150463_bK = func_180383_a("cobblestone_wall");
-@@ -482,7 +517,6 @@
+@@ -482,7 +597,6 @@
              field_150471_bO = func_180383_a("wooden_button");
              field_150465_bP = (BlockSkull)func_180383_a("skull");
              field_150467_bQ = func_180383_a("anvil");
@@ -284,7 +365,7 @@
              field_150445_bS = func_180383_a("light_weighted_pressure_plate");
              field_150443_bT = func_180383_a("heavy_weighted_pressure_plate");
              field_150441_bU = (BlockRedstoneComparator)func_180383_a("unpowered_comparator");
-@@ -504,8 +538,6 @@
+@@ -504,8 +618,6 @@
              field_150405_ch = func_180383_a("hardened_clay");
              field_150402_ci = func_180383_a("coal_block");
              field_150403_cj = func_180383_a("packed_ice");
@@ -293,7 +374,7 @@
              field_180399_cE = func_180383_a("slime");
              field_150398_cm = (BlockDoublePlant)func_180383_a("double_plant");
              field_150399_cn = (BlockStainedGlass)func_180383_a("stained_glass");
-@@ -574,6 +606,81 @@
+@@ -574,6 +686,81 @@
              field_192443_dR = func_180383_a("concrete");
              field_192444_dS = func_180383_a("concrete_powder");
              field_185779_df = func_180383_a("structure_block");

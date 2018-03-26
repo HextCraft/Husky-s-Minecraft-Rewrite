@@ -1,6 +1,23 @@
 --- ../src-base/minecraft/net/minecraft/item/ItemFishFood.java
 +++ ../src-work/minecraft/net/minecraft/item/ItemFishFood.java
-@@ -35,7 +35,7 @@
+@@ -1,7 +1,6 @@
+ package net.minecraft.item;
+ 
+ import com.google.common.collect.Maps;
+-import java.util.Map;
+ import net.minecraft.creativetab.CreativeTabs;
+ import net.minecraft.entity.player.EntityPlayer;
+ import net.minecraft.init.MobEffects;
+@@ -9,6 +8,8 @@
+ import net.minecraft.util.NonNullList;
+ import net.minecraft.world.World;
+ 
++import java.util.Map;
++
+ public class ItemFishFood extends ItemFood
+ {
+     private final boolean field_150907_b;
+@@ -35,7 +36,7 @@
      {
          ItemFishFood.FishType itemfishfood$fishtype = ItemFishFood.FishType.func_150978_a(p_77849_1_);
  
@@ -9,19 +26,27 @@
          {
              p_77849_3_.func_70690_d(new PotionEffect(MobEffects.field_76436_u, 1200, 3));
              p_77849_3_.func_70690_d(new PotionEffect(MobEffects.field_76438_s, 300, 2));
-@@ -69,8 +69,9 @@
+@@ -65,14 +66,15 @@
+         return this.func_77658_a() + "." + itemfishfood$fishtype.func_150972_b() + "." + (this.field_150907_b && itemfishfood$fishtype.func_150973_i() ? "cooked" : "raw");
+     }
+ 
+-    public static enum FishType
++    public enum FishType
      {
          COD(0, "cod", 2, 0.1F, 5, 0.6F),
          SALMON(1, "salmon", 2, 0.1F, 6, 0.8F),
 -        CLOWNFISH(2, "clownfish", 1, 0.1F),
 -        PUFFERFISH(3, "pufferfish", 1, 0.1F);
-+        CLOWN_FISH(2, "clown_fish", 1, 0.1F),
-+        PUFFER_FISH(3, "puffer_fish", 1, 0.1F),
++        CLOWN_FISH(2, "clownfish", 1, 0.1F),
++        PUFFER_FISH(3, "pufferfish", 1, 0.1F),
 +        SWORD_FISH(4, "sword_fish", 2, 0.1F, 6, 0.8F);
  
-         private static final Map<Integer, ItemFishFood.FishType> field_150983_e = Maps.<Integer, ItemFishFood.FishType>newHashMap();
+-        private static final Map<Integer, ItemFishFood.FishType> field_150983_e = Maps.<Integer, ItemFishFood.FishType>newHashMap();
++        private static final Map<Integer, FishType> field_150983_e = Maps.<Integer, ItemFishFood.FishType>newHashMap();
          private final int field_150980_f;
-@@ -81,7 +82,7 @@
+         private final String field_150981_g;
+         private final int field_150991_j;
+@@ -81,7 +83,7 @@
          private final float field_150990_m;
          private final boolean field_150987_n;
  
@@ -30,7 +55,7 @@
          {
              this.field_150980_f = p_i45336_3_;
              this.field_150981_g = p_i45336_4_;
-@@ -92,7 +93,7 @@
+@@ -92,7 +94,7 @@
              this.field_150987_n = true;
          }
  
@@ -39,7 +64,7 @@
          {
              this.field_150980_f = p_i45337_3_;
              this.field_150981_g = p_i45337_4_;
-@@ -140,7 +141,7 @@
+@@ -140,7 +142,7 @@
  
          public static ItemFishFood.FishType func_150974_a(int p_150974_0_)
          {
@@ -48,7 +73,7 @@
              return itemfishfood$fishtype == null ? COD : itemfishfood$fishtype;
          }
  
-@@ -153,7 +154,7 @@
+@@ -153,7 +155,7 @@
          {
              for (ItemFishFood.FishType itemfishfood$fishtype : values())
              {

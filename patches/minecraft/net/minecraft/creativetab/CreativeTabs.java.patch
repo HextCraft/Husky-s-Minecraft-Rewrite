@@ -1,5 +1,41 @@
 --- ../src-base/minecraft/net/minecraft/creativetab/CreativeTabs.java
 +++ ../src-work/minecraft/net/minecraft/creativetab/CreativeTabs.java
+@@ -79,7 +79,7 @@
+         {
+             return new ItemStack(Items.field_151036_c);
+         }
+-    }).func_111229_a(new EnumEnchantmentType[] {EnumEnchantmentType.ALL, EnumEnchantmentType.DIGGER, EnumEnchantmentType.FISHING_ROD, EnumEnchantmentType.BREAKABLE});
++    }).func_111229_a(EnumEnchantmentType.ALL, EnumEnchantmentType.DIGGER, EnumEnchantmentType.FISHING_ROD, EnumEnchantmentType.BREAKABLE);
+     public static final CreativeTabs field_78037_j = (new CreativeTabs(9, "combat")
+     {
+         @SideOnly(Side.CLIENT)
+@@ -87,7 +87,7 @@
+         {
+             return new ItemStack(Items.field_151010_B);
+         }
+-    }).func_111229_a(new EnumEnchantmentType[] {EnumEnchantmentType.ALL, EnumEnchantmentType.ARMOR, EnumEnchantmentType.ARMOR_FEET, EnumEnchantmentType.ARMOR_HEAD, EnumEnchantmentType.ARMOR_LEGS, EnumEnchantmentType.ARMOR_CHEST, EnumEnchantmentType.BOW, EnumEnchantmentType.WEAPON, EnumEnchantmentType.WEARABLE, EnumEnchantmentType.BREAKABLE});
++    }).func_111229_a(EnumEnchantmentType.ALL, EnumEnchantmentType.ARMOR, EnumEnchantmentType.ARMOR_FEET, EnumEnchantmentType.ARMOR_HEAD, EnumEnchantmentType.ARMOR_LEGS, EnumEnchantmentType.ARMOR_CHEST, EnumEnchantmentType.BOW, EnumEnchantmentType.WEAPON, EnumEnchantmentType.WEARABLE, EnumEnchantmentType.BREAKABLE);
+     public static final CreativeTabs field_78038_k = new CreativeTabs(10, "brewing")
+     {
+         @SideOnly(Side.CLIENT)
+@@ -102,7 +102,7 @@
+         @SideOnly(Side.CLIENT)
+         public ItemStack func_78016_d()
+         {
+-            return new ItemStack(Blocks.field_150342_X);
++            return new ItemStack(Blocks.OAK_BOOKSHELF);
+         }
+         @SideOnly(Side.CLIENT)
+         public void func_78018_a(NonNullList<ItemStack> p_78018_1_)
+@@ -120,7 +120,7 @@
+         @SideOnly(Side.CLIENT)
+         public ItemStack func_78016_d()
+         {
+-            return new ItemStack(Item.func_150898_a(Blocks.field_150486_ae));
++            return new ItemStack(Item.func_150898_a(Blocks.OAK_CHEST));
+         }
+     }).func_78025_a("inventory.png").func_78022_j().func_78014_h();
+     private final int field_78033_n;
 @@ -131,8 +131,22 @@
      private EnumEnchantmentType[] field_111230_s = new EnumEnchantmentType[0];
      private ItemStack field_151245_t;

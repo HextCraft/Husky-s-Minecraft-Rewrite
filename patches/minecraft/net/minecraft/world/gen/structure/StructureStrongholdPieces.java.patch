@@ -18,6 +18,36 @@
  import net.minecraft.block.state.IBlockState;
  import net.minecraft.entity.EntityList;
  import net.minecraft.entity.monster.EntitySilverfish;
+@@ -683,22 +676,22 @@
+                         }
+                         else
+                         {
+-                            this.func_175804_a(p_74875_1_, p_74875_3_, 1, 1, l, 1, 4, l, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
+-                            this.func_175804_a(p_74875_1_, p_74875_3_, 12, 1, l, 12, 4, l, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
++                            this.func_175804_a(p_74875_1_, p_74875_3_, 1, 1, l, 1, 4, l, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
++                            this.func_175804_a(p_74875_1_, p_74875_3_, 12, 1, l, 12, 4, l, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
+ 
+                             if (this.field_75008_c)
+                             {
+-                                this.func_175804_a(p_74875_1_, p_74875_3_, 1, 6, l, 1, 9, l, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
+-                                this.func_175804_a(p_74875_1_, p_74875_3_, 12, 6, l, 12, 9, l, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
++                                this.func_175804_a(p_74875_1_, p_74875_3_, 1, 6, l, 1, 9, l, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
++                                this.func_175804_a(p_74875_1_, p_74875_3_, 12, 6, l, 12, 9, l, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
+                             }
+                         }
+                     }
+ 
+                     for (int k1 = 3; k1 < 12; k1 += 2)
+                     {
+-                        this.func_175804_a(p_74875_1_, p_74875_3_, 3, 1, k1, 4, 3, k1, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
+-                        this.func_175804_a(p_74875_1_, p_74875_3_, 6, 1, k1, 7, 3, k1, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
+-                        this.func_175804_a(p_74875_1_, p_74875_3_, 9, 1, k1, 10, 3, k1, Blocks.field_150342_X.func_176223_P(), Blocks.field_150342_X.func_176223_P(), false);
++                        this.func_175804_a(p_74875_1_, p_74875_3_, 3, 1, k1, 4, 3, k1, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
++                        this.func_175804_a(p_74875_1_, p_74875_3_, 6, 1, k1, 7, 3, k1, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
++                        this.func_175804_a(p_74875_1_, p_74875_3_, 9, 1, k1, 10, 3, k1, Blocks.OAK_BOOKSHELF.func_176223_P(), Blocks.OAK_BOOKSHELF.func_176223_P(), false);
+                     }
+ 
+                     if (this.field_75008_c)
 @@ -1505,8 +1498,8 @@
                          this.func_175811_a(p_74990_1_, Blocks.field_150417_aV.func_176223_P(), p_74990_5_ + 2, p_74990_6_ + 2, p_74990_7_, p_74990_3_);
                          this.func_175811_a(p_74990_1_, Blocks.field_150417_aV.func_176223_P(), p_74990_5_ + 2, p_74990_6_ + 1, p_74990_7_, p_74990_3_);

@@ -1,5 +1,14 @@
 --- ../src-base/minecraft/net/minecraft/item/ItemAxe.java
 +++ ../src-work/minecraft/net/minecraft/item/ItemAxe.java
+@@ -9,7 +9,7 @@
+ 
+ public class ItemAxe extends ItemTool
+ {
+-    private static final Set<Block> field_150917_c = Sets.newHashSet(Blocks.field_150344_f, Blocks.field_150342_X, Blocks.field_150364_r, Blocks.field_150363_s, Blocks.field_150486_ae, Blocks.field_150423_aK, Blocks.field_150428_aP, Blocks.field_150440_ba, Blocks.field_150468_ap, Blocks.field_150471_bO, Blocks.field_150452_aw);
++    private static final Set<Block> field_150917_c = Sets.newHashSet(Blocks.field_150344_f, Blocks.OAK_BOOKSHELF, Blocks.field_150364_r, Blocks.field_150363_s, Blocks.OAK_CHEST, Blocks.field_150423_aK, Blocks.field_150428_aP, Blocks.field_150440_ba, Blocks.field_150468_ap, Blocks.field_150471_bO, Blocks.field_150452_aw);
+     private static final float[] field_185066_m = new float[] {6.0F, 8.0F, 8.0F, 8.0F, 6.0F};
+     private static final float[] field_185067_n = new float[] { -3.2F, -3.2F, -3.1F, -3.0F, -3.0F};
+ 
 @@ -20,6 +20,13 @@
          this.field_185065_c = field_185067_n[p_i45327_1_.ordinal()];
      }

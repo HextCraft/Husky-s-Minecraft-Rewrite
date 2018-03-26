@@ -1,0 +1,178 @@
+--- ../src-base/minecraft/net/minecraft/client/renderer/tileentity/TileEntityChestRenderer.java
++++ ../src-work/minecraft/net/minecraft/client/renderer/tileentity/TileEntityChestRenderer.java
+@@ -1,25 +1,55 @@
+ package net.minecraft.client.renderer.tileentity;
+ 
+-import java.util.Calendar;
+ import net.minecraft.block.Block;
+ import net.minecraft.block.BlockChest;
+ import net.minecraft.client.model.ModelChest;
+ import net.minecraft.client.model.ModelLargeChest;
+ import net.minecraft.client.renderer.GlStateManager;
++import net.minecraft.init.Blocks;
+ import net.minecraft.tileentity.TileEntityChest;
+ import net.minecraft.util.ResourceLocation;
+ import net.minecraftforge.fml.relauncher.Side;
+ import net.minecraftforge.fml.relauncher.SideOnly;
+ 
++import java.util.Calendar;
++
+ @SideOnly(Side.CLIENT)
+ public class TileEntityChestRenderer extends TileEntitySpecialRenderer<TileEntityChest>
+ {
+-    private static final ResourceLocation field_147507_b = new ResourceLocation("textures/entity/chest/trapped_double.png");
++    private static final ResourceLocation TEXTURE_OAK_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/oak_trapped_double.png");
++    private static final ResourceLocation TEXTURE_SPRUCE_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/spruce_trapped_double.png");
++    private static final ResourceLocation TEXTURE_BIRCH_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/birch_trapped_double.png");
++    private static final ResourceLocation TEXTURE_JUNGLE_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/jungle_trapped_double.png");
++    private static final ResourceLocation TEXTURE_DARK_OAK_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/dark_oak_trapped_double.png");
++    private static final ResourceLocation TEXTURE_ACACIA_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/oak_trapped_double.png");
++    private static final ResourceLocation TEXTURE_REDWOOD_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/redwood_trapped_double.png");
++    private static final ResourceLocation TEXTURE_PALM_TRAPPED_DOUBLE = new ResourceLocation("textures/entity/chest/oak_trapped_double.png");
+     private static final ResourceLocation field_147508_c = new ResourceLocation("textures/entity/chest/christmas_double.png");
+-    private static final ResourceLocation field_147505_d = new ResourceLocation("textures/entity/chest/normal_double.png");
+-    private static final ResourceLocation field_147506_e = new ResourceLocation("textures/entity/chest/trapped.png");
++    private static final ResourceLocation TEXTURE_OAK_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/oak_double.png");
++    private static final ResourceLocation TEXTURE_SPRUCE_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/spruce_double.png");
++    private static final ResourceLocation TEXTURE_BIRCH_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/birch_double.png");
++    private static final ResourceLocation TEXTURE_JUNGLE_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/jungle_double.png");
++    private static final ResourceLocation TEXTURE_DARK_OAK_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/dark_oak_double.png");
++    private static final ResourceLocation TEXTURE_ACACIA_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/acacia_double.png");
++    private static final ResourceLocation TEXTURE_REDWOOD_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/redwood_double.png");
++    private static final ResourceLocation TEXTURE_PALM_NORMAL_DOUBLE = new ResourceLocation("textures/entity/chest/palm_double.png");
++    private static final ResourceLocation TEXTURE_OAK_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_SPRUCE_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_BIRCH_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_JUNGLE_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_DARK_OAK_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_REDWOOD_TRAPPED = new ResourceLocation("textures/entity/chest/redwood_trapped.png");
++    private static final ResourceLocation TEXTURE_PALM_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
++    private static final ResourceLocation TEXTURE_ACACIA_TRAPPED = new ResourceLocation("textures/entity/chest/oak_trapped.png");
+     private static final ResourceLocation field_147503_f = new ResourceLocation("textures/entity/chest/christmas.png");
+-    private static final ResourceLocation field_147504_g = new ResourceLocation("textures/entity/chest/normal.png");
++    private static final ResourceLocation TEXTURE_OAK_NORMAL = new ResourceLocation("textures/entity/chest/oak.png");
++    private static final ResourceLocation TEXTURE_SPRUCE_NORMAL = new ResourceLocation("textures/entity/chest/spruce.png");
++    private static final ResourceLocation TEXTURE_BIRCH_NORMAL = new ResourceLocation("textures/entity/chest/birch.png");
++    private static final ResourceLocation TEXTURE_JUNGLE_NORMAL = new ResourceLocation("textures/entity/chest/jungle.png");
++    private static final ResourceLocation TEXTURE_DARK_OAK_NORMAL = new ResourceLocation("textures/entity/chest/dark_oak.png");
++    private static final ResourceLocation TEXTURE_ACACIA_NORMAL = new ResourceLocation("textures/entity/chest/acacia.png");
++    private static final ResourceLocation TEXTURE_REDWOOD_NORMAL = new ResourceLocation("textures/entity/chest/redwood.png");
++    private static final ResourceLocation TEXTURE_PALM_NORMAL = new ResourceLocation("textures/entity/chest/palm.png");
+     private final ModelChest field_147510_h = new ModelChest();
+     private final ModelChest field_147511_i = new ModelLargeChest();
+     private boolean field_147509_j;
+@@ -28,7 +58,7 @@
+     {
+         Calendar calendar = Calendar.getInstance();
+ 
+-        if (calendar.get(2) + 1 == 12 && calendar.get(5) >= 24 && calendar.get(5) <= 26)
++        if (calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26)
+         {
+             this.field_147509_j = true;
+         }
+@@ -82,11 +112,50 @@
+                 }
+                 else if (p_192841_1_.func_145980_j() == BlockChest.Type.TRAP)
+                 {
+-                    this.func_147499_a(field_147506_e);
++
++                    Block block = p_192841_1_.func_145838_q();
++
++                    if(block == Blocks.OAK_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_OAK_TRAPPED);
++                    } else if(block == Blocks.SPRUCE_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_SPRUCE_TRAPPED);
++                    } else if(block == Blocks.REDWOOD_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_REDWOOD_TRAPPED);
++                    } else if(block == Blocks.BIRCH_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_BIRCH_TRAPPED);
++                    } else if(block == Blocks.DARK_OAK_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_DARK_OAK_TRAPPED);
++                    } else if(block == Blocks.SPRUCE_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_SPRUCE_TRAPPED);
++                    } else if(block == Blocks.JUNGLE_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_JUNGLE_TRAPPED);
++                    } else if(block == Blocks.ACACIA_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_ACACIA_TRAPPED);
++                    } else if(block == Blocks.PALM_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_PALM_TRAPPED);
++                    }
+                 }
+                 else
+                 {
+-                    this.func_147499_a(field_147504_g);
++                    Block block = p_192841_1_.func_145838_q();
++
++                    if(block == Blocks.OAK_CHEST) {
++                        this.func_147499_a(TEXTURE_OAK_NORMAL);
++                    } else if(block == Blocks.REDWOOD_CHEST) {
++                        this.func_147499_a(TEXTURE_REDWOOD_NORMAL);
++                    } else if(block == Blocks.BIRCH_CHEST) {
++                        this.func_147499_a(TEXTURE_BIRCH_NORMAL);
++                    } else if(block == Blocks.DARK_OAK_CHEST) {
++                        this.func_147499_a(TEXTURE_DARK_OAK_NORMAL);
++                    } else if(block == Blocks.SPRUCE_CHEST) {
++                        this.func_147499_a(TEXTURE_SPRUCE_NORMAL);
++                    } else if(block == Blocks.JUNGLE_CHEST) {
++                        this.func_147499_a(TEXTURE_JUNGLE_NORMAL);
++                    } else if(block == Blocks.ACACIA_CHEST) {
++                        this.func_147499_a(TEXTURE_ACACIA_NORMAL);
++                    } else if(block == Blocks.PALM_CHEST) {
++                        this.func_147499_a(TEXTURE_PALM_NORMAL);
++                    }
+                 }
+             }
+             else
+@@ -108,11 +177,50 @@
+                 }
+                 else if (p_192841_1_.func_145980_j() == BlockChest.Type.TRAP)
+                 {
+-                    this.func_147499_a(field_147507_b);
++
++                    Block block = p_192841_1_.func_145838_q();
++
++                    if(block == Blocks.OAK_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_OAK_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.REDWOOD_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_REDWOOD_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.BIRCH_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_BIRCH_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.DARK_OAK_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_DARK_OAK_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.SPRUCE_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_SPRUCE_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.JUNGLE_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_JUNGLE_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.ACACIA_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_ACACIA_TRAPPED_DOUBLE);
++                    } else if(block == Blocks.PALM_TRAPPED_CHEST) {
++                        this.func_147499_a(TEXTURE_PALM_TRAPPED_DOUBLE);
++                    }
+                 }
+                 else
+                 {
+-                    this.func_147499_a(field_147505_d);
++                    Block block = p_192841_1_.func_145838_q();
++
++                    if(block == Blocks.OAK_CHEST) {
++                        this.func_147499_a(TEXTURE_OAK_NORMAL_DOUBLE);
++                    } else if(block == Blocks.REDWOOD_CHEST) {
++                        func_147499_a(TEXTURE_REDWOOD_NORMAL_DOUBLE);
++                    } else if(block == Blocks.REDWOOD_CHEST) {
++                        this.func_147499_a(TEXTURE_REDWOOD_NORMAL_DOUBLE);
++                    } else if(block == Blocks.BIRCH_CHEST) {
++                        this.func_147499_a(TEXTURE_BIRCH_NORMAL_DOUBLE);
++                    } else if(block == Blocks.DARK_OAK_CHEST) {
++                        this.func_147499_a(TEXTURE_DARK_OAK_NORMAL_DOUBLE);
++                    } else if(block == Blocks.SPRUCE_CHEST) {
++                        this.func_147499_a(TEXTURE_SPRUCE_NORMAL_DOUBLE);
++                    } else if(block == Blocks.JUNGLE_CHEST) {
++                        this.func_147499_a(TEXTURE_JUNGLE_NORMAL_DOUBLE);
++                    } else if(block == Blocks.ACACIA_CHEST) {
++                        this.func_147499_a(TEXTURE_ACACIA_NORMAL_DOUBLE);
++                    } else if(block == Blocks.PALM_CHEST) {
++                        this.func_147499_a(TEXTURE_PALM_NORMAL_DOUBLE);
++                    }
+                 }
+             }
+ 

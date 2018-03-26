@@ -1,0 +1,11 @@
+--- ../src-base/minecraft/net/minecraft/world/gen/structure/WoodlandMansionPieces.java
++++ ../src-work/minecraft/net/minecraft/world/gen/structure/WoodlandMansionPieces.java
+@@ -485,7 +485,7 @@
+                 if (p_186175_1_.startsWith("Chest"))
+                 {
+                     Rotation rotation = this.field_186177_b.func_186215_c();
+-                    IBlockState iblockstate = Blocks.field_150486_ae.func_176223_P();
++                    IBlockState iblockstate = Blocks.OAK_CHEST.func_176223_P();
+ 
+                     if ("ChestWest".equals(p_186175_1_))
+                     {

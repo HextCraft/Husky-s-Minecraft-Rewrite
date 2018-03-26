@@ -9,15 +9,18 @@
          {
              p_180709_3_ = p_180709_3_.func_177977_b();
          }
-@@ -31,7 +31,7 @@
+@@ -31,9 +31,9 @@
              {
                  BlockPos blockpos = p_180709_3_.func_177982_a(p_180709_2_.nextInt(4) - p_180709_2_.nextInt(4), p_180709_2_.nextInt(3) - p_180709_2_.nextInt(3), p_180709_2_.nextInt(4) - p_180709_2_.nextInt(4));
  
 -                if (p_180709_1_.func_175623_d(blockpos) && p_180709_1_.func_180495_p(blockpos.func_177977_b()).func_185896_q())
 +                if (p_180709_1_.func_175623_d(blockpos) && p_180709_1_.func_180495_p(blockpos.func_177977_b()).isSideSolid(p_180709_1_, blockpos.func_177977_b(), net.minecraft.util.EnumFacing.UP))
                  {
-                     p_180709_1_.func_180501_a(blockpos, Blocks.field_150486_ae.func_176223_P(), 2);
+-                    p_180709_1_.func_180501_a(blockpos, Blocks.field_150486_ae.func_176223_P(), 2);
++                    p_180709_1_.func_180501_a(blockpos, Blocks.OAK_CHEST.func_176223_P(), 2);
                      TileEntity tileentity = p_180709_1_.func_175625_s(blockpos);
+ 
+                     if (tileentity instanceof TileEntityChest)
 @@ -46,22 +46,22 @@
                      BlockPos blockpos3 = blockpos.func_177978_c();
                      BlockPos blockpos4 = blockpos.func_177968_d();

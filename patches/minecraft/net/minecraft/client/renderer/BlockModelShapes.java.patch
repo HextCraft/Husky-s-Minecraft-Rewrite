@@ -1,9 +1,11 @@
 --- ../src-base/minecraft/net/minecraft/client/renderer/BlockModelShapes.java
 +++ ../src-work/minecraft/net/minecraft/client/renderer/BlockModelShapes.java
-@@ -3,43 +3,9 @@
+@@ -1,45 +1,7 @@
+ package net.minecraft.client.renderer;
+ 
  import com.google.common.collect.Maps;
- import java.util.Map;
- import java.util.Map.Entry;
+-import java.util.Map;
+-import java.util.Map.Entry;
 -import net.minecraft.block.Block;
 -import net.minecraft.block.BlockCactus;
 -import net.minecraft.block.BlockColored;
@@ -41,13 +43,77 @@
 -import net.minecraft.block.BlockTallGrass;
 -import net.minecraft.block.BlockTripWire;
 -import net.minecraft.block.BlockWall;
-+import java.util.Objects;
-+
 +import net.minecraft.block.*;
  import net.minecraft.block.properties.IProperty;
  import net.minecraft.block.state.IBlockState;
  import net.minecraft.client.renderer.block.model.IBakedModel;
-@@ -243,8 +209,9 @@
+@@ -55,6 +17,9 @@
+ import net.minecraftforge.fml.relauncher.Side;
+ import net.minecraftforge.fml.relauncher.SideOnly;
+ 
++import java.util.Map;
++import java.util.Map.Entry;
++
+ @SideOnly(Side.CLIENT)
+ public class BlockModelShapes
+ {
+@@ -78,13 +43,41 @@
+         Block block = p_178122_1_.func_177230_c();
+         IBakedModel ibakedmodel = this.func_178125_b(p_178122_1_);
+ 
+-        if (ibakedmodel == null || ibakedmodel == this.field_178128_c.func_174951_a())
++        if (ibakedmodel == this.field_178128_c.func_174951_a())
+         {
+-            if (block == Blocks.field_150444_as || block == Blocks.field_150472_an || block == Blocks.field_150486_ae || block == Blocks.field_150447_bR || block == Blocks.field_180393_cK || block == Blocks.field_180394_cL || block == Blocks.field_150324_C)
++            if (block == Blocks.field_150444_as || block == Blocks.field_150472_an || block == Blocks.OAK_CHEST || block == Blocks.OAK_TRAPPED_CHEST || block == Blocks.field_180393_cK || block == Blocks.field_180394_cL || block == Blocks.field_150324_C)
+             {
+                 return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_oak");
+             }
+ 
++            if(block == Blocks.SPRUCE_CHEST || block == Blocks.SPRUCE_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_spruce");
++            }
++
++            if(block == Blocks.BIRCH_CHEST || block == Blocks.BIRCH_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_birch");
++            }
++
++            if(block == Blocks.JUNGLE_CHEST || block == Blocks.JUNGLE_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_jungle");
++            }
++
++            if(block == Blocks.DARK_OAK_CHEST || block == Blocks.DARK_OAK_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_dark_oak");
++            }
++
++            if(block == Blocks.ACACIA_CHEST || block == Blocks.ACACIA_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_acacia");
++            }
++
++            if(block == Blocks.REDWOOD_CHEST || block == Blocks.REDWOOD_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_redwood");
++            }
++
++            if(block == Blocks.PALM_CHEST || block == Blocks.PALM_TRAPPED_CHEST) {
++                return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/planks_palm");
++            }
++
+             if (block == Blocks.field_150477_bB)
+             {
+                 return this.field_178128_c.func_174952_b().func_110572_b("minecraft:blocks/obsidian");
+@@ -196,11 +189,6 @@
+             }
+         }
+ 
+-        if (ibakedmodel == null)
+-        {
+-            ibakedmodel = this.field_178128_c.func_174951_a();
+-        }
+-
+         return ibakedmodel.func_177554_e();
+     }
+ 
+@@ -243,8 +231,9 @@
  
      private void func_178119_d()
      {
@@ -58,35 +124,16 @@
          this.func_178121_a(Blocks.field_180397_cI, (new StateMap.Builder()).func_178440_a(BlockPrismarine.field_176332_a).func_178441_a());
          this.func_178121_a(Blocks.field_150362_t, (new StateMap.Builder()).func_178440_a(BlockOldLeaf.field_176239_P).func_178439_a("_leaves").func_178442_a(BlockLeaves.field_176236_b, BlockLeaves.field_176237_a).func_178441_a());
          this.func_178121_a(Blocks.field_150361_u, (new StateMap.Builder()).func_178440_a(BlockNewLeaf.field_176240_P).func_178439_a("_leaves").func_178442_a(BlockLeaves.field_176236_b, BlockLeaves.field_176237_a).func_178441_a());
-@@ -260,18 +227,18 @@
-         this.func_178121_a(Blocks.field_180385_bs, (new StateMap.Builder()).func_178442_a(BlockFenceGate.field_176465_b).func_178441_a());
-         this.func_178121_a(Blocks.field_180387_bt, (new StateMap.Builder()).func_178442_a(BlockFenceGate.field_176465_b).func_178441_a());
-         this.func_178121_a(Blocks.field_150473_bD, (new StateMap.Builder()).func_178442_a(BlockTripWire.field_176295_N, BlockTripWire.field_176293_a).func_178441_a());
--        this.func_178121_a(Blocks.field_150373_bw, (new StateMap.Builder()).func_178440_a(BlockPlanks.field_176383_a).func_178439_a("_double_slab").func_178441_a());
--        this.func_178121_a(Blocks.field_150376_bx, (new StateMap.Builder()).func_178440_a(BlockPlanks.field_176383_a).func_178439_a("_slab").func_178441_a());
-+        this.func_178121_a(Blocks.field_150373_bw, (new StateMap.Builder()).func_178442_a(BlockLiquid.field_176367_b).func_178440_a(BlockPlanks.field_176383_a).func_178439_a("_double_slab").func_178441_a());
-+        this.func_178121_a(Blocks.field_150376_bx, (new StateMap.Builder()).func_178442_a(BlockLiquid.field_176367_b).func_178440_a(BlockPlanks.field_176383_a).func_178439_a("_slab").func_178441_a());
-         this.func_178121_a(Blocks.field_150335_W, (new StateMap.Builder()).func_178442_a(BlockTNT.field_176246_a).func_178441_a());
-         this.func_178121_a(Blocks.field_150480_ab, (new StateMap.Builder()).func_178442_a(BlockFire.field_176543_a).func_178441_a());
-         this.func_178121_a(Blocks.field_150488_af, (new StateMap.Builder()).func_178442_a(BlockRedstoneWire.field_176351_O).func_178441_a());
--        this.func_178121_a(Blocks.field_180413_ao, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_180414_ap, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_180412_aq, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_180411_ar, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_180410_as, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_180409_at, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
--        this.func_178121_a(Blocks.field_150454_av, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:oak_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:spruce_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:birch_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:jungle_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:acacia_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Objects.requireNonNull(Block.func_149684_b("minecraft:dark_oak_door")), (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
-+        this.func_178121_a(Blocks.field_150454_av, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178442_a(BlockLiquid.field_176367_b).func_178441_a());
+@@ -271,6 +260,8 @@
+         this.func_178121_a(Blocks.field_180411_ar, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
+         this.func_178121_a(Blocks.field_180410_as, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
+         this.func_178121_a(Blocks.field_180409_at, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
++        this.func_178121_a(Blocks.REDWOOD_DOOR, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
++        this.func_178121_a(Blocks.PALM_DOOR, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
+         this.func_178121_a(Blocks.field_150454_av, (new StateMap.Builder()).func_178442_a(BlockDoor.field_176522_N).func_178441_a());
          this.func_178121_a(Blocks.field_150325_L, (new StateMap.Builder()).func_178440_a(BlockColored.field_176581_a).func_178439_a("_wool").func_178441_a());
          this.func_178121_a(Blocks.field_150404_cg, (new StateMap.Builder()).func_178440_a(BlockColored.field_176581_a).func_178439_a("_carpet").func_178441_a());
-         this.func_178121_a(Blocks.field_150406_ce, (new StateMap.Builder()).func_178440_a(BlockColored.field_176581_a).func_178439_a("_stained_hardened_clay").func_178441_a());
-@@ -297,11 +264,12 @@
+@@ -297,11 +288,12 @@
          this.func_178121_a(Blocks.field_150457_bL, (new StateMap.Builder()).func_178442_a(BlockFlowerPot.field_176444_a).func_178441_a());
          this.func_178121_a(Blocks.field_192443_dR, (new StateMap.Builder()).func_178440_a(BlockColored.field_176581_a).func_178439_a("_concrete").func_178441_a());
          this.func_178121_a(Blocks.field_192444_dS, (new StateMap.Builder()).func_178440_a(BlockColored.field_176581_a).func_178439_a("_concrete_powder").func_178441_a());
@@ -100,39 +147,39 @@
  
                  switch (blockquartz$enumtype)
                  {
-@@ -330,7 +298,7 @@
+@@ -330,7 +322,7 @@
          {
              protected ModelResourceLocation func_178132_a(IBlockState p_178132_1_)
              {
 -                Map < IProperty<?>, Comparable<? >> map = Maps. < IProperty<?>, Comparable<? >> newLinkedHashMap(p_178132_1_.func_177228_b());
-+                Map < IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
++                Map <IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
  
                  if (p_178132_1_.func_177229_b(BlockStem.field_176483_b) != EnumFacing.UP)
                  {
-@@ -344,7 +312,7 @@
+@@ -344,7 +336,7 @@
          {
              protected ModelResourceLocation func_178132_a(IBlockState p_178132_1_)
              {
 -                Map < IProperty<?>, Comparable<? >> map = Maps. < IProperty<?>, Comparable<? >> newLinkedHashMap(p_178132_1_.func_177228_b());
-+                Map < IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
++                Map <IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
  
                  if (p_178132_1_.func_177229_b(BlockStem.field_176483_b) != EnumFacing.UP)
                  {
-@@ -358,7 +326,7 @@
+@@ -358,7 +350,7 @@
          {
              protected ModelResourceLocation func_178132_a(IBlockState p_178132_1_)
              {
 -                Map < IProperty<?>, Comparable<? >> map = Maps. < IProperty<?>, Comparable<? >> newLinkedHashMap(p_178132_1_.func_177228_b());
-+                Map < IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
++                Map <IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
                  String s = BlockDirt.field_176386_a.func_177702_a((BlockDirt.DirtType)map.remove(BlockDirt.field_176386_a));
  
                  if (BlockDirt.DirtType.PODZOL != p_178132_1_.func_177229_b(BlockDirt.field_176386_a))
-@@ -373,10 +341,10 @@
+@@ -373,10 +365,10 @@
          {
              protected ModelResourceLocation func_178132_a(IBlockState p_178132_1_)
              {
 -                Map < IProperty<?>, Comparable<? >> map = Maps. < IProperty<?>, Comparable<? >> newLinkedHashMap(p_178132_1_.func_177228_b());
-+                Map < IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
++                Map <IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
                  String s = BlockStoneSlab.field_176556_M.func_177702_a((BlockStoneSlab.EnumType)map.remove(BlockStoneSlab.field_176556_M));
                  map.remove(BlockStoneSlab.field_176555_b);
 -                String s1 = ((Boolean)p_178132_1_.func_177229_b(BlockStoneSlab.field_176555_b)).booleanValue() ? "all" : "normal";
@@ -140,12 +187,12 @@
                  return new ModelResourceLocation(s + "_double_slab", s1);
              }
          });
-@@ -384,12 +352,13 @@
+@@ -384,12 +376,13 @@
          {
              protected ModelResourceLocation func_178132_a(IBlockState p_178132_1_)
              {
 -                Map < IProperty<?>, Comparable<? >> map = Maps. < IProperty<?>, Comparable<? >> newLinkedHashMap(p_178132_1_.func_177228_b());
-+                Map < IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
++                Map <IProperty<?>, Comparable<? >> map = Maps.newLinkedHashMap(p_178132_1_.func_177228_b());
                  String s = BlockStoneSlabNew.field_176559_M.func_177702_a((BlockStoneSlabNew.EnumType)map.remove(BlockStoneSlabNew.field_176559_M));
                  map.remove(BlockStoneSlab.field_176555_b);
 -                String s1 = ((Boolean)p_178132_1_.func_177229_b(BlockStoneSlabNew.field_176558_b)).booleanValue() ? "all" : "normal";

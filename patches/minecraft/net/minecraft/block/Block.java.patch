@@ -1,6 +1,6 @@
 --- ../src-base/minecraft/net/minecraft/block/Block.java
 +++ ../src-work/minecraft/net/minecraft/block/Block.java
-@@ -1,11 +1,7 @@
+@@ -1,11 +1,5 @@
  package net.minecraft.block;
  
 -import com.google.common.collect.Sets;
@@ -9,12 +9,10 @@
 -import java.util.Random;
 -import java.util.Set;
 -import javax.annotation.Nullable;
-+import net.minecraft.block.enums.EnumAquamarineTypes;
-+import net.minecraft.block.enums.EnumNaturalAquamarineTypes;
  import net.minecraft.block.material.EnumPushReaction;
  import net.minecraft.block.material.MapColor;
  import net.minecraft.block.material.Material;
-@@ -24,26 +20,11 @@
+@@ -24,26 +18,11 @@
  import net.minecraft.init.Blocks;
  import net.minecraft.init.Enchantments;
  import net.minecraft.init.Items;
@@ -44,7 +42,7 @@
  import net.minecraft.util.registry.RegistryNamespacedDefaultedByKey;
  import net.minecraft.util.text.translation.I18n;
  import net.minecraft.world.Explosion;
-@@ -52,15 +33,28 @@
+@@ -52,15 +31,28 @@
  import net.minecraftforge.fml.relauncher.Side;
  import net.minecraftforge.fml.relauncher.SideOnly;
  
@@ -79,7 +77,7 @@
      protected boolean field_149787_q;
      protected int field_149786_r;
      protected boolean field_149785_s;
-@@ -72,1203 +66,2302 @@
+@@ -72,1203 +64,2306 @@
      protected boolean field_149789_z;
      protected boolean field_149758_A;
      protected SoundType field_149762_H;
@@ -220,7 +218,7 @@
 +        func_176215_a(0, field_176230_a, (new BlockAir()).func_149663_c("air"));
 +        func_176219_a(1, "stone", (new BlockStone()).func_149711_c(1.5F).func_149752_b(10.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("stone"));
 +        func_176219_a(2, "stone2", (new BlockStone2()).func_149711_c(1.5F).func_149752_b(10.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("stone2"));
-+        func_176219_a(3, "grass_block", (new BlockGrass()).func_149711_c(0.6F).func_149672_a(SoundType.field_185850_c).func_149663_c("grass_block"));
++        func_176219_a(3, "grass", (new BlockGrass()).func_149711_c(0.6F).func_149672_a(SoundType.field_185850_c).func_149663_c("grass_block"));
 +        func_176219_a(4, "dirt", (new BlockDirt()).func_149711_c(0.5F).func_149672_a(SoundType.field_185849_b).func_149663_c("dirt"));
 +        Block block = (new Block(Material.field_151576_e)).func_149711_c(2.0F).func_149752_b(10.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("stone_bricks").func_149647_a(CreativeTabs.field_78030_b);
 +        func_176219_a(5, "cobblestone", block);
@@ -458,85 +456,89 @@
 +            func_176219_a(236, color.func_176610_l() + "_glazed_terracotta", new BlockGlazedTerracotta(color));
 +        }
 +
-+        func_176219_a(224, "yellow_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralYellow"));
-+        func_176219_a(226, "pink_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPink"));
-+        func_176219_a(230, "purple_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPurple"));
-+        func_176219_a(231, "blue_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralBlue"));
-+        func_176219_a(234, "red_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralRed"));
++        func_176219_a(252, "yellow_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralYellow"));
++        func_176219_a(253, "pink_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPink"));
++        func_176219_a(254, "purple_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPurple"));
++        func_176219_a(255, "blue_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralBlue"));
++        func_176219_a(256, "red_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralRed"));
 +
-+        func_176219_a(224, "yellow_coral_plant", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantYellow"));
-+        func_176219_a(226, "pink_coral_plant", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantPink"));
-+        func_176219_a(230, "purple_coral_plant", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantPurple"));
-+        func_176219_a(231, "blue_coral_plant", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantBlue"));
-+        func_176219_a(234, "red_coral_plant", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantRed"));
++        func_176219_a(257, "yellow_coral_plant", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantYellow"));
++        func_176219_a(258, "pink_coral_plant", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantPink"));
++        func_176219_a(259, "purple_coral_plant", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantPurple"));
++        func_176219_a(260, "blue_coral_plant", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantBlue"));
++        func_176219_a(261, "red_coral_plant", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralPlantRed"));
 +
-+        func_176219_a(224, "yellow_coral_fan", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanYellow"));
-+        func_176219_a(226, "pink_coral_fan", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanPink"));
-+        func_176219_a(230, "purple_coral_fan", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanPurple"));
-+        func_176219_a(231, "blue_coral_fan", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanBlue"));
-+        func_176219_a(234, "red_coral_fan", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanRed"));
++        func_176219_a(262, "yellow_coral_fan", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanYellow"));
++        func_176219_a(263, "pink_coral_fan", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanPink"));
++        func_176219_a(264, "purple_coral_fan", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanPurple"));
++        func_176219_a(265, "blue_coral_fan", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanBlue"));
++        func_176219_a(266, "red_coral_fan", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("coralFanRed"));
 +
-+        func_176219_a(224, "yellow_dead_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralYellow"));
-+        func_176219_a(226, "pink_dead_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPink"));
-+        func_176219_a(230, "purple_dead_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPurple"));
-+        func_176219_a(231, "blue_dead_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralBlue"));
-+        func_176219_a(234, "red_dead_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralRed"));
++        func_176219_a(267, "yellow_dead_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralYellow"));
++        func_176219_a(268, "pink_dead_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPink"));
++        func_176219_a(269, "purple_dead_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPurple"));
++        func_176219_a(270, "blue_dead_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralBlue"));
++        func_176219_a(271, "red_dead_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralRed"));
 +
-+        func_176219_a(224, "yellow_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantYellow"));
-+        func_176219_a(226, "pink_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantPink"));
-+        func_176219_a(230, "purple_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantPurple"));
-+        func_176219_a(231, "blue_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantBlue"));
-+        func_176219_a(234, "red_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantRed"));
++        func_176219_a(272, "yellow_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantYellow"));
++        func_176219_a(273, "pink_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantPink"));
++        func_176219_a(274, "purple_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantPurple"));
++        func_176219_a(275, "blue_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantBlue"));
++        func_176219_a(276, "red_dead_coral_plant", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralPlantRed"));
 +
-+        func_176219_a(224, "yellow_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanYellow"));
-+        func_176219_a(226, "pink_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanPink"));
-+        func_176219_a(230, "purple_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanPurple"));
-+        func_176219_a(231, "blue_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanBlue"));
-+        func_176219_a(234, "red_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanRed"));
++        func_176219_a(277, "yellow_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanYellow"));
++        func_176219_a(278, "pink_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanPink"));
++        func_176219_a(279, "purple_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanPurple"));
++        func_176219_a(280, "blue_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanBlue"));
++        func_176219_a(281, "red_dead_coral_fan", (new BlockCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadCoralFanRed"));
 +
-+        func_176219_a(224, "yellow_brain_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralYellow"));
-+        func_176219_a(226, "pink_brain_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralPink"));
-+        func_176219_a(230, "purple_brain_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralPurple"));
-+        func_176219_a(231, "blue_brain_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralBlue"));
-+        func_176219_a(234, "red_brain_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralRed"));
++        func_176219_a(282, "yellow_brain_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralYellow"));
++        func_176219_a(283, "pink_brain_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralPink"));
++        func_176219_a(284, "purple_brain_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralPurple"));
++        func_176219_a(285, "blue_brain_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralBlue"));
++        func_176219_a(286, "red_brain_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("brainCoralRed"));
 +
-+        func_176219_a(224, "yellow_dead_brain_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralYellow"));
-+        func_176219_a(226, "pink_dead_brain_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralPink"));
-+        func_176219_a(230, "purple_dead_brain_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralPurple"));
-+        func_176219_a(231, "blue_dead_brain_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralBlue"));
-+        func_176219_a(234, "red_dead_brain_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralRed"));
++        func_176219_a(287, "yellow_dead_brain_coral", (new BlockCoral(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralYellow"));
++        func_176219_a(288, "pink_dead_brain_coral", (new BlockCoral(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralPink"));
++        func_176219_a(289, "purple_dead_brain_coral", (new BlockCoral(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralPurple"));
++        func_176219_a(290, "blue_dead_brain_coral", (new BlockCoral(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralBlue"));
++        func_176219_a(291, "red_dead_brain_coral", (new BlockCoral(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadBrainCoralRed"));
 +
-+        func_176219_a(224, "yellow_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralYellow"));
-+        func_176219_a(226, "pink_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralPink"));
-+        func_176219_a(230, "purple_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralPurple"));
-+        func_176219_a(231, "blue_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralBlue"));
-+        func_176219_a(234, "red_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralRed"));
++        func_176219_a(292, "yellow_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralYellow"));
++        func_176219_a(293, "pink_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralPink"));
++        func_176219_a(294, "purple_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralPurple"));
++        func_176219_a(295, "blue_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralBlue"));
++        func_176219_a(296, "red_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("pipeCoralRed"));
 +
-+        func_176219_a(224, "yellow_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralYellow"));
-+        func_176219_a(226, "pink_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralPink"));
-+        func_176219_a(230, "purple_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralPurple"));
-+        func_176219_a(231, "blue_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralBlue"));
-+        func_176219_a(234, "red_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralRed"));
++        func_176219_a(297, "yellow_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralYellow"));
++        func_176219_a(298, "pink_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralPink"));
++        func_176219_a(299, "purple_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralPurple"));
++        func_176219_a(300, "blue_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralBlue"));
++        func_176219_a(301, "red_dead_pipe_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadPipeCoralRed"));
 +
-+        func_176219_a(224, "yellow_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralYellow"));
-+        func_176219_a(226, "pink_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralPink"));
-+        func_176219_a(230, "purple_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralPurple"));
-+        func_176219_a(231, "blue_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralBlue"));
-+        func_176219_a(234, "red_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralRed"));
++        func_176219_a(302, "yellow_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralYellow"));
++        func_176219_a(303, "pink_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralPink"));
++        func_176219_a(304, "purple_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralPurple"));
++        func_176219_a(305, "blue_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralBlue"));
++        func_176219_a(306, "red_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("seaFanCoralRed"));
 +
-+        func_176219_a(224, "yellow_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralYellow"));
-+        func_176219_a(226, "pink_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralPink"));
-+        func_176219_a(230, "purple_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralPurple"));
-+        func_176219_a(231, "blue_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralBlue"));
-+        func_176219_a(234, "red_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralRed"));
++        func_176219_a(307, "yellow_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.YELLOW)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralYellow"));
++        func_176219_a(308, "pink_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PINK)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralPink"));
++        func_176219_a(309, "purple_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.PURPLE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralPurple"));
++        func_176219_a(310, "blue_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.BLUE)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralBlue"));
++        func_176219_a(311, "red_dead_sea_fan_coral", (new BlockDoubleCoralPlant(EnumCoralColor.RED)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("deadSeaFanCoralRed"));
 +
-+        for(EnumNaturalAquamarineTypes aquamarineTypes : EnumNaturalAquamarineTypes.values()) {
-+            func_176219_a(235, aquamarineTypes.func_176610_l(), new BlockNewSeaBlock(Material.field_151576_e, aquamarineTypes.func_176610_l()).func_149647_a(CreativeTabs.field_78030_b).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d));
-+        }
++        func_176219_a(312, "raw_natural_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("rawNaturalAquamarine"));
++        func_176219_a(313, "smooth_natural_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("smoothNaturalAquamarine"));
++        func_176219_a(314, "chiseled_natural_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("chiseledNaturalAquamarine"));
++        func_176219_a(315, "natural_aquamarine_bricks", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("naturalAquamarineBricks"));
++        func_176219_a(316, "natural_aquamarine_pillar", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("naturalAquamarinePillar"));
 +
-+        for(EnumAquamarineTypes aquamarineTypes : EnumAquamarineTypes.values()) {
-+            func_176219_a(236, aquamarineTypes.func_176610_l(), new BlockNewSeaBlock(Material.field_151576_e, aquamarineTypes.func_176610_l()).func_149647_a(CreativeTabs.field_78030_b).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d));
-+        }
++        func_176219_a(317, "raw_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("rawAquamarine"));
++        func_176219_a(318, "smooth_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("smoothAquamarine"));
++        func_176219_a(319, "chiseled_aquamarine", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("chiseledAquamarine"));
++        func_176219_a(320, "aquamarine_bricks", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("aquamarineBricks"));
++        func_176219_a(321, "aquamarine_pillar", (new BlockNewSeaBlock(Material.field_151576_e)).func_149711_c(2.0F).func_149672_a(SoundType.field_185851_d).func_149663_c("aquamarinePillar"));
 +
 +        func_176219_a(241, "concrete", (new BlockColored(Material.field_151576_e)).func_149711_c(1.8F).func_149672_a(SoundType.field_185851_d).func_149663_c("concrete"));
 +        func_176219_a(242, "concrete_powder", (new BlockConcretePowder()).func_149711_c(0.5F).func_149672_a(SoundType.field_185855_h).func_149663_c("concretePowder"));
@@ -2725,7 +2727,7 @@
 +     * @return The amount of enchanting power this block produces.
 +     */
 +    public float getEnchantPowerBonus(World world, BlockPos pos) {
-+        return this == net.minecraft.init.Blocks.field_150342_X ? 1 : 0;
++        return this == Blocks.OAK_BOOKSHELF ? 1 : 0;
 +    }
  
 -        for (Block block16 : field_149771_c)

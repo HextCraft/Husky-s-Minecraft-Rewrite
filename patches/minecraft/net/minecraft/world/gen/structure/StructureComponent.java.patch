@@ -1,6 +1,15 @@
 --- ../src-base/minecraft/net/minecraft/world/gen/structure/StructureComponent.java
 +++ ../src-work/minecraft/net/minecraft/world/gen/structure/StructureComponent.java
-@@ -41,6 +41,10 @@
+@@ -3,6 +3,8 @@
+ import java.util.List;
+ import java.util.Random;
+ import javax.annotation.Nullable;
++
++import net.minecraft.block.BlockChest;
+ import net.minecraft.block.BlockDispenser;
+ import net.minecraft.block.BlockDoor;
+ import net.minecraft.block.material.Material;
+@@ -41,6 +43,10 @@
  
      public final NBTTagCompound func_143010_b()
      {
@@ -11,3 +20,18 @@
          NBTTagCompound nbttagcompound = new NBTTagCompound();
          nbttagcompound.func_74778_a("id", MapGenStructureIO.func_143036_a(this));
          nbttagcompound.func_74782_a("BB", this.field_74887_e.func_151535_h());
+@@ -411,13 +417,8 @@
+ 
+     protected boolean func_191080_a(World p_191080_1_, StructureBoundingBox p_191080_2_, Random p_191080_3_, BlockPos p_191080_4_, ResourceLocation p_191080_5_, @Nullable IBlockState p_191080_6_)
+     {
+-        if (p_191080_2_.func_175898_b(p_191080_4_) && p_191080_1_.func_180495_p(p_191080_4_).func_177230_c() != Blocks.field_150486_ae)
++        if (p_191080_2_.func_175898_b(p_191080_4_) && p_191080_1_.func_180495_p(p_191080_4_).func_177230_c() != Blocks.OAK_CHEST)
+         {
+-            if (p_191080_6_ == null)
+-            {
+-                p_191080_6_ = Blocks.field_150486_ae.func_176458_f(p_191080_1_, p_191080_4_, Blocks.field_150486_ae.func_176223_P());
+-            }
+-
+             p_191080_1_.func_180501_a(p_191080_4_, p_191080_6_, 2);
+             TileEntity tileentity = p_191080_1_.func_175625_s(p_191080_4_);
+ 
